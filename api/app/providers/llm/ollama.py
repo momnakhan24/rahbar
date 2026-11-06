@@ -42,7 +42,10 @@ class OllamaProvider:
                 ],
                 "format": Answer.model_json_schema(),
                 "stream": False,
-                "options": {"temperature": self.settings.temperature, "num_predict": 512},
+                # Four threads fit the documented local serving CPU budget;
+                # host-wide thread detection oversubscribes a CPU-limited container.
+                "options": {"temperature": self.settings.temperature,
+                            "num_predict": 384, "num_thread": 4},
             },
             timeout=120.0,
         )
