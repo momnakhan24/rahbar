@@ -158,3 +158,5 @@ This log is the reviewable record of implementation, verification, assumptions a
 - Local Chroma terminated with OOMKilled (exit 137) at 10:15:21 UTC while limited to 1Gi. Increased its request from 384Mi to 768Mi and limit to 2Gi before index publication. This is a measured runtime correction; post-change stability remains under observation.
 
 - CI run 42177121689 passed quality, manifests, image builds/scans and stub cluster smoke, then failed because fixture Ollama was not accepting connections yet. Added a bounded 60-second readiness loop before model pull; final ollama list still fails explicitly if startup never succeeds. Rerun pending.
+
+- Executed Calico checks: API -> Chroma heartbeat 200, API -> local Ollama 200, API -> Redis +PONG, UI -> Chroma timeout. Found missing UI egress allow; added UI -> API:8000 and verified direct pod liveness 200. API Service currently has no ready endpoints until indexing completes, so initial Service timeout is preserved in evidence and is not represented as a policy-only result. Stage B fixed 100-word/no-overlap retrieval experiment is running separately in Docker against the source-verified extraction cache.
