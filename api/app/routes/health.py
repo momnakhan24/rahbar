@@ -28,11 +28,18 @@ def readyz(request: Request, response: Response) -> dict[str, object]:
     settings = request.app.state.settings
     checks: dict[str, object] = {}
     try:
-        client = chromadb.HttpClient(
-            host=settings.chroma_host,
-            port=settings.chroma_port,
-            settings=ChromaSettings(anonymized_telemetry=False),
-        )
+        # Reuse the serving client's connection pool. Constructing a thin client
+        # on every probe repeatedly allocates transport/telemetry resources.
+        client = getattr(request.app.state, "health_chroma", None)
+        if client is None:
+            client = getattr(request.app.state.retriever, "client", None)
+            if client is None:
+                client = chromadb.HttpClient(
+                    host=settings.chroma_host,
+                    port=settings.chroma_port,
+                    settings=ChromaSettings(anonymized_telemetry=False),
+                )
+            request.app.state.health_chroma = client
         registry_name = f"{settings.collection[:40]}-registry"
         try:
             registry = client.get_collection(registry_name)
