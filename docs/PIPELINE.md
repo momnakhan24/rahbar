@@ -6,7 +6,15 @@ The indexer is a one-shot Kubernetes Job, separate from API startup. Its stages 
 
 PDF pages are extracted with pdfplumber. When normalized text has fewer than 25 characters, the page is rasterized with Poppler and OCR'd with Tesseract. PDF tables are serialized as pipe-delimited rows; HTML tables use the same row representation. Markdown front matter is skipped. Unsupported file extensions fail explicitly.
 
-Cleaning normalizes whitespace and drops repeated page-edge lines when they recur across pages. It retains section labels, page boundaries, numbers, punctuation, table row boundaries and clause identifiers because they support exact-term answers and citation locations. OCR text is tagged in the page model. OCR is not automatically trusted: the scanned 2023 policy and the eight-page 2022 policy still need visual quality review.
+Cleaning normalizes whitespace and drops repeated page-edge lines when they recur across pages. It retains section labels, page boundaries, numbers, punctuation, table row boundaries and clause identifiers because they support exact-term answers and citation locations. OCR text is tagged in the page model. The executed extraction inventory is in `evidence/extraction.json`: 41 OCR pages across four PDFs, including all eight entrepreneurship-policy pages. Visual review of representative pages found detached clause numbers with default OCR; `--psm 6` kept the reviewed number/text pairs together. It also found off-page hidden PDF text, now removed by cropping to page bounds. Minor OCR artifacts and complex merged PDF cells remain; the audit is representative rather than exhaustive.
+
+Actual fee-table before/after (`evidence/table-before-after.json`): naive flattened
+HTML produces `Program Fee BBA / BS Rs. 12,000 MBA / MS Rs. 12,000`; the table parser
+produces separate rows `Program | Fee`, `BBA / BS | Rs. 12,000`, and
+`MBA / MS | Rs. 12,000`. Row/cell delimiters preserve which amount belongs to which
+program. Script/navigation text remains elsewhere in the extracted HTML, a known
+cleaning limitation. Numeric clauses are deliberately retained, including short
+threshold-bearing lines that an aggressive short-line cleanup would destroy.
 
 ## Chunking
 
@@ -22,9 +30,9 @@ The three configurations are specified to make the required experiment reproduci
 
 ## Embedding and version pin
 
-`EMBED_MODEL` defaults to `nomic-embed-text`; the indexer and API both use the Ollama `/api/embed` endpoint. The configured model name is stored in Chroma collection metadata and exposed through the active registry. The API readiness route compares that metadata with its configured model and reports not-ready on a mismatch. The vector dimension is determined by the selected model and is checked by Chroma on writes; it has not been recorded from a live model in this environment.
+`EMBED_MODEL` defaults to `nomic-embed-text`; the indexer and API both use the Ollama `/api/embed` endpoint. The configured model name is stored in Chroma collection metadata and exposed through the active registry. The API readiness route compares that metadata with its configured model and reports not-ready on a mismatch. Live local Docker embeddings have 768 dimensions; model IDs/digests are recorded in `evidence/local-models.json`.
 
-Current-document retrieval applies `superseded=false`. A narrow historical-language heuristic permits old policy chunks when a question explicitly refers to prior versions. This reduces accidental mixing but should be tested with a live index and explicit version questions. Re-indexing publishes a new versioned collection before switching the registry pointer, then flushes Redis. Cache keys include the active index revision, which also prevents old-revision hits if Redis flushing fails.
+Current-document retrieval applies `superseded=false`. A narrow historical-language heuristic permits old policy chunks when a question explicitly refers to prior versions. This reduces accidental mixing but should be tested with a live index and explicit version questions. Re-indexing publishes a new versioned collection before switching the registry pointer. Cache keys include the active index revision, so publication immediately invalidates previous entries logically; the API prunes obsolete revisions. The indexer never connects to Redis, consistent with the API-only Redis NetworkPolicy.
 
 ## Semantic cache
 
