@@ -5,7 +5,7 @@ resources:
   - ../../base
 images:
   - name: rahbar-api
-    newTag: 7b4daae5a28f50df37d3a1c6fa5734a70f6f3bc0
+    newTag: c4d59f28a484e6e9b399ebcae704823ddf75ae86
   - name: rahbar-indexer
     newTag: 7b4daae5a28f50df37d3a1c6fa5734a70f6f3bc0
   - name: rahbar-ui
@@ -24,20 +24,20 @@ patches:
         RETRIEVER: chroma
         LLM_PROVIDER: ollama-host
         EMBED_MODEL: nomic-embed-text
-        OLLAMA_URL: http://192.168.49.10:11434
+        OLLAMA_URL: http://192.168.49.11:11434
   - target:
       kind: NetworkPolicy
       name: api-policy
     patch: |-
       - op: replace
         path: /spec/egress/2/to/0/ipBlock/cidr
-        value: 192.168.49.10/32
+        value: 192.168.49.11/32
   - target:
       kind: NetworkPolicy
       name: indexer-egress
     patch: |-
       - op: replace
         path: /spec/egress/2/to/0/ipBlock/cidr
-        value: 192.168.49.10/32
+        value: 192.168.49.11/32
 
 
