@@ -10,19 +10,26 @@ This log is the reviewable record of implementation, verification, assumptions a
 - Record unknowns as unknown. Source code and rendered YAML are not evidence of a live rollout, measured retrieval quality or protected-branch behavior.
 - Assignment deadline from the handout: 8 November 2026, 23:59 PKT.
 
-## Current status
+## Current status (local execution in progress)
 
-| Requirement area | Status | What is verified / still needed |
+| Requirement area | Verified now | Still required |
 | --- | --- | --- |
-| Local branch and commit organization | Implemented and pushed | Branch `dev-aimwnoaim`; commits are one file/change each. The user authorized pushing the five local commits on 2026-11-05; local HEAD now matches origin. |
-| Kubernetes stub deployment | Manifests and smoke workflow prepared | Both Kustomize overlays render. Docker Desktop engine is unavailable here; no image build, cluster rollout, probes, endpoints, HPA behavior or rollback was observed locally. CI workflow has not run on GitHub. |
-| Corpus and provenance | Audited | Nine listed documents and SHA-256 manifest; seven PDFs total 279 pages, plus two HTML pages. Detailed audit is in [`CORPUS.md`](CORPUS.md). Raw files are ignored and not committed. |
-| Extraction, cleaning, chunking, embedding and store | Implemented; unit-tested in parts | PDF/HTML/Markdown/text parsing, OCR path, cleanup, structure-aware chunks, Ollama embeddings and staged versioned Chroma publish are implemented. 9 indexer tests pass. Full corpus indexing, OCR quality review and live vector-dimension evidence remain. |
-| API retrieval, provider, citations, abstention and cache | Implemented; unit-tested | Chroma retrieval, provider interface, schema validation/retry/fallback, relevance-floor abstention, Redis semantic cache and readiness pin guard are present. 13 API tests pass. No live Chroma, Redis or model requests have been run. |
-| Golden evaluation | Set and scoring code present; real metrics pending | `eval/golden.yaml` contains 17 real-corpus questions; evaluator reports exact expected-term accuracy in addition to recall/citations/abstentions. `eval/baseline.json` is an explicit pending marker with null recall, so the regression gate correctly fails. No measured `results.json` exists. Real evaluation remains blocked on indexing/model/cluster access and OCR review. |
-| Assignment documentation and ADRs | Drafted and mapped | Corpus, pipeline, six failure-analysis plans, seven engineering answers, AI disclosure, architecture, and four ADRs are present. Fault-injection plans are not reported as observed incident evidence. |
-| CI/CD | CI passed on daff3ae | Run 42083260429 passed quality and cluster smoke, including all three image scans, workload rollout, indexer completion, and the question endpoint. This exercises the dev stub path; real corpus/model evaluation, production CD, registry publication and GitHub protection evidence remain open. |
-| Evidence bundle | Not complete; capture runbook prepared | [`OPERATIONS.md`](OPERATIONS.md) gives exact commands and evidence names. No real branch protection screenshot, blocked-merge evidence, `kubectl top`, endpoint/HPA output or rollout/failure evidence is available; these require GitHub settings and a working cluster. |
+| Development history | Separate file/change commits on `dev-aimwnoaim`; pushes authorized, main untouched | Push final results and verify final CI |
+| Local Docker / Kubernetes | Minikube `rahbar`, Docker driver, Calico, Ingress, metrics-server; real service images loaded | API rollout after index publication; HPA/endpoints/resilience/rollback evidence |
+| Corpus / extraction | Nine public documents, 279 PDF pages; 41 OCR pages; representative visual review; table before/after saved | Exhaustive OCR proofreading is outside the completed representative audit |
+| Real pipeline | Corrected numbered clauses, visible-page extraction, atomic store and revision invalidation; real bulk embedding running | Successful real index publication and final resource measurements |
+| API | 16 existing tests plus readiness-reuse regression pass; local Llama fixture answer validated | Real-corpus generation, abstention and cache operational checks |
+| Evaluation | 19 source-labelled questions, cache threshold study complete; first chunk sweep measured | Remaining two configurations; live `results.json` and reviewed baseline |
+| Failure experiments | A executed and recorded; B running in Docker | C API model mismatch and E obsolete-source retrieval |
+| Network security | API dependencies allowed; UI-to-Chroma denied; UI-to-API corrected and verified | Repeat Service-level check after API readiness |
+| CI/CD | Earlier stub CI passed; newest run failed Ollama startup race, fix pushed | Verify revised fixture CI; external SHA publication and CD run |
+| External controls | Original-repo login can push but cannot administer; an admin-accessible fork exists | Protected main, real approval, blocked/green merge screenshots, registry token and successful CD remain unverified |
+| Documentation | Work log records observed results and rationale; AI disclosure updated | Replace remaining provisional summaries as experiments finish |
+
+The submission checker reports 164 passes, three warnings and zero mechanical failures.
+It does not establish assignment completion; the runtime/evaluation/external items above
+remain necessary. Chronological entries below preserve earlier observations and superseded
+blockers rather than claiming that old environment failures still apply.
 
 ## Decisions and assumptions
 
