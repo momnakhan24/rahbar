@@ -7,8 +7,8 @@ The corpus is FAST-NUCES public material selected from the URLs in [`sources.yam
 | Property | Evidence in this corpus | Audit result / limitation |
 | --- | --- | --- |
 | At least 6 documents and 40 pages | Nine manifest entries: seven PDFs and two HTML pages. PDFs have 279 total pages. | Verified locally with pypdf page enumeration; HTML pages count as one extracted page each. |
-| Two versions of one policy | Undergraduate Academic Rules Aug 2023 and Academic Rules Handbook Jun 2026 | `doc_version=2023-08, superseded=true` and `doc_version=2026-06, superseded=false`. The former is treated as historical; the handbook is the current policy. The 2023 file is image-heavy and its OCR output has not been quality-reviewed, so do not claim version-answer evaluation is complete. |
-| Scanned, image-only PDF | Faculty Entrepreneurship and Technical Start-ups Policy, May 2022 | Eight pages, no extractable text and no page fonts in the PDF resource dictionaries. This is stronger evidence of a scan than an empty result from one text extractor. OCR is implemented; OCR execution and manual correction remain to be verified because Tesseract/Poppler are unavailable in this environment. |
+| Two versions of one policy | Undergraduate Academic Rules Aug 2023 and Academic Rules Handbook Jun 2026 | `doc_version=2023-08, superseded=true` and `doc_version=2026-06, superseded=false`. Source review confirmed summer-policy changes: optional 8–9 weeks and elective exceptions in 2023 versus 8 weeks and repeat-only courses in current clauses 6.1–6.2. Evaluation uses those genuine changes. |
+| Scanned, image-only PDF | Faculty Entrepreneurship and Technical Start-ups Policy, May 2022 | Eight pages, no extractable text and no page fonts in the PDF resource dictionaries. Executed OCR yields 1,814 words. Deliberately disabling OCR yields zero characters/chunks and empty-publication rejection; see `evidence/failure-a-no-ocr.json`. |
 | Table with real information | Fee Structure HTML page; Grading HTML page; annual reports | Parser audit produced 21 fee rows and 38 grading rows. Example normalized fee data includes `BBA / BS | Rs. 12,000`; grading includes `A+ | 4.00 | Excellent`. PDF tables are also serialized page by page when detected. |
 | Long definitions | Student Handbook Jun 2026 and the academic rules handbook | These multi-page documents include policy prose and definitions. Chunking preserves section headings, page numbers, source and version metadata. A definition-level recall audit remains pending. |
 | Deliberately absent topic | Detailed hostel application / room allocation rules | We excluded the separate Transport and Hostel Facilities document. That is a plausible student question and is used as a must-abstain test; the included handbook's mere mention of hostels is not treated as coverage of application steps. |
@@ -28,6 +28,14 @@ The corpus is FAST-NUCES public material selected from the URLs in [`sources.yam
 | **Total PDF pages** | | **279** | HTML sources add two extracted pages |
 
 Extraction marks a page as OCR-derived when its normalized text layer has fewer than 25 characters. This is a heuristic, not a substitute for visual proofreading. For scanned pages, compare OCR output with the source PDF before using its claims as golden answers. Table extraction preserves rows as pipe-separated cells; merged cells and complex multi-page layouts may still be lost.
+
+The corrected local Docker extraction (`evidence/extraction.json`) OCR'd 41 pages:
+24 in the old rules, five in the academic handbook, four in the student handbook,
+and all eight entrepreneurship-policy pages. Visual checks covered old-rules page 7,
+policy page 2, and academic-handbook page 25; they are representative checks, not
+an exhaustive transcription audit. Tesseract `--psm 6` keeps clause numbers with
+their paragraphs on the reviewed scans. Cropping PDF text to visible page bounds
+removed hidden adjacent-page text from handbook page 25. Minor OCR artifacts remain.
 
 ## Provenance and limits
 
