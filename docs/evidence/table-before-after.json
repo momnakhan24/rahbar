@@ -1,0 +1,8 @@
+{
+  "source": "fee-structure-page.html",
+  "before_method": "naive HTML data flattening loses cell/row delimiters",
+  "before": "t hour applicable to all batches is as follows: Program Fee BBA / BS Rs. 12,000 MBA / MS Rs. 12,000 PhD Rs. 12,000 Student Activities Fund To support co-curricular and extra-curricular activities a Student Activities Fund has been formed. Students contribute Rs 2,500 towards Students Activities Fund",
+  "after_method": "HTML table parser preserves row and cell boundaries",
+  "after": "our applicable to all batches is as follows:\n\nProgram | Fee\nBBA / BS | Rs. 12,000\nMBA / MS | Rs. 12,000\nPhD | Rs. 12,000\n\n\n\nStudent Activities Fund\n\n\nTo support co-curricular and extra-curricular activities a Student Activities Fund has been formed. Students contribute Rs 2,500 towards Students Acti",
+  "limits": "Script/navigation text remains in the broader extracted HTML; merged PDF table cells and OCR artifacts are not exhaustively corrected."
+}
