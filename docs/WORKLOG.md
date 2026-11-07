@@ -350,3 +350,19 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
   all nine raw files match the manifest. Final strict prod render validates 28 objects.
 - Pushed source changes to dev only and created replacement draft PR #5. CI quality
   is green on dc49a38; cluster-smoke is still running at this entry.
+
+### Final observability and documentation audit
+
+- Added dense_scores and match_kinds to per-request JSON logs so exact-source match
+  relevance 1.0 is never mistaken for an embedding cosine. This changes logging only;
+  the evaluated retrieval/generation/cache behavior is unchanged. API: 31 tests,
+  83.71% coverage, Ruff and mypy pass on this source.
+- Validated the README-generated local overlay: it resolves all three checked-out
+  source tags and includes exactly the expected Job/CronJob. The hardened loader
+  ran as uid/gid 10001, had writable corpus storage and no service-account token,
+  then was deleted without modifying the corpus or starting another indexer.
+- Submission checker: 166 passes, one warning, zero failures. The warning identifies
+  the intentionally empty Secret template in history; no real credential is present.
+- Final per-answer review has verified r01–r11. The two current-version summer
+  questions now use the actual current duration/restriction clauses. Remaining
+  questions are still running; no scores or baseline have been invented.
