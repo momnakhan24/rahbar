@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from app.config import Settings
 from app.providers.llm.ollama import OllamaProvider, _answer_schema
 from app.schemas import Answer, Citation, Passage
-from app.services.answer import _validate_citations
+from app.services.answer import _select_evidence, _validate_citations
 
 
 def test_model_declared_abstention_cannot_display_an_uncited_fact() -> None:
@@ -54,3 +54,29 @@ def test_decoder_requires_citations_only_for_grounded_branch() -> None:
     assert refusal["properties"]["citations"]["maxItems"] == 0
     assert refusal["properties"]["confidence"]["const"] == "low"
     assert next(iter(grounded["properties"])) == "answered_from_context"
+
+
+def test_explicit_clause_focus_does_not_bypass_relevance_floor() -> None:
+    requested = Passage(chunk_id="clause", text="All classes must be attended.",
+                        source="policy.pdf", section="4.12 Attendance", page=3, score=.75)
+    other = requested.model_copy(update={"chunk_id": "other", "section": "4.120 Unrelated", "score": .9})
+    assert _select_evidence("What does clause 4.12 say?", [other, requested], .7) == [requested]
+    assert _select_evidence("What does clause 4.12 say?", [requested], .8) == []
+
+
+def test_weak_passage_with_same_number_does_not_distract_generation() -> None:
+    policy = Passage(chunk_id="rule", text="Minimum CGPA is 2.00.", source="rules.pdf",
+                     section="Warning", page=1, score=.91)
+    grades = policy.model_copy(update={"chunk_id": "table", "source": "grades.html", "score": .74})
+    assert _select_evidence("What CGPA avoids a warning?", [policy, grades], .7) == [policy]
+
+
+def test_bare_boolean_is_replaced_by_attributed_policy_text():
+    passage = Passage(chunk_id="p", source="policy.txt", section="Repeats", page=1,
+                      text="3.1 Only the most recent grade counts.", score=.9)
+    answer = Answer(reasoning="supported", answer="Yes", answered_from_context=True,
+                    confidence="high", citations=[Citation(source=passage.source,
+                                                          section=passage.section, page=1)])
+    result = _validate_citations(answer, [passage])
+    assert result.answer == 'The cited policy states: "Only the most recent grade counts."'
+    assert result.citations == answer.citations
