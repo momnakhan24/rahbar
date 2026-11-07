@@ -9,8 +9,8 @@ The API only reads Chroma; re-indexing is performed by a Job or the weekly CronJ
 
 > `dev` keeps the starter retriever/provider and a dummy index for plumbing checks.
 > `prod` selects Chroma retrieval, the Ollama host provider and the real corpus indexer.
-> Cluster rollout and measured retrieval evidence are still pending in this workspace;
-> see [WORKLOG](docs/WORKLOG.md) for the exact status.
+> The real corpus has been indexed on the local Docker-backed Minikube profile `rahbar`.
+> See [WORKLOG](docs/WORKLOG.md) for measured evidence and remaining evaluation/external requirements.
 
 ## Architecture
 
@@ -143,3 +143,49 @@ remain unverified until recorded in the evidence bundle.
 Secrets are created with `make secret` from an environment variable. Never commit a real
 key or a populated Secret manifest. AI assistance used during implementation is recorded
 in [docs/AI-USAGE.md](docs/AI-USAGE.md).
+
+
+## Verified local Windows / Docker runtime
+
+The local profile is isolated from other Docker projects: Kubernetes context/profile
+`rahbar`, namespace `rahbar`, Calico, metrics-server and ingress. The initial 4Gi node
+was insufficient; the measured run uses 6Gi and six CPUs. Production indexer execution
+is separate from the three serving replicas. Raw public documents remain ignored.
+
+`k8s/overlays/local` records the actual immutable image source SHAs and local model IP.
+Build/load those images before applying it. Do not reuse its fixed Docker-network IP
+on a different profile without checking that profile's subnet. For a portable host
+Ollama setup use the production instructions above and its detected host address.
+Local models use the Docker volume `rahbar-models`; bulk experiments and interactive
+serving use separate Ollama containers over that same model data to prevent large
+embedding batches from blocking questions. No hosted LLM secret is needed.
+
+On this Windows Docker driver, a verified route through the real Ingress is:
+
+```powershell
+kubectl --context rahbar port-forward -n ingress-nginx service/ingress-nginx-controller 18080:80 --address 127.0.0.1
+```
+
+In a second terminal:
+
+```powershell
+Invoke-RestMethod -Uri http://127.0.0.1:18080/api/ask -Method Post `
+  -Headers @{Host='rahbar.local'} -ContentType application/json `
+  -Body '{"question":"What minimum CGPA avoids academic warning?"}'
+```
+
+For the browser UI, map `rahbar.local` to `127.0.0.1` in the local hosts file and open
+`http://rahbar.local:18080`. An ordinary `http://localhost:18080` browser visit lacks the
+required Ingress host header. The port-forward terminal must remain running.
+
+Readiness is an API diagnostic route, not the Ingress UI's `/readyz`. To inspect it:
+
+```powershell
+kubectl --context rahbar port-forward -n rahbar service/api 18081:8000 --address 127.0.0.1
+Invoke-RestMethod http://127.0.0.1:18081/readyz
+```
+
+Captured evidence includes the full real indexing Job, three endpoints, numeric HPA,
+Calico allow/deny tests, visible UI rollout/undo, and pod replacement. The real-corpus
+baseline, generation review and four failure experiments must be checked against the
+current work log; a passing mechanical checker or fixture CI is not a substitute.
