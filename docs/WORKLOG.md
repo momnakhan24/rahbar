@@ -244,3 +244,32 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
   account; there are no padding commits.
 - Generation temperature is now 0.0 for deterministic policy extraction, with its
   rationale in the shared ConfigMap. Grounding still relies on evidence and validation.
+
+### HTML cleanup, evidence focus and final corpus publication
+
+- After the user requested that only aimwnoaim be used from this point onward,
+  all new genuine commits use aimwnoaim; prior attribution is retained. Future counts
+  can diverge rather than being silently rewritten again. PR #4 is the replacement
+  draft from dev-aimwnoaim-balanced; PR #3 remains the old branch's draft.
+- Decoder verification against the actual local Qwen model returned a supported
+  answer with the required citation. The live summer-elective query cited current
+  clause 6.2. Citation review also caught navigation text contaminating HTML labels.
+- HTML extraction now omits head/scripts/styles/navigation/header/footer content
+  while keeping policy blocks and table rows. All nine raw corpus hashes still
+  match MANIFEST.md. Tests verify retained tables, PDF vector reuse, empty-source
+  rejection and embedding-model mismatch rejection.
+- Ran the sole html-policy-refresh indexer Job: 1,232 existing PDF chunks/vectors
+  retained, seven cleaned HTML chunks generated, 1,239 chunks atomically published.
+  The Job completed in 22 seconds. The old index stayed active until publication;
+  no API process wrote the index and no full PDF OCR rerun is claimed.
+- Generation now focuses explicit clause questions without bypassing the relevance
+  floor, restricts evidence to a close-score window, and replaces bare yes/no with
+  attributed policy excerpts. Reference-derived clauses appear before broad anchors.
+  API: 24 tests pass, 83.65% coverage; mypy passes 24 files. Indexer: 16 tests pass,
+  mypy passes 11 files. Ruff and corpus verification pass.
+- Recomputed chunk sweeps for the cleaned corpus. PDF extraction was reused only
+  after raw checksums and unchanged PDF-extractor/dispatcher AST were verified;
+  the Docker image's extractor fingerprint also matched. The measurement runner
+  now invalidates resumed results on corpus/extractor/chunker/gold/model changes.
+- The final 19-question live evaluation is running and writes eval/results.json
+  plus complete API responses. A baseline will be accepted only after answer review.
