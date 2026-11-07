@@ -187,6 +187,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate RAHBAR against a golden set.")
     parser.add_argument("--api", required=True, help="base URL, e.g. http://192.168.49.2")
     parser.add_argument("--host", help="Host header, when your Ingress rule names a host")
+    parser.add_argument("--timeout", type=float, default=120.0,
+                        help="per-request timeout; increase for CPU-only local generation")
     parser.add_argument("--golden", type=Path, default=HERE / "golden.yaml")
     parser.add_argument("--baseline", type=Path, default=HERE / "baseline.json")
     parser.add_argument("--out", type=Path, default=HERE / "results.json")
@@ -199,7 +201,7 @@ def main() -> int:
     questions = load_golden(args.golden)
     rows = []
     headers = {"Host": args.host} if args.host else {}
-    with httpx.Client(timeout=120.0, headers=headers) as client:
+    with httpx.Client(timeout=args.timeout, headers=headers) as client:
         for q in questions:
             started = time.perf_counter()
             response = ask(client, args.api, q["question"])
