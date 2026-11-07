@@ -17,19 +17,30 @@ review representative scans. Default OCR detached clause numbers on reviewed pol
 page 2; single-block `--psm 6` improved that association. This was a Docker pipeline
 probe, not a claim of a failed Kubernetes Job.
 
-## B · fixed 100-word chunks with no overlap (running)
+## B � fixed 100-word chunks with no overlap (completed)
 
-`scripts/measure_fixed_chunks.py` replaces structure-aware windows with fixed 100-word
+`scripts/measure_fixed_chunks.py` replaced structure-aware windows with fixed 100-word
 windows and no overlap, using the same verified extraction, model and golden labels.
-Whitespace words are the pipeline's documented token approximation. Metadata comes
-from the section at the beginning of each window; it is not deliberately deleted.
-The experiment writes `evidence/failure-b-fixed-chunks.json`; no metric is claimed until
-it finishes. Compare recall@3/@5 and individual misses with the normal chunk sweep.
+Whitespace words are the pipeline's documented token approximation. Metadata came
+from the section at the beginning of each window; it was not deliberately deleted.
+The 939 resulting chunks measured recall@3 5.88%, recall@5 11.76%, against normal
+400/50 recall@3 70.59%, recall@5 88.24%. Raw per-question retrieved metadata:
+`evidence/failure-b-fixed-chunks.json`.
 
-Without knowing the fault, inspect the retrieved IDs/sections and text at chunk ends,
-then compare exact/definition recall. A policy split across adjacent windows suggests
-stage B even when extraction contains the full text. Remedy: restore section/paragraph/
-sentence-aware chunks and measured overlap; reindex and invalidate revision cache.
+Diagnosis: fixed windows merge several short numbered clauses and can split a rule
+at arbitrary word positions. A window labelled with its first clause may contain a
+later relevant clause, so this source/section recall metric measures metadata
+attribution as well as semantic retrieval. The large drop must not be interpreted
+as proof that all matching facts vanished from text. This is a retrieval-only fault,
+not a measured generation-accuracy result. It exposes why chunk boundaries and
+provenance must remain aligned.
+
+Without knowing the fault, inspect retrieved IDs/sections and text at chunk ends,
+then compare exact/definition recall. A policy split across adjacent windows or a
+label belonging to another clause suggests stage B even when extraction is complete.
+Remedy: restore the shipped section/paragraph/sentence-aware 400/50 chunks, reindex
+and invalidate revision cache. The live published collection was never replaced by
+this isolated failure experiment.
 
 ## C · API-only model mismatch (completed)
 
