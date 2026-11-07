@@ -329,3 +329,24 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
 - Registry metadata still lists no original-repository Actions secrets or variables.
   The connected account has push but not admin access. OWNER-STEPS describes the
   necessary owner configuration; no Docker credential has been exported as a workaround.
+
+### Runtime convergence and request draining
+
+- All three dc49a384480c7c7663d75349c1c1135f1ecf0d73 images were built/loaded and
+  published through the normal local Docker CLI. Final image digests are recorded;
+  the offline indexer wheelhouse build is disclosed separately from standard CI builds.
+- Applied the local release with the one-shot Job excluded, preserving the active
+  1,239-chunk generation. Only the earlier completed index Jobs wrote the store.
+- An in-progress evaluation request received 502 during the configuration rollout:
+  the 35-second termination grace was shorter than real-model request latency.
+  Increased draining and Ingress timeouts to 900 seconds, covering two bounded
+  generation calls per attempt and one retry. The existing preStop endpoint delay
+  remains. This manifest change will be applied/tested after evaluation, not during it.
+- The restarted full evaluation uses the converged configuration. Actual poisoned
+  fixture calls returned the recent-grade rule and the minimum-attendance FA
+  consequence, never the injected optional-attendance instruction. The latter is
+  a supported consequence, not a claim that the model explicitly quoted 80%.
+- Indexer: 16 tests and mypy (11 files) pass. Evaluator: four tests pass. Ruff passes;
+  all nine raw files match the manifest. Final strict prod render validates 28 objects.
+- Pushed source changes to dev only and created replacement draft PR #5. CI quality
+  is green on dc49a38; cluster-smoke is still running at this entry.
