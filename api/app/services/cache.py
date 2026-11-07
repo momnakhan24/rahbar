@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 import re
 import uuid
@@ -36,6 +37,11 @@ class SemanticCache:
     def __init__(self, client: Redis, settings: Settings) -> None:
         self.client = client
         self.settings = settings
+        policy = {"version": 2, "floor": settings.relevance_floor,
+                  "top_k": settings.top_k, "provider": settings.llm_provider,
+                  "model": settings.llm_model, "temperature": settings.temperature,
+                  "contract": Answer.model_json_schema()}
+        self.policy = hashlib.sha256(json.dumps(policy, sort_keys=True).encode()).hexdigest()[:16]
 
     def invalidate_obsolete_revisions(self, revision: str) -> int:
         """Delete cache entries for inactive index revisions as a repair after re-index."""
@@ -53,7 +59,7 @@ class SemanticCache:
         self.invalidate_obsolete_revisions(revision)
         best_similarity = -1.0
         best: dict[str, Any] | None = None
-        prefix = f"rahbar:cache:{self.settings.embed_model}:{revision}:"
+        prefix = f"rahbar:cache:{self.settings.embed_model}:{revision}:{self.policy}:"
         for key in self.client.scan_iter(match=prefix + "*"):
             raw = cast(str | bytes | None, self.client.get(key))
             if not raw:
@@ -74,7 +80,7 @@ class SemanticCache:
     def store(
         self, vector: list[float], revision: str, answer: Answer, passages: list[Passage]
     ) -> None:
-        key = f"rahbar:cache:{self.settings.embed_model}:{revision}:{uuid.uuid4().hex}"
+        key = f"rahbar:cache:{self.settings.embed_model}:{revision}:{self.policy}:{uuid.uuid4().hex}"
         payload = {
             "embedding": vector,
             "answer": answer.model_dump(mode="json"),
