@@ -16,7 +16,7 @@ import numpy as np
 from pipeline.chunk import chunk
 from pipeline.clean import clean
 from pipeline.config import get_settings
-from pipeline.embed import embed
+from measurement_vectors import embed
 from pipeline.extract import extract
 from pipeline.models import Chunk, Document, Page
 from pipeline.run import discover
