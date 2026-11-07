@@ -309,3 +309,23 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
 - Evidence-excerpt model selection still chose unrelated facts in targeted tests.
   These attempts are diagnostic, not a passing final evaluation. Testing the installed
   Llama 3B and downloading Qwen 3B locally before accepting a generation baseline.
+
+### Bounded excerpt selection verified against the real local model
+
+- Long correlated quote/citation alternatives were structurally valid but the local
+  models selected unrelated excerpts. Plain-schema probes also produced incomplete
+  facts. These failures were caught by actual answer review, not the membership metric.
+- A bounded numeric evidence-selection call with Qwen 2.5 3B selected the correct
+  no-new-courses rule, actual BBA/BS tuition row and A+ grading table on all three
+  targeted cases. The selected quote and its original citation then constrain final
+  generation through the shared Answer schema; server checks enforce that exact pair.
+  A zero choice means refusal. No golden question, relevance label or answer was changed.
+- Currency abbreviation handling preserves the amount after Rs.; stopword-free
+  excerpt ranking reduces distraction. Injection-like sentences cannot become allowed
+  policy excerpts. Cache policy 6 isolates this new generation path.
+- API checks: 31 tests passed, 83.71% coverage, Ruff and mypy passed. This adds one
+  bounded model selection call before final Answer generation and increases latency;
+  correctness is assessed on the actual full run next, not inferred from test count.
+- Registry metadata still lists no original-repository Actions secrets or variables.
+  The connected account has push but not admin access. OWNER-STEPS describes the
+  necessary owner configuration; no Docker credential has been exported as a workaround.
