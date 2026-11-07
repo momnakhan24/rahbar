@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 
 import httpx
 
@@ -18,14 +19,9 @@ class OllamaProvider:
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
         evidence = _evidence(passages)
-        schema = Answer.model_json_schema()
+        schema = _answer_schema(passages)
         # Constrain the decoder to the actual citation objects, then still check
         # membership server-side. Small local models otherwise mistype long labels.
-        if passages:
-            schema["$defs"]["Citation"] = {"enum": [
-                {"source": p.source, "section": p.section, "page": p.page}
-                for p in passages
-            ]}
         instructions = (
             "You are RAHBAR, a university document assistant. Find the supplied passage "
             "that answers the question and state its facts concisely. When a passage "
@@ -54,13 +50,39 @@ class OllamaProvider:
                 # Four threads fit the documented local serving CPU budget;
                 # host-wide thread detection oversubscribes a CPU-limited container.
                 "options": {"temperature": self.settings.temperature,
-                            "num_predict": 256, "num_thread": 4},
+                            "num_predict": 384, "num_thread": 4},
             },
             timeout=180.0,
         )
         response.raise_for_status()
         content = response.json().get("message", {}).get("content", "")
         return Answer.model_validate_json(content)
+
+
+def _answer_schema(passages: list[Passage]) -> dict:
+    """Refine the shared Answer contract into consistent grounded/refusal branches."""
+    schema = Answer.model_json_schema()
+    definitions = schema.pop("$defs")
+    if passages:
+        definitions["Citation"] = {"enum": [
+            {"source": p.source, "section": p.section, "page": p.page}
+            for p in passages
+        ]}
+    branches = []
+    for grounded in (True, False):
+        branch = deepcopy(schema)
+        properties = branch["properties"]
+        properties["answered_from_context"] = {"type": "boolean", "const": grounded}
+        properties["citations"]["minItems"] = 1 if grounded else 0
+        properties["citations"]["maxItems"] = 2 if grounded else 0
+        if not grounded:
+            properties["confidence"] = {"type": "string", "const": "low"}
+        # Commit to the grounding decision before generating its dependent fields.
+        branch["properties"] = {
+            "answered_from_context": properties.pop("answered_from_context"), **properties,
+        }
+        branches.append(branch)
+    return {"$defs": definitions, "oneOf": branches}
 
 
 def _evidence(passages: list[Passage]) -> str:
