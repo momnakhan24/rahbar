@@ -11,6 +11,7 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,7 +25,7 @@ jobs:
         run: python -m pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
       - name: Lint and type check
         run: |
-          ruff check api indexer eval corpus
+          ruff check api indexer eval corpus scripts/check_evaluation.py
           (cd api && mypy app)
           (cd indexer && mypy pipeline)
       - name: Unit and evaluation gate tests
@@ -33,6 +34,7 @@ jobs:
           (cd indexer && pytest --cov=pipeline --cov-report=term-missing --cov-report=xml:../coverage-indexer.xml -q)
           (cd eval && pytest -q)
           python eval/run_eval.py --help
+          python scripts/check_evaluation.py
       - name: Validate rendered Kubernetes manifests
         run: |
           for overlay in dev prod; do
@@ -43,6 +45,7 @@ jobs:
   cluster-smoke:
     needs: quality
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: helm/kind-action@v1.10.0
