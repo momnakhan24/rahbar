@@ -12,3 +12,7 @@ CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT    MEM %     NET I/O
 af1067700879   rahbar-serving   474.98%   1.852GiB / 4GiB      46.30%    60.9kB / 27.8kB   110MB / 0B        51
 NAME   REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
 api    Deployment/api   cpu: <unknown>/70%   3         8         3          26h
+
+HPA after startup metrics window, 2026-11-07T14:11:56.8242267+05:00:
+NAME   REFERENCE        TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+api    Deployment/api   cpu: 15%/70%   3         8         3          26h
