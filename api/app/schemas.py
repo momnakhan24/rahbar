@@ -25,8 +25,9 @@ class Passage(BaseModel):
     source: str
     section: str
     page: int | None = None
-    score: float = Field(description="Cosine similarity; section references inherit anchor relevance.")
+    score: float = Field(description="Retrieval relevance: dense cosine, inherited section match, or exact source match (1).")
     match_kind: str = "dense"
+    dense_score: float | None = None
 
 
 class Citation(BaseModel):
@@ -54,6 +55,7 @@ class RetrievedRef(BaseModel):
     page: int | None = None
     score: float
     match_kind: str = "dense"
+    dense_score: float | None = None
 
 
 class AskResponse(BaseModel):
