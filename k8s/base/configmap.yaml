@@ -11,7 +11,8 @@ data:
   CHROMA_PORT: "8000"
   CHROMA_COLLECTION: rahbar
   TOP_K: "5"
-  TEMPERATURE: "0.2"
+  # Deterministic policy extraction; retrieval and validation enforce grounding.
+  TEMPERATURE: "0.0"
   LLM_MODEL: llama3.2:3b
   OLLAMA_URL: http://host.minikube.internal:11434
   HOSTED_BASE_URL: ""
