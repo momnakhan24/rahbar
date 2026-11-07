@@ -1,0 +1,4 @@
+{"ts": "2026-11-07T14:21:38Z", "logger": "rahbar.indexer", "msg": "source refreshed", "source": "fee-structure-page.html", "chunks": 4, "sections": ["1. Admission Fee is non-refundable.", "2. Security deposit is refundable at the time of completion of degree or closing of admission.", "3. Tuition Fee is refunded in accordance with the guidelines of Higher Education Commission (HEC).", "Document"]}
+{"ts": "2026-11-07T14:21:38Z", "logger": "rahbar.indexer", "msg": "source refreshed", "source": "grading-page.html", "chunks": 3, "sections": ["Document"]}
+{"ts": "2026-11-07T14:21:47Z", "logger": "rahbar.indexer", "msg": "refresh prepared", "reused_chunks": 1232, "replaced_sources": ["fee-structure-page.html", "grading-page.html"], "new_chunks": 7, "previous_collection": "rahbar-1793960893-475fc7c5"}
+{"ts": "2026-11-07T14:21:51Z", "logger": "rahbar.indexer", "msg": "refresh finished", "chunks": 1239}
