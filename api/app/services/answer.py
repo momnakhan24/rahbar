@@ -198,6 +198,9 @@ def answer_question(
             "top_k": settings.top_k,
             "chunk_ids": [p.chunk_id for p in passages],
             "scores": [round(p.score, 4) for p in passages],
+            "dense_scores": [round(p.dense_score if p.dense_score is not None else p.score, 4)
+                             for p in passages],
+            "match_kinds": [p.match_kind for p in passages],
             "answered_from_context": answer.answered_from_context,
             "cache_hit": cache_hit,
         },
