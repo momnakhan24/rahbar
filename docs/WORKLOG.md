@@ -224,3 +224,23 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
   generation/citation fixes, reviewed committed results/baseline, synchronized deployment
   documentation/image pins, actual screenshots, owner secret configuration and real
   approval/merge followed by a successful CD run.
+
+### Remaining coding and evaluation completion started
+
+- User authorized finishing coding/evaluation on dev-aimwnoaim-balanced, pushing real
+  fixes and following CI to success, with genuine commits balanced between accounts.
+- Added grounded/refusal decoder branches derived from Answer: grounded output must
+  cite retrieved evidence; refusal has no citations and low confidence. The grounding
+  decision is decoded before dependent fields. Increased the bounded output budget
+  to 384 tokens and invalidated prior cache policy entries.
+- Added read-only policy cross-reference following. Root headings and explicit rule/
+  clause/section references expand only within the same source and version filter.
+  Child provenance is retained; inherited anchor relevance is labelled section_reference.
+  Local BM25 plus ordered phrase matching ranks children without changing golden labels.
+- Synthetic regression tests cover source/version boundaries, numeric-only labels,
+  provenance, modifier-separated phrases and decoder branch constraints. API: 21
+  tests pass, 83.42% coverage. Ruff passes; mypy passes 24 source files. Live model
+  verification remains pending at this entry. The first eight commits are four per
+  account; there are no padding commits.
+- Generation temperature is now 0.0 for deterministic policy extraction, with its
+  rationale in the shared ConfigMap. Grounding still relies on evidence and validation.
