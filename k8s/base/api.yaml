@@ -20,7 +20,9 @@ spec:
     spec:
       serviceAccountName: api
       automountServiceAccountToken: false
-      terminationGracePeriodSeconds: 35
+      # Drain in-flight CPU generation: two calls per attempt, one retry, plus
+      # embedding/transport time. Existing preStop lets endpoints withdraw first.
+      terminationGracePeriodSeconds: 900
       securityContext:
         runAsNonRoot: true
         runAsUser: 10001
