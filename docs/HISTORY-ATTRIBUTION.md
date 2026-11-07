@@ -19,3 +19,12 @@ as builds or checks of new SHAs. The archive and mapping retain their provenance
 The balanced branch needs a fresh CI run before submission. Existing published
 branches, main, review approvals and the original PR are not overwritten as part
 of preparing this branch.
+
+## Subsequent branch publication
+
+The user renamed the published working branch to **dev** and deleted the older
+remote development/archive branches. Original history is retained locally and the
+committed mapping still records provenance; no deleted remote branch is recreated.
+New commits now use **aimwnoaim** only, at the user's explicit instruction. Counts
+can diverge as genuine work continues. Later CI verifies the actual dev head;
+old image tags and run URLs remain identified by their original source SHAs.
