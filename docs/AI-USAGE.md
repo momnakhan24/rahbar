@@ -37,3 +37,21 @@ Representative visual checks are labelled as such. Unexecuted external repositor
 settings, approvals, CD publication and screenshot requirements remain distinguishable
 from local tests. The submitting team must review, understand and explain the final
 implementation and measurements; Codex cannot attest to that human review.
+
+## Final grounding and deployment corrections
+
+Codex implemented and tested the final evidence-excerpt generation strategy after
+live answers exposed correct facts paired with irrelevant citations and incorrect
+source selection. It added unique named-page filtering, explicit raw dense scores,
+a bounded numeric model evidence selector, constrained final Answer generation,
+independent quote/citation pairing checks and cache policy invalidation. Qwen 2.5
+3B was selected after smaller-model and alternative-schema probes failed review.
+No question labels were changed to fit final retrieval or generation.
+
+Codex also cleaned HTML navigation, added atomic selected-source refresh with PDF
+vector reuse, reran the three chunk measurements with input fingerprints, hardened
+the corpus loader, corrected clean-clone order, and made CD depend on the complete
+reusable fixture CI gate. It records observed results, limitations and failed probes
+in WORKLOG and evidence. The owner must still configure Actions credentials, provide
+actual review/approval, capture required screenshots and submit the work. The agent
+did not export Docker credentials or fabricate a successful hosted CD run.
