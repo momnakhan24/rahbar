@@ -37,7 +37,7 @@ class SemanticCache:
     def __init__(self, client: Redis, settings: Settings) -> None:
         self.client = client
         self.settings = settings
-        policy = {"version": 5, "floor": settings.relevance_floor,
+        policy = {"version": 6, "floor": settings.relevance_floor,
                   "top_k": settings.top_k, "provider": settings.llm_provider,
                   "model": settings.llm_model, "temperature": settings.temperature,
                   "contract": Answer.model_json_schema()}
@@ -87,3 +87,4 @@ class SemanticCache:
             "passages": [item.model_dump(mode="json") for item in passages],
         }
         self.client.set(key, json.dumps(payload), ex=7 * 24 * 60 * 60)
+
