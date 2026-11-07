@@ -1,0 +1,14 @@
+Captured 2026-11-07T14:08:11.9908671+05:00; context rahbar; after probe-client reuse
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-c6586d96d-8hjq5      api      125m         67Mi            
+api-c6586d96d-v2gfv      api      221m         66Mi            
+api-c6586d96d-vjfdq      api      188m         67Mi            
+chroma-0                 chroma   7m           75Mi            
+redis-6df6cb6758-k68b9   redis    26m          5Mi             
+ui-55dc64f65c-jppvq      ui       1m           3Mi             
+CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT    MEM %     NET I/O           BLOCK I/O         PIDS
+19f440e30cef   rahbar           96.74%    1.771GiB / 6GiB      29.51%    2.2GB / 58MB      44.9GB / 7.54GB   970
+0f672a576672   rahbar-ollama    486.23%   1.897GiB / 11.5GiB   16.49%    4.06GB / 172MB    2.19GB / 3.82GB   45
+af1067700879   rahbar-serving   474.98%   1.852GiB / 4GiB      46.30%    60.9kB / 27.8kB   110MB / 0B        51
+NAME   REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+api    Deployment/api   cpu: <unknown>/70%   3         8         3          26h
