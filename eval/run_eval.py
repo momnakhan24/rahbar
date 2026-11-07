@@ -207,6 +207,7 @@ def main() -> int:
             response = ask(client, args.api, q["question"])
             rows.append({
                 "id": q["id"], "type": q.get("type", "ordinary"),
+                "question": q["question"],
                 "must_abstain": bool(q.get("must_abstain", False)),
                 "relevant": q.get("relevant") or [],
                 "expect": q.get("expect"),
