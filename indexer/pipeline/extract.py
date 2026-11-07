@@ -13,14 +13,23 @@ class _HTMLText(HTMLParser):
     """Keep block boundaries and serialize table rows as pipe-delimited cells."""
 
     BLOCKS = {"p", "div", "section", "article", "li", "h1", "h2", "h3", "h4", "h5", "h6"}
+    OMIT = {"head", "script", "style", "nav", "header", "footer", "noscript", "svg"}
+    VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "wbr"}
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.parts: list[str] = []
         self.row: list[str] | None = None
         self.cell: list[str] | None = None
+        self.stack: list[tuple[str, bool]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        omitted = bool(self.stack and self.stack[-1][1]) or tag in self.OMIT
+        omitted = omitted or dict(attrs).get("role") in {"navigation", "banner", "contentinfo"}
+        if tag not in self.VOID:
+            self.stack.append((tag, omitted))
+        if omitted:
+            return
         if tag == "tr":
             self.row = []
         elif tag in {"td", "th"}:
@@ -29,6 +38,13 @@ class _HTMLText(HTMLParser):
             self.parts.append("\n")
 
     def handle_endtag(self, tag: str) -> None:
+        omitted = bool(self.stack and self.stack[-1][1])
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index][0] == tag:
+                self.stack = self.stack[:index]
+                break
+        if omitted:
+            return
         if tag in {"td", "th"} and self.cell is not None:
             if self.row is not None:
                 self.row.append(" ".join(self.cell))
@@ -40,6 +56,8 @@ class _HTMLText(HTMLParser):
             self.parts.append("\n")
 
     def handle_data(self, data: str) -> None:
+        if self.stack and self.stack[-1][1]:
+            return
         cleaned = " ".join(data.split())
         if cleaned:
             if self.cell is not None:
