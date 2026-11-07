@@ -146,3 +146,16 @@ def test_cache_is_scoped_to_index_revision() -> None:
 def test_follow_up_detector_skips_pronominal_follow_ups() -> None:
     assert is_follow_up("What about it?")
     assert not is_follow_up("What is clause 5.4?")
+
+
+def test_stricter_grounding_and_changed_generator_cannot_reuse_old_answers() -> None:
+    client = FakeRedis()
+    settings = get_settings()
+    original = SemanticCache(client, settings)  # type: ignore[arg-type]
+    answer = GoodProvider().generate("What is the CGPA rule?", [PASSAGE])
+    original.store([1.0, 0.0], "same-index", answer, [PASSAGE])
+    assert original.lookup([1.0, 0.0], "same-index") is not None
+    stricter = SemanticCache(client, replace(settings, relevance_floor=0.99))  # type: ignore[arg-type]
+    assert stricter.lookup([1.0, 0.0], "same-index") is None
+    other_model = SemanticCache(client, replace(settings, llm_model="another-model"))  # type: ignore[arg-type]
+    assert other_model.lookup([1.0, 0.0], "same-index") is None
