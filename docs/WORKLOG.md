@@ -6,30 +6,34 @@ This log is the reviewable record of implementation, verification, assumptions a
 
 - Work only in the connected repository. Push only when the user explicitly authorizes it; do not merge or open a PR unless asked.
 - Keep all assignment changes on the user-requested local `dev-aimwnoaim` branch; keep each commit limited to one file/change.
-- The configured local Git author for new commits is `momnakhan24 <i243119@isb.nu.edu.pk>`. Earlier commits remain under their original authors; they were not rewritten. This sets commit attribution fields only and does not log into, impersonate, or grant access to a GitHub account. GitHub attribution depends on its account/email verification.
+- New genuine audit changes use `aimwnoaim <aimtk20@gmail.com>` at the user's request. A separate balanced branch transparently reattributes selected existing commits between the two accounts the user identified as their own; the original history is retained. Author counts are metadata, not proof of independent contributors.
 - Record unknowns as unknown. Source code and rendered YAML are not evidence of a live rollout, measured retrieval quality or protected-branch behavior.
 - Assignment deadline from the handout: 8 November 2026, 23:59 PKT.
 
-## Current status (local execution in progress)
+## Current status (audited 7 November 2026)
 
-| Requirement area | Verified now | Still required |
+The complete ordered handoff is in SUBMISSION-CHECKLIST.md. The assignment is not
+finished; in particular, there is still generation/retrieval work and no reviewed
+submission baseline. Earlier chronological entries below preserve past states.
+
+| Area | Verified | Outstanding |
 | --- | --- | --- |
-| Development history | Separate file/change commits on `dev-aimwnoaim`; pushes authorized, main untouched | Push final results and verify final CI |
-| Local Docker / Kubernetes | Minikube `rahbar`, Docker driver, Calico, Ingress, metrics-server; real service images loaded | API rollout after index publication; HPA/endpoints/resilience/rollback evidence |
-| Corpus / extraction | Nine public documents, 279 PDF pages; 41 OCR pages; representative visual review; table before/after saved | Exhaustive OCR proofreading is outside the completed representative audit |
-| Real pipeline | Corrected numbered clauses, visible-page extraction, atomic store and revision invalidation; real bulk embedding running | Successful real index publication and final resource measurements |
-| API | 16 existing tests plus readiness-reuse regression pass; local Llama fixture answer validated | Real-corpus generation, abstention and cache operational checks |
-| Evaluation | 19 source-labelled questions, cache threshold study complete; first chunk sweep measured | Remaining two configurations; live `results.json` and reviewed baseline |
-| Failure experiments | A executed and recorded; B running in Docker | C API model mismatch and E obsolete-source retrieval |
-| Network security | API dependencies allowed; UI-to-Chroma denied; UI-to-API corrected and verified | Repeat Service-level check after API readiness |
-| CI/CD | Earlier stub CI passed; newest run failed Ollama startup race, fix pushed | Verify revised fixture CI; external SHA publication and CD run |
-| External controls | Original-repo login can push but cannot administer; an admin-accessible fork exists | Protected main, real approval, blocked/green merge screenshots, registry token and successful CD remain unverified |
-| Documentation | Work log records observed results and rationale; AI disclosure updated | Replace remaining provisional summaries as experiments finish |
+| History | Real changes on dev-aimwnoaim; author-count imbalance identified | Prepare transparent balanced history without empty commits; choose publication route before overwriting anything |
+| Corpus/index | Nine public sources, 279 PDF pages, 41 OCR pages; 1,247 real chunks published | Representative review is not exhaustive OCR proofreading |
+| Chunk/cache experiments | All three chunk sweeps measured; 400/50 recall@5 88.24%; threshold study complete | Final documentation must distinguish retrieval scores from answer correctness |
+| Kubernetes | Three endpoints, numeric HPA, resource samples, Calico checks, pod replacement and rollout/undo captured | Synchronize committed image pins/README with the corrected live runtime |
+| UI/API checks | localhost served UI, file-open guidance and duplicate-submit guard; 18 API tests / 77.10% coverage | Final generation correctness and per-answer review |
+| Real evaluation | Completed 19-question diagnostic: recall@3 70.59%, recall@5 88.24%, citation membership 10/10, must-abstain 2/2; literal expected terms 6/17 | eval/results.json missing; baseline pending; fix supported-answer fallbacks and wrong r12 prerequisite answer before accepting results |
+| Citation diagnosis | Provider can emit a true grounded flag with an empty citation list; server rejects it safely | Enforce compatible grounded/refusal branches during decoding, then test actual model behavior |
+| Controlled failures | A/B/C/E executed; removed fixture tuition caused 1.0→0.8 recall and a failed gate; restoration passed CI | Required actual screenshots remain missing |
+| CI | Original PR #3 is draft; checks passed on 9940eec in runs 42360957317 / 42361063605 | Later local and rewritten commits require fresh CI |
+| Registry/CD | Local Docker pushes succeeded for 02246e5 and bf3edf7 source tags | No successful CD verified; original repository listed no Actions secrets at audit |
+| Repository controls | Original main reports protected; PR #3 requires real review | Owner must verify all protection settings, save DOCKERHUB_TOKEN, obtain approval and merge through PR |
 
-The submission checker reports 164 passes, three warnings and zero mechanical failures.
-It does not establish assignment completion; the runtime/evaluation/external items above
-remain necessary. Chronological entries below preserve earlier observations and superseded
-blockers rather than claiming that old environment failures still apply.
+The user declined agent-mediated export of the Docker credential; no such transfer
+occurred. Giving a token to the owner does not establish that the Actions secret exists.
+Windows screenshot inspection stopped because current Chrome URL could not be verified.
+
 
 ## Decisions and assumptions
 
@@ -184,3 +188,19 @@ blockers rather than claiming that old environment failures still apply.
 
 - User-owned fork aimwnoaim/rahbar main now requires quality and cluster-smoke checks, up-to-date branch, one approval, stale-review dismissal and conversation resolution, enforced for administrators. Original repository settings are unchanged because current login has no admin access. Opened controlled gate PR https://github.com/aimwnoaim/rahbar/pull/1 on separate demo-eval-gate worktree/branch; deliberately removed fixture tuition evidence, keeping golden labels/baseline fixed. It will be restored after observing the live eval gate failure. No main merge or fabricated approval.
 - CPU-only Llama 1B declined directly supported r01/r02 despite relevant evidence; Qwen 0.5B comparison then exceeded 120-second generation/request budget. Added explicit schema prose/citation bounds, 256-token generation cap, 180-second attempt timeout, configurable evaluator timeout and 480-second Ingress budget for two attempts. This is an operational adjustment, not evidence of answer accuracy. Latest local checks: API 17 pass with 76.83% coverage, indexer 14 pass, eval 4 pass, mypy 23 API/10 indexer source files clean. The earlier CI exact-512-token test failed after the intentional cap change; the test now checks the bounded-output contract and the fix is pushed. HPA recovered from startup unknown to numeric 15%/70%.
+
+### Author-balance and final submission audit
+
+- User reiterated balanced account history as an assignment requirement. Empty/padding
+  commits are not used. Prepare the real, transparently reattributed feature history on
+  a separate branch, preserve main ancestry and the original history, and verify every
+  rewritten commit retains its original tree/message/timestamps. Do not overwrite the
+  published branch or claim old CI checks validate new SHAs.
+- New audit documents and this status update are genuine file changes, committed
+  individually under aimwnoaim. HISTORY-ATTRIBUTION.md explains the metadata adjustment.
+- Full local diagnostic run completed after the prior turn: citation membership and
+  must-abstain gates pass, but wrong/incomplete/fallback answers remain. The evaluator
+  still fails against the pending baseline. Do not bless that baseline without fixes
+  and manual answer review. SUBMISSION-CHECKLIST.md records exact remaining steps.
+
+- Mechanical audit found duplicate starter files in the completed experimental worktree under ignored work/. Moved that clean worktree with git worktree move to the verified task-specific temporary directory, retaining its commits. The checker's captured output is a .log scratch file so the checker does not recursively scan its own diagnostics. The assignment checker itself was not modified.
