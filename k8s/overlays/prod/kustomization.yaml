@@ -17,6 +17,8 @@ patches:
       data:
         RETRIEVER: chroma
         LLM_PROVIDER: ollama-host
+        LLM_MODEL: qwen2.5:1.5b
+        RELEVANCE_FLOOR: "0.70"
         EMBED_MODEL: nomic-embed-text
 images:
   - name: rahbar-api
