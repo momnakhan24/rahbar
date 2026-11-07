@@ -1,191 +1,197 @@
 # RAHBAR
 
-[![CI](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml/badge.svg)](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml)
+[![CI](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml)
 
-RAHBAR is a grounded question-answering service for FAST-NUCES public academic and
-student documents. It retrieves passages from an index built by a one-shot Kubernetes
-Job, then returns an answer with citations or declines when its evidence is insufficient.
-The API only reads Chroma; re-indexing is performed by a Job or the weekly CronJob.
-
-> `dev` keeps the starter retriever/provider and a dummy index for plumbing checks.
-> `prod` selects Chroma retrieval, the Ollama host provider and the real corpus indexer.
-> The real corpus has been indexed on the local Docker-backed Minikube profile `rahbar`.
-> See [WORKLOG](docs/WORKLOG.md) for measured evidence and remaining evaluation/external requirements.
-
-## Architecture
+Grounded question answering over nine public FAST-NUCES documents. The indexer Job
+extracts/OCRs, cleans, chunks and embeds documents, then atomically publishes Chroma.
+Three API replicas only read that index. Answers cite retrieved policy excerpts;
+questions without sufficient evidence receive a refusal. Raw university files are
+ignored; their public URLs and SHA-256 checksums are in `corpus/MANIFEST.md`.
 
 ```mermaid
 flowchart LR
-  Browser -->|/| Ingress --> UI
-  Browser -->|/api| Ingress --> API
-  API -->|read only| Chroma[(Chroma StatefulSet + PVC)]
+  Browser --> Ingress
+  Ingress -->|/| UI
+  Ingress -->|/api| API
+  API -->|read| Chroma[(Chroma StatefulSet + PVC)]
   API --> Redis[(Redis + PVC)]
-  Indexer[Indexer Job / weekly CronJob] -->|sole writer| Chroma
-  API --> Ollama[Ollama host, optional real provider]
+  Job[Indexer Job / weekly CronJob] -->|sole writer| Chroma
+  API --> Ollama[Local Ollama]
+  Job --> Ollama
 ```
 
-The API, indexer, and UI are separate images. The ConfigMap provides one embedding-model
-pin to both API and indexer. Chroma uses a StatefulSet because its single writable data
-directory needs a stable identity and persistent volume. Redis stores the semantic cache
-and uses a PVC so restarts do not discard all cache state.
+`dev` is the working Git branch. Separately, `k8s/overlays/dev` is a **stub plumbing
+configuration**, `local` is the real Docker/Minikube configuration, and `prod` uses
+published images and the real provider. CD deploys a disposable stub acceptance
+cluster after the full real-retrieval fixture CI gate; it does not host the university
+corpus as a public service. Real-corpus evaluation is performed on local Minikube.
 
 ## Requirements
 
-- Docker, Minikube with the Calico CNI, `kubectl`, and `make` in WSL 2 / a Bash shell.
-- Python 3.12 for local development and the submission checker.
-- To switch to the real RAG configuration: the downloaded corpus and an Ollama host
-  listening on port 11434 with the selected LLM and embedding models pulled.
-
-## From a clean clone to a stub answer
-
-Run these commands from the repository root:
-
-```bash
-make cluster
-make images TAG=dev
-kubectl apply -k k8s/overlays/dev
-kubectl rollout status statefulset/chroma -n rahbar --timeout=5m
-kubectl rollout status deployment/redis -n rahbar --timeout=2m
-kubectl wait --for=condition=complete job/indexer -n rahbar --timeout=5m
-kubectl rollout status deployment/api -n rahbar --timeout=3m
-kubectl rollout status deployment/ui -n rahbar --timeout=2m
-```
-
-On Windows with the Docker driver, run `minikube tunnel` in a second WSL terminal. Then
-open `http://127.0.0.1/` with the `Host: rahbar.local` header, or ask through the Ingress:
-
-```bash
-curl -H 'Host: rahbar.local' -H 'Content-Type: application/json' \
-  -d '{"question":"What does the stub handbook say?"}' \
-  http://127.0.0.1/api/ask
-```
-
-The starter deployment is stub mode. The initial Job writes three fake passages so the
-StatefulSet, PVC, Service, Ingress and API can be brought up before model setup.
-
-## Move from stub mode to the real corpus
-
-Copy and review the source list, then fetch the selected public documents and verify the
-hashes. Do not commit the downloaded PDFs:
-
-```bash
-cp corpus/sources.example.yaml corpus/sources.yaml
-make fetch
-python corpus/fetch.py --verify
-```
-
-The production overlay already selects Chroma retrieval, `ollama-host`, and
-`nomic-embed-text`. The base Job and CronJob run the real indexer; the dev overlay patches
-them to `--dummy`. Copying files into the PVC is an explicit step because Kubernetes
-cannot mount the ignored local corpus automatically. After applying the prod overlay and
-waiting for the `corpus-data` claim to bind, use the temporary loader pod:
-
-```bash
-kubectl apply -f k8s/base/corpus-loader.example.yaml
-kubectl wait --for=condition=Ready pod/corpus-loader -n rahbar --timeout=2m
-kubectl cp corpus/raw/. rahbar/corpus-loader:/corpus
-kubectl delete pod corpus-loader -n rahbar
-kubectl create job --from=cronjob/reindex first-index -n rahbar
-kubectl wait --for=condition=complete job/first-index -n rahbar --timeout=2h
-kubectl rollout status deployment/api -n rahbar --timeout=5m
-```
-
-The temporary loader manifest is deliberately excluded from Kustomize. It must be deleted
-after copying the corpus. Create the runtime secret only if hosted generation is selected;
-the prod overlay uses Ollama and does not require an API key. Set up `host.minikube.internal`
-and the `192.168.49.1/32` NetworkPolicy egress address for the actual cluster before use.
-Re-index after changing `EMBED_MODEL`; readiness compares the API pin with Chroma metadata.
-
-## Endpoints
-
-| Method | Path | Purpose |
-| --- | --- | --- |
-| GET | `/healthz` | Process liveness; does not depend on downstream services. |
-| GET | `/readyz` | Dependency and index readiness. |
-| GET | `/metrics` | Prometheus text metrics. |
-| POST | `/api/ask` | Ask a question (3–500 characters) and return answer, citations, and retrieval metadata. |
-
-## Development and evaluation
-
-```bash
-make install
-make test
-make lint
-make dev
-make check
-```
-
-The 17-question real corpus set is [`eval/golden.yaml`](eval/golden.yaml). Once the real
-index is available, run `make eval`; the runner writes `eval/results.json` and compares
-against `eval/baseline.json`. Do not update the baseline until the set has been reviewed
-and a deliberate evaluation run is complete. A tiny offline fixture set is available via
-`make eval-fixtures`, but the stub deployment cannot produce meaningful RAG scores. The UI
-screenshot, measured resource evidence, and cluster rollout/failure demonstrations remain
-outstanding; see [WORKLOG](docs/WORKLOG.md).
-
-## GitHub Actions setup
-
-CI runs on pushes and pull requests. In repository settings, protect `main` and require the
-`quality` and `cluster-smoke` CI checks before merge. CD runs on a push to `main` or manual
-dispatch: tests must pass before images are built, scanned and published, and publication
-must succeed before deployment. Set the repository secret `DOCKERHUB_TOKEN` to a Docker Hub
-access token with push permission, and the variable `DOCKERHUB_USERNAME` to `aimwnoaim`
-(the workflow default). Images are published as `aimwnoaim/rahbar-{api,indexer,ui}:<commit SHA>`.
-The deployment job uses a disposable kind acceptance cluster and the protected `production`
-GitHub Environment, then verifies the published images through Ingress. That acceptance
-deployment uses the dev stub index; the real corpus and model deployment is validated
-separately on local Minikube. No external kubeconfig secret is needed for this ephemeral
-CD cluster. Do not store credentials in the repository. Settings and successful publication
-remain unverified until recorded in the evidence bundle.
-
-## Security and attribution
-
-Secrets are created with `make secret` from an environment variable. Never commit a real
-key or a populated Secret manifest. AI assistance used during implementation is recorded
-in [docs/AI-USAGE.md](docs/AI-USAGE.md).
-
-
-## Verified local Windows / Docker runtime
-
-The local profile is isolated from other Docker projects: Kubernetes context/profile
-`rahbar`, namespace `rahbar`, Calico, metrics-server and ingress. The initial 4Gi node
-was insufficient; the measured run uses 6Gi and six CPUs. Production indexer execution
-is separate from the three serving replicas. Raw public documents remain ignored.
-
-`k8s/overlays/local` records the actual immutable image source SHAs and local model IP.
-Build/load those images before applying it. Do not reuse its fixed Docker-network IP
-on a different profile without checking that profile's subnet. For a portable host
-Ollama setup use the production instructions above and its detected host address.
-Local models use the Docker volume `rahbar-models`; bulk experiments and interactive
-serving use separate Ollama containers over that same model data to prevent large
-embedding batches from blocking questions. No hosted LLM secret is needed.
-
-On this Windows Docker driver, a verified route through the real Ingress is:
+Docker Desktop running Linux containers, Minikube, kubectl, Git, and Python 3.12+.
+Allow 6Gi/six CPUs for the Minikube node plus additional host memory for Ollama.
+Run the following PowerShell commands from the repository root. Keep the `rahbar`
+profile separate from other projects. Installation is required only once:
 
 ```powershell
-kubectl --context rahbar port-forward -n ingress-nginx service/ingress-nginx-controller 18080:80 --address 127.0.0.1
+python -m venv .venv
+.venv\Scripts\python -m pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+.venv\Scripts\python corpus/fetch.py
+.venv\Scripts\python corpus/fetch.py --verify
 ```
 
-In a second terminal:
+The reviewed `corpus/sources.yaml` is already committed. Do not overwrite it with the
+example. Downloaded files belong in ignored `corpus/raw`, not Git.
+
+## Clean-clone real deployment on Windows / Docker
+
+These steps target a **new** `rahbar` profile/namespace. For an existing deployment,
+inspect its active index and Jobs first; do not launch concurrent indexing writers.
 
 ```powershell
-Invoke-RestMethod -Uri http://127.0.0.1:18080/api/ask -Method Post `
-  -Headers @{Host='rahbar.local'} -ContentType application/json `
+minikube start -p rahbar --driver=docker --cni=calico --memory=6144 --cpus=6
+minikube -p rahbar addons enable metrics-server
+minikube -p rahbar addons enable ingress
+```
+
+The local overlay uses Docker network `rahbar`, Ollama address `192.168.49.11`.
+Confirm `docker network inspect rahbar` shows the `192.168.49.0/24` subnet and that
+`.11` is free before the first container creation. A different subnet requires changing
+both `OLLAMA_URL` and the API/indexer egress CIDRs in your local overlay. For an existing
+`rahbar-serving` container, reuse it instead of running another with the same name.
+
+```powershell
+docker volume create rahbar-models
+docker run -d --name rahbar-serving --network rahbar --ip 192.168.49.11 `
+  --cpus 4 --memory 4g -e OLLAMA_HOST=0.0.0.0 -e OLLAMA_MAX_LOADED_MODELS=2 `
+  -v rahbar-models:/root/.ollama `
+  ollama/ollama@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
+docker exec rahbar-serving ollama pull nomic-embed-text
+docker exec rahbar-serving ollama pull qwen2.5:3b
+```
+
+Build the exact checked-out source, load it into Minikube, and create an ignored overlay
+that overrides all three image tags with that source SHA. The checked-in overlay records
+the measured release; this generated overlay also works for a later checked-out revision.
+
+```powershell
+$tag = (git rev-parse HEAD).Trim()
+foreach ($component in @('api','indexer','ui')) {
+  docker build -t "rahbar-${component}:$tag" $component
+  if ($LASTEXITCODE) { throw "Build failed: $component" }
+  minikube -p rahbar image load "rahbar-${component}:$tag"
+  if ($LASTEXITCODE) { throw "Image load failed: $component" }
+}
+New-Item -ItemType Directory -Force work/local | Out-Null
+@"
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../k8s/overlays/local
+images:
+  - name: rahbar-api
+    newTag: $tag
+  - name: rahbar-indexer
+    newTag: $tag
+  - name: rahbar-ui
+    newTag: $tag
+"@ | Set-Content work/local/kustomization.yaml
+```
+
+**Load corpus before applying the overlay**, because the overlay creates the indexing
+Job immediately. The temporary loader is hardened, has resources and no service token.
+
+```powershell
+kubectl --context rahbar apply -f k8s/base/namespace.yaml
+kubectl --context rahbar apply -f k8s/base/corpus-pvc.yaml
+kubectl --context rahbar apply -f k8s/base/corpus-loader.example.yaml
+kubectl --context rahbar -n rahbar wait --for=condition=Ready pod/corpus-loader --timeout=3m
+kubectl --context rahbar cp corpus/raw/. rahbar/corpus-loader:/corpus
+if ($LASTEXITCODE) { throw 'Corpus copy failed; do not start indexing' }
+kubectl --context rahbar -n rahbar delete pod corpus-loader --wait=true
+kubectl --context rahbar apply -k work/local
+kubectl --context rahbar -n rahbar rollout status statefulset/chroma --timeout=5m
+kubectl --context rahbar -n rahbar rollout status deployment/redis --timeout=3m
+kubectl --context rahbar -n rahbar wait --for=condition=complete job/indexer --timeout=2h
+kubectl --context rahbar -n rahbar rollout status deployment/api --timeout=5m
+kubectl --context rahbar -n rahbar rollout status deployment/ui --timeout=3m
+```
+
+The recorded full OCR/embedding run took about 29 minutes; cold downloads and slower
+CPUs can take longer. If it fails, inspect `kubectl describe pod`, Job logs and events;
+do not start a second writer while the first is running. The weekly CronJob uses the
+same real pipeline. Changing the embedding pin requires re-indexing; API readiness
+rejects an index/model mismatch. Hosted generation is optional and requires a local
+Kubernetes Secret; this Ollama configuration requires no LLM key.
+
+Start this port-forward and leave its terminal running:
+
+```powershell
+kubectl --context rahbar -n ingress-nginx port-forward service/ingress-nginx-controller 18080:80 --address 127.0.0.1
+```
+
+Open **http://localhost:18080**. The Ingress accepts localhost and rahbar.local;
+no hosts-file change is needed. Do not open `ui/index.html` as a file. In another terminal:
+
+```powershell
+Invoke-RestMethod http://localhost:18080/api/ask -Method Post -ContentType application/json `
   -Body '{"question":"What minimum CGPA avoids academic warning?"}'
 ```
 
-For the browser UI, map `rahbar.local` to `127.0.0.1` in the local hosts file and open
-`http://rahbar.local:18080`. An ordinary `http://localhost:18080` browser visit lacks the
-required Ingress host header. The port-forward terminal must remain running.
+`/healthz`, `/readyz` and `/metrics` are API routes. To inspect them directly, run a
+second port-forward: `kubectl --context rahbar -n rahbar port-forward service/api 18081:8000`.
+The Ingress `/` route goes to the UI; `/api` goes to the API.
 
-Readiness is an API diagnostic route, not the Ingress UI's `/readyz`. To inspect it:
+## Tests and evaluation
 
 ```powershell
-kubectl --context rahbar port-forward -n rahbar service/api 18081:8000 --address 127.0.0.1
-Invoke-RestMethod http://127.0.0.1:18081/readyz
+Push-Location api
+..\.venv\Scripts\pytest --cov=app --cov-fail-under=60 -q
+..\.venv\Scripts\mypy app
+Pop-Location
+Push-Location indexer
+..\.venv\Scripts\pytest -q
+..\.venv\Scripts\mypy pipeline
+Pop-Location
+.venv\Scripts\ruff check api indexer eval corpus
+.venv\Scripts\python -m pytest eval -q
+.venv\Scripts\python eval/run_eval.py --api http://localhost:18080 --timeout 480 --out eval/results.json
+.venv\Scripts\python scripts/check_submission.py
 ```
 
-Captured evidence includes the full real indexing Job, three endpoints, numeric HPA,
-Calico allow/deny tests, visible UI rollout/undo, and pod replacement. The real-corpus
-baseline, generation review and four failure experiments must be checked against the
-current work log; a passing mechanical checker or fixture CI is not a substitute.
+The unchanged real golden set has **19 questions**. `eval/results.json` and
+`eval/baseline.json` hold real-corpus measurements; `docs/evidence/final-responses.json`
+and the generation review preserve per-answer evidence. Update a baseline only after
+review, using `--update-baseline`, then rerun without that flag. Fixture evaluation uses
+its own golden set/baseline; fixture scores must never replace real-corpus measurements.
+Chunking and cache-threshold measurements are explained in `docs/PIPELINE.md`.
+
+## CI, CD and submission
+
+CI performs lint/type checks, tests with coverage, strict manifest validation, image
+builds/scans, a kind rollout, and actual fixture indexing/retrieval plus evaluation.
+CD reuses that full CI suite before publishing anything, then builds/scans/pushes
+`aimwnoaim/rahbar-{api,indexer,ui}:<github.sha>`. Only successful publication unlocks
+an ephemeral acceptance deployment and JSON-validated smoke test through Ingress.
+Runs upload evaluation, image-digest and acceptance artifacts. See `docs/OWNER-STEPS.md`
+for exact repository settings and final submission steps. Credentials belong only in
+GitHub Secrets; never paste them into code, Git history, PR descriptions or screenshots.
+
+`main` requires a PR, up-to-date `quality` and `cluster-smoke` checks, and one genuine
+review approval. Work and pushes use `dev`; no direct push to main is needed. Final
+CI and CD status must be checked on the actual submitted commit. An earlier green run
+cannot verify later changes, and a local acceptance run cannot establish hosted CD success.
+
+See `docs/WORKLOG.md` for the chronological audit trail, `docs/SUBMISSION-CHECKLIST.md`
+for remaining requirements, and `docs/AI-USAGE.md` for the extent of AI assistance.
+
+
+| Method | API path | Purpose |
+| --- | --- | --- |
+| GET | `/healthz` | Process liveness without downstream dependencies |
+| GET | `/readyz` | Index/model/dependency readiness |
+| GET | `/metrics` | Prometheus metrics |
+| POST | `/api/ask` | Validated question, cited answer or refusal |
+
+The clean-clone `kubectl apply` order above creates storage and loads the corpus
+before the real indexing Job. All namespace operations explicitly target rahbar.
