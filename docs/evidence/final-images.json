@@ -1,0 +1,33 @@
+{
+  "indexer_build": "Production source/requirements with offline wheelhouse pip install; API/UI standard Dockerfiles",
+  "publication": "Normal local Docker CLI push; not a hosted CD run",
+  "images": [
+    {
+      "repo_digests": [
+        "aimwnoaim/rahbar-api@sha256:7e5e7e92916664fd78c07eed3076b0fe2f305cddefb36a792d8fc41d4185ab56",
+        "rahbar-api@sha256:7e5e7e92916664fd78c07eed3076b0fe2f305cddefb36a792d8fc41d4185ab56"
+      ],
+      "component": "api",
+      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
+      "image": "aimwnoaim/rahbar-api:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+    },
+    {
+      "repo_digests": [
+        "aimwnoaim/rahbar-indexer@sha256:2836350a9730e07fa2523524a4f5a387f4c046f21511e21690af489f05691ee5",
+        "rahbar-indexer@sha256:2836350a9730e07fa2523524a4f5a387f4c046f21511e21690af489f05691ee5"
+      ],
+      "component": "indexer",
+      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
+      "image": "aimwnoaim/rahbar-indexer:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+    },
+    {
+      "repo_digests": [
+        "aimwnoaim/rahbar-ui@sha256:203f02b580f384d1fb6ae796631e7cdf9a27593ee78ffe80af32a30665f4bfad",
+        "rahbar-ui@sha256:203f02b580f384d1fb6ae796631e7cdf9a27593ee78ffe80af32a30665f4bfad"
+      ],
+      "component": "ui",
+      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
+      "image": "aimwnoaim/rahbar-ui:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+    }
+  ]
+}
