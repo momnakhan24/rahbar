@@ -17,16 +17,18 @@ patches:
       data:
         RETRIEVER: chroma
         LLM_PROVIDER: ollama-host
-        LLM_MODEL: qwen2.5:1.5b
+        LLM_MODEL: qwen2.5:3b
         RELEVANCE_FLOOR: "0.70"
         EMBED_MODEL: nomic-embed-text
 images:
   - name: rahbar-api
-    newName: DOCKERHUB_USERNAME/rahbar-api
-    newTag: REPLACE_WITH_GIT_SHA
+    newName: aimwnoaim/rahbar-api
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
   - name: rahbar-indexer
-    newName: DOCKERHUB_USERNAME/rahbar-indexer
-    newTag: REPLACE_WITH_GIT_SHA
+    newName: aimwnoaim/rahbar-indexer
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
   - name: rahbar-ui
-    newName: DOCKERHUB_USERNAME/rahbar-ui
-    newTag: REPLACE_WITH_GIT_SHA
+    newName: aimwnoaim/rahbar-ui
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+
+
