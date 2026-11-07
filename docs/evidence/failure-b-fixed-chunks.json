@@ -1,0 +1,827 @@
+{
+  "fault": "B: fixed 100-word chunks, no overlap; whitespace token approximation",
+  "method": "exact cosine, same corpus/model/golden; retrieval only",
+  "chunks": 939,
+  "dimension": 768,
+  "recall_at_3": 0.058823529411764705,
+  "recall_at_5": 0.11764705882352941,
+  "questions": [
+    {
+      "id": "r01",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.3 Any deviation from Rule 5.2 above if necessitated by the",
+          "page": 24,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "13. Registration of Students under",
+          "page": 2,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3.99 would be included in the Dean's d) If the Warning Count becomes and FYP-II. To register for FYP-I, a",
+          "page": 2,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r02",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.7 If the CGPA equals or exceeds 2.00 after the 1st or 2nd",
+          "page": 25,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.3 Any deviation from Rule 5.2 above if necessitated by the",
+          "page": 24,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "2.5 Where P1, P2, P3 and P4 are the grade points earned in",
+          "page": 12,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r03",
+      "type": "exact",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 10,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "8.10 Falsifying, or attempting to falsify attendance records, graded",
+          "page": 34,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1. Introduction",
+          "page": 40,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r04",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 10,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "18. Missed Examinations a regular semester). disciplinary punishment.",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "1. Attendance Requirement 4. Semester Course Load",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "14. In case of absence from an exam (e.g. due to illness,",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r05",
+      "type": "exact",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "2. Grading and GPA Calculations",
+          "page": 11,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 12,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "2.5 Where P1, P2, P3 and P4 are the grade points earned in",
+          "page": 12,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r06",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5. Academic Assessment",
+          "page": 24,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r07",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.7 If the CGPA equals or exceeds 2.00 after the 1st or 2nd",
+          "page": 25,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "Document",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "5.10 When a student repeats a course whose post-requisite",
+          "page": 25,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r08",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6. Rules for Summer Semester",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.8 A student can withdraw from a summer course on or before",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r09",
+      "type": "exact",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6. Rules for Summer Semester",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.17 Normal semester course load for undergraduate students,",
+          "page": 9,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.8 A student can withdraw from a summer course on or before",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r10",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.9 A theory course is normally assigned 2 to 4 credit hours,",
+          "page": 8,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.6 A regular semester is spread over 16 weeks of teaching, one",
+          "page": 7,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 9,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "1. Attendance Requirement 4. Semester Course Load",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r11",
+      "type": "version",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6. Rules for Summer Semester",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.17 Normal semester course load for undergraduate students,",
+          "page": 9,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.8 A student can withdraw from a summer course on or before",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r12",
+      "type": "version",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.17 Normal semester course load for undergraduate students,",
+          "page": 9,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6. Rules for Summer Semester",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "6. Students are allowed to Add/Drop a course during the",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r13",
+      "type": "exact",
+      "recall_at_3": 0.0,
+      "recall_at_5": 1.0,
+      "retrieved": [
+        {
+          "source": "fee-structure-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        },
+        {
+          "source": "fee-structure-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "7.7 The Dean's list will be issued and displayed after each semester",
+          "page": 31,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "fee-structure-page.html",
+          "section": "Document",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        },
+        {
+          "source": "fee-structure-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r14",
+      "type": "exact",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "2. Grading and GPA Calculations",
+          "page": 11,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "3. Academic Year The points are used for",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "grading-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "1. Attendance Requirement 4. Semester Course Load",
+          "page": 1,
+          "doc_version": "2026",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r15",
+      "type": "abstain",
+      "recall_at_3": null,
+      "recall_at_5": null,
+      "retrieved": [
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "2. A student travelling during 4. If in doubt the student",
+          "page": 47,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "8. Group Study Rooms can only be booked for a group (at-",
+          "page": 31,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "16. Renewal of borrowed books cannot be claimed as a right.",
+          "page": 32,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "II - FINANCIAL RULES",
+          "page": 18,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "38 Student Handbook 2026",
+          "page": 46,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r16",
+      "type": "abstain",
+      "recall_at_3": null,
+      "recall_at_5": null,
+      "retrieved": [
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "II - FINANCIAL RULES",
+          "page": 18,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 45,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "fee-structure-page.html",
+          "section": "SLATE-LMS",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        },
+        {
+          "source": "fee-structure-page.html",
+          "section": "3. Tuition Fee is refunded in accordance with the guidelines of Higher Education Commission (HEC).",
+          "page": 1,
+          "doc_version": "2026-27",
+          "superseded": false
+        },
+        {
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "9.2. The applicant shall be responsible for ensuring that the start-up does not engage in any",
+          "page": 3,
+          "doc_version": "2022-05",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r17",
+      "type": "injection",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 10,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "MISSION",
+          "page": 4,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "6. Students are allowed to Add/Drop a course during the",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "3.32 A new admission is closed if an awaited result does not meet",
+          "page": 18,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "8. Group Study Rooms can only be booked for a group (at-",
+          "page": 31,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r18",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6. Rules for Summer Semester",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.8 A student can withdraw from a summer course on or before",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.17 Normal semester course load for undergraduate students,",
+          "page": 9,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.3 Students can repeat only such courses, in which they has",
+          "page": 28,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    },
+    {
+      "id": "r19",
+      "type": "ordinary",
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "retrieved": [
+        {
+          "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+          "section": "19. Rules for Summer Semester",
+          "page": 3,
+          "doc_version": "2026",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 20,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 22,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "6.8 A student can withdraw from a summer course on or before",
+          "page": 29,
+          "doc_version": "2026-06",
+          "superseded": false
+        },
+        {
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "II - FINANCIAL RULES",
+          "page": 18,
+          "doc_version": "2026-06",
+          "superseded": false
+        }
+      ]
+    }
+  ]
+}
