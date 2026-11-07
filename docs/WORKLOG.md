@@ -293,3 +293,19 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
   API: 29 tests passed, 83.43% coverage; Ruff and mypy (24 files) passed.
 - Actual model evaluation, final deployment pins, CD hardening and final CI remain
   in progress at this entry. No final answer correctness is claimed from unit tests.
+
+### CD and reproduction hardening
+
+- CD's test dependency now invokes the complete reusable CI workflow, including
+  strict manifests, scans, actual fixture indexing and the live retrieval gate.
+  Publishing is still gated by needs: test; deployment by needs: build-push.
+- Added explicit missing-token/invalid-registry checks without logging credentials,
+  serialized CD runs, bounded publish/deploy jobs, admission-webhook Job waits,
+  JSON assertions for the Ingress smoke response, and uploaded registry digests
+  and acceptance evidence. actionlint 1.7.7 (including shellcheck) passes both workflows.
+- Hardened the temporary corpus loader with a non-root identity, read-only root,
+  disabled service token, seccomp and requests/limits. Rewrote clean-clone order:
+  namespace/PVC, loader copy and removal, then exactly one indexing Job.
+- Evidence-excerpt model selection still chose unrelated facts in targeted tests.
+  These attempts are diagnostic, not a passing final evaluation. Testing the installed
+  Llama 3B and downloading Qwen 3B locally before accepting a generation baseline.
