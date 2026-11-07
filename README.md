@@ -30,6 +30,14 @@ corpus as a public service. Real-corpus evaluation is performed on local Minikub
 
 Docker Desktop running Linux containers, Minikube, kubectl, Git, and Python 3.12+.
 Allow 6Gi/six CPUs for the Minikube node plus additional host memory for Ollama.
+On this Windows installation, Minikube is in `C:\Program Files\Kubernetes\Minikube`.
+If `Get-Command minikube` cannot find it, add that directory for the current terminal:
+
+```powershell
+$env:Path += ';C:\Program Files\Kubernetes\Minikube'
+minikube version
+```
+
 Run the following PowerShell commands from the repository root. Keep the `rahbar`
 profile separate from other projects. Installation is required only once:
 
