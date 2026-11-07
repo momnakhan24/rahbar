@@ -34,6 +34,7 @@ def test_ollama_separates_system_instructions_from_untrusted_evidence(monkeypatc
                                json=lambda: {"message": {"content": expected.model_dump_json()}})
 
     monkeypatch.setattr("app.providers.llm.ollama.httpx.post", post)
+    monkeypatch.setattr(OllamaProvider, "_select_excerpt", lambda self, q, ps: (ps[0], ps[0].text))
     result = OllamaProvider(Settings()).generate("What attendance is required?", [evidence])
     assert result == expected
     assert captured["messages"][0]["role"] == "system"
@@ -109,8 +110,30 @@ def test_provider_rejects_source_pair_mismatch_even_if_decoder_misbehaves(monkey
     invalid = Answer(reasoning="wrong", answer="New courses are allowed.",
                      answered_from_context=True, confidence="high",
                      citations=[Citation(source=passage.source, section=passage.section, page=9)])
+    monkeypatch.setattr(OllamaProvider, "_select_excerpt", lambda self, q, ps: (ps[0], ps[0].text))
     monkeypatch.setattr("app.providers.llm.ollama.httpx.post", lambda *a, **kw:
                         SimpleNamespace(raise_for_status=lambda: None,
                                         json=lambda: {"message": {"content": invalid.model_dump_json()}}))
     with pytest.raises(ValueError, match="cited evidence excerpt"):
         OllamaProvider(Settings()).generate("Can I take new courses?", [passage])
+
+
+def test_numeric_evidence_selector_can_decline_and_rejects_out_of_range_choice(monkeypatch):
+    passage = Passage(chunk_id="x", text="The library closes at seven.", source="library.txt",
+                      section="Hours", page=2, score=.9)
+    choice = {"choice": 0}
+    monkeypatch.setattr("app.providers.llm.ollama.httpx.post", lambda *a, **kw:
+                        SimpleNamespace(raise_for_status=lambda: None,
+                                        json=lambda: {"message": {"content": __import__('json').dumps(choice)}}))
+    provider = OllamaProvider(Settings())
+    assert provider._select_excerpt("What are the hours?", [passage]) is None
+    choice["choice"] = 1
+    assert provider._select_excerpt("What are the hours?", [passage]) == (passage, passage.text)
+    choice["choice"] = 99
+    with pytest.raises(ValueError, match="evidence selection"):
+        provider._select_excerpt("What are the hours?", [passage])
+
+
+def test_currency_excerpt_keeps_the_amount_attached_to_its_row():
+    assert any('Rs. 12,000' in quote for quote in _quote_options(
+        'Program | Fee BBA / BS | Rs. 12,000. Fees may change.', 'What is the BBA / BS fee?'))
