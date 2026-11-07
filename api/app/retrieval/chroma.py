@@ -11,7 +11,7 @@ from typing import Any
 from ..config import Settings
 from ..embedding import embed_query
 from ..schemas import Passage
-from .references import rank_children, referenced_section
+from .references import rank_children, referenced_section, requested_source
 
 
 class ChromaRetriever:
@@ -30,7 +30,15 @@ class ChromaRetriever:
     ) -> list[Passage]:
         collection = self.active_collection()
         vector = query_embedding or embed_query(question, self.settings)
-        where = None if _asks_for_older_version(question) else {"superseded": False}
+        where: dict[str, Any] | None = (
+            None if _asks_for_older_version(question) else {"superseded": False})
+        source_match = None
+        if re.search(r"\b(?:page|document)\b", question, re.IGNORECASE):
+            catalog = collection.get(where=where, include=["metadatas"])
+            source_match = requested_source(question, {m["source"] for m in catalog["metadatas"] if m})
+            if source_match:
+                where = ({"$and": [{"source": source_match}, where]} if where
+                         else {"source": source_match})
         result = collection.query(
             query_embeddings=[vector],
             n_results=max(1, k),
@@ -51,12 +59,16 @@ class ChromaRetriever:
                 source=str(metadata.get("source", "unknown")),
                 section=str(metadata.get("section", "unknown")),
                 page=int(metadata["page"]) if metadata.get("page") is not None else None,
-                score=max(-1.0, min(1.0, 1.0 - float(distance))),
+                score=1.0 if source_match else max(-1.0, min(1.0, 1.0 - float(distance))),
+                dense_score=max(-1.0, min(1.0, 1.0 - float(distance))),
+                match_kind="source_reference" if source_match else "dense",
             ))
+        if source_match:
+            return passages
         return self._expand_reference(question, vector, passages, k, where)
 
     def _expand_reference(self, question: str, vector: list[float], passages: list[Passage],
-                          k: int, where: dict[str, bool] | None) -> list[Passage]:
+                          k: int, where: dict[str, Any] | None) -> list[Passage]:
         if k < 2:
             return passages
         collection = self.active_collection()
@@ -79,7 +91,7 @@ class ChromaRetriever:
                                       where=linked_filter,
                                       include=["documents", "metadatas", "distances"])
             children = [Passage(chunk_id=i, text=t, source=m["source"], section=m["section"],
-                                page=m.get("page"), score=1 - distance)
+                                page=m.get("page"), score=1 - distance, dense_score=1 - distance)
                         for i, t, m, distance in zip(linked["ids"][0], linked["documents"][0],
                                                     linked["metadatas"][0], linked["distances"][0])]
             chosen = rank_children(question, children)[:min(3, k - 1)]
