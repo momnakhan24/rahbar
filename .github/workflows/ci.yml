@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_call:
 
 permissions:
   contents: read
@@ -91,7 +92,7 @@ jobs:
       - name: Smoke test question endpoint
         run: |
           kubectl port-forward service/api 8000:8000 -n rahbar >/tmp/rahbar-port-forward.log 2>&1 &
-          for attempt in $(seq 1 30); do
+          for _ in $(seq 1 30); do
             if curl --silent --fail http://127.0.0.1:8000/readyz >/dev/null; then break; fi
             sleep 2
           done
@@ -102,7 +103,7 @@ jobs:
       - name: Start pinned fixture embedding service
         run: |
           docker run -d --name fixture-ollama --network kind ollama/ollama@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
-          for attempt in $(seq 1 30); do
+          for _ in $(seq 1 30); do
             if docker exec fixture-ollama ollama list >/dev/null 2>&1; then break; fi
             sleep 2
           done
@@ -127,7 +128,7 @@ jobs:
         run: |
           python -m pip install httpx==0.28.1 pyyaml==6.0.2
           kubectl port-forward service/api 8001:8000 -n rahbar > /tmp/fixture-forward.log 2>&1 &
-          for attempt in $(seq 1 30); do
+          for _ in $(seq 1 30); do
             if curl --silent --fail http://127.0.0.1:8001/readyz >/dev/null; then break; fi
             sleep 2
           done
@@ -144,3 +145,4 @@ jobs:
           name: fixture-evaluation
           path: fixture-results.json
           if-no-files-found: ignore
+
