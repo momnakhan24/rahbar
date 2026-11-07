@@ -12,22 +12,22 @@ with retry budget at line 7; `indexer/pipeline/run.py:66` owns the five stages.
 `indexer/pipeline/store.py:76` switches the registry only after all chunks are stored.
 API startup creates serving clients, never invokes that pipeline. The actual Job
 published 1,247 chunks in 1,736.7 seconds (`evidence/indexer-completed.txt`), a cost
-that must not be multiplied by each API restart.
+that must not be multiplied by each API restart. A subsequent sole-writer HTML refresh retained 1,232 PDF vectors and atomically published 1,239 total chunks in 22 seconds; this was not another full OCR run.
 
 ## 2. Swapping readiness and liveness during 90 seconds of slow Chroma
 
 `api/app/routes/health.py:21` returns process liveness without dependencies; line 27
 checks collection/count/model and Redis for readiness. Probes are at
-`k8s/base/api.yaml:43`, 49 and 56. Swapping them would leave broken readers in the
+`k8s/base/api.yaml:45`, 51 and 58. Swapping them would leave broken readers in the
 Service while dependency slowness triggers repeated restarts of all three healthy
-processes. The 20-second liveness period and three-failure budget can restart them
+processes. The 10-second liveness period and three-failure budget can restart them
 within that 90-second outage. Correct readiness withdraws traffic without restarting
 processes; `maxUnavailable: 0` at line 12 protects existing ready replicas on rollout.
 
 ## 3. What CPU HPA measures
 
 `k8s/base/hpa.yaml:11`–19 sets 3–8 replicas and 70% CPU/request utilization. With each
-API requesting 100m CPU (`k8s/base/api.yaml:69`), 70m average use reaches its target.
+API requesting 100m CPU (`k8s/base/api.yaml:71`), 70m average use reaches its target.
 Actual HPA output showed 41%/70%, three replicas (`evidence/hpa.txt`). It measures
 Python/client/JSON/retrieval work, not the external Ollama CPU doing generation. API
 pods can wait on an overloaded model while barely using CPU, so this HPA can miss
@@ -65,14 +65,18 @@ outside that node, so its memory/CPU is an additional host cost, not included in
 
 ## 5. Recall by question type
 
-The first completed exact-cosine chunk experiment (250/30) measured overall recall@5
-82.35%: ordinary 100%, exact 83.33%, version 0%, injection 100%. The source filter
-excluded old material but could not guarantee that the right current clause ranked
-highly. Version wording can favor general handbook context rather than the particular
-summer clause. Dense similarity also blurs literal identifiers/years. Hybrid lexical
-retrieval (BM25 plus dense ranking), exact clause lookup and reranking are appropriate
-next techniques. These first-run figures are retrieval-only; the remaining chunk sweep
-and live API evaluation must be reported separately before selecting shipped parameters.
+The cleaned-corpus dense-only 400/50 experiment measured recall@5 88.24%:
+ordinary 100%, exact 83.33%, version 50%, injection 100%
+(`evidence/chunk-sweep.json`). Version questions were worst: excluding obsolete
+material cannot make the right current clause rank first. Semantic similarity blurs
+literal identifiers and can favor a general summer heading over its restriction.
+The final query path therefore follows explicit numbered references, ranks linked
+children using BM25/ordered phrases, focuses requested clauses and resolves unique
+named pages. It retains both match relevance and original dense cosine rather than
+presenting an exact-source match as a cosine of one. The complete live API metrics
+are in eval/results.json; generation relevance/correctness is reviewed separately
+in evidence/generation-review.md. Dense-only tuning scores and final query-path
+scores measure different retrieval methods and must not be conflated.
 
 ## 6. Model pin changed on API alone
 
@@ -100,3 +104,39 @@ last termination state before interpreting every timeout as an application bug.
 A later host suspension interrupted measurements; resumable vector batches now avoid
 throwing away all completed experiment work. WORKLOG preserves the uncertainty and
 failed attempts rather than retroactively claiming every first diagnosis was correct.
+
+
+
+## Final serving behavior and limitations
+
+The provider first selects a bounded verbatim excerpt, then generates the shared
+Answer contract constrained to that exact quote and original citation. The server
+checks that pair independently. This avoids the observed small-model combination
+of a correct fact and an unrelated citation. Qwen 2.5 3B remains CPU-bound and the
+two model calls can make cold/long answers take minutes; this is measured assignment
+behavior, not production latency. Exact repeats use the revision/policy-scoped cache.
+The 0.70 floor conservatively refuses an injected but answerable attendance query;
+the generation review labels that false abstention explicitly.
+
+A real configuration rollout interrupted an in-flight long request because the
+35-second termination grace was shorter than generation. API grace and Ingress
+read/send timeouts now allow 900 seconds, covering two bounded model calls per
+attempt and one retry plus embedding overhead. The existing five-second preStop
+allows endpoint withdrawal; maxUnavailable remains zero. Request draining is verified
+separately from merely counting three ready replicas. Long grace does not make a
+forced kill or node loss preserve an in-memory request; clients still need retries
+for those failures, and old ready replicas alone do not prove in-flight safety.
+
+Final live API recall@3/5 is 100% across the 17 labelled retrieval questions, with
+100% in every reported type. This follows explicit-reference/source improvements;
+it does not retroactively change the dense-only 88.24% tuning measurement. Grounded
+citation membership is 16/16 and required abstention 2/2. One answerable injection
+question safely refuses; semantic correctness is therefore not claimed as 100%.
+The measured mixed run's median request was 39.03s and maximum 216.31s; these CPU
+latencies explain why short drain budgets and repeated cold evaluation are expensive.
+
+The final drain probe returned HTTP 200 after 72.34 seconds while its serving pod
+was gracefully deleted, with X-Cache MISS and three replacement pods ready afterward
+(`evidence/request-drain.json`). This exceeds the old 35-second budget and directly
+checks in-flight completion. It does not claim survival of forced kill/node loss or
+full semantic coverage of the probe's compound question.
