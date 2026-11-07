@@ -19,7 +19,7 @@ import numpy as np
 from pipeline.chunk import chunk
 from pipeline.clean import clean
 from pipeline.config import get_settings
-from pipeline.embed import embed
+from measurement_vectors import embed
 from pipeline.extract import extract
 from pipeline.models import Document, Page
 from pipeline.run import discover
@@ -69,6 +69,12 @@ def main() -> None:
     original = sum(len(p.text.split()) for d in documents for p in d.pages)
     results = []
     for size, overlap in ((250, 30), (400, 50), (600, 75)):
+        previous = evidence / "chunk-sweep.json"
+        prior = json.loads(previous.read_text()) if previous.exists() else []
+        completed = next((r for r in prior if r['size'] == size and r['overlap'] == overlap), None)
+        if completed:
+            results.append(completed)
+            continue
         chunks = [c for d in documents for c in chunk(d, size, overlap)]
         vectors = np.array(embed([c.text for c in chunks], settings))
         vectors /= np.linalg.norm(vectors, axis=1, keepdims=True)
