@@ -2,7 +2,7 @@
 from types import SimpleNamespace
 
 from app.config import Settings
-from app.providers.llm.ollama import OllamaProvider
+from app.providers.llm.ollama import OllamaProvider, _answer_schema
 from app.schemas import Answer, Citation, Passage
 from app.services.answer import _validate_citations
 
@@ -41,3 +41,16 @@ def test_ollama_separates_system_instructions_from_untrusted_evidence(monkeypatc
         {"source": evidence.source, "section": evidence.section, "page": evidence.page}
     ]
     assert 0 < captured["options"]["num_predict"] <= 512
+
+
+def test_decoder_requires_citations_only_for_grounded_branch() -> None:
+    passage = Passage(chunk_id="x", text="The library closes at seven.",
+                      source="library.txt", section="Hours", page=2, score=.9)
+    schema = _answer_schema([passage])
+    grounded, refusal = schema["oneOf"]
+    assert grounded["properties"]["answered_from_context"]["const"] is True
+    assert grounded["properties"]["citations"]["minItems"] == 1
+    assert refusal["properties"]["answered_from_context"]["const"] is False
+    assert refusal["properties"]["citations"]["maxItems"] == 0
+    assert refusal["properties"]["confidence"]["const"] == "low"
+    assert next(iter(grounded["properties"])) == "answered_from_context"
