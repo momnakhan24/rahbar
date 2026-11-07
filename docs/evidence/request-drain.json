@@ -1,0 +1,75 @@
+{
+  "request_id": "rahbar-drain-proof-20261107",
+  "deleted_pod": "api-5fc9445d4c-2tqzt",
+  "deletion_started_utc": "2026-11-07T15:31:42.601254+00:00",
+  "http_status": 200,
+  "cache": "MISS",
+  "seconds": 72.34,
+  "replacement_ready_pods": [
+    "api-5fc9445d4c-8cjq7",
+    "api-5fc9445d4c-8dkqt",
+    "api-5fc9445d4c-lzv8l"
+  ],
+  "response": {
+    "request_id": "rahbar-drain-proof-20261107",
+    "answer": "The cited policy states: \"6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories.\"",
+    "citations": [
+      {
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "6.1 Summer semester is an 8-week semester and is meant to",
+        "page": 28
+      }
+    ],
+    "answered_from_context": true,
+    "confidence": "high",
+    "retrieved": [
+      {
+        "chunk_id": "0e290fac1e1707e35632",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "6.1 Summer semester is an 8-week semester and is meant to",
+        "page": 28,
+        "score": 0.8265990599999999,
+        "match_kind": "section_reference",
+        "dense_score": 0.76693696
+      },
+      {
+        "chunk_id": "2c6530d825d14f6dcd7c",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "6.4 The contact hours per week during the Summer Semester will",
+        "page": 28,
+        "score": 0.8265990599999999,
+        "match_kind": "section_reference",
+        "dense_score": 0.7392954199999999
+      },
+      {
+        "chunk_id": "eece1378922315ffb454",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "6.13 A student can study summer semester in another campus,",
+        "page": 29,
+        "score": 0.8265990599999999,
+        "match_kind": "section_reference",
+        "dense_score": 0.7315216
+      },
+      {
+        "chunk_id": "568304caf18f5c42cf57",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "6. Rules for Summer Semester",
+        "page": 28,
+        "score": 0.8265990599999999,
+        "match_kind": "dense",
+        "dense_score": 0.8265990599999999
+      },
+      {
+        "chunk_id": "b8c9d94856dec29a2565",
+        "source": "academic-rules-handbook-jun-2026.pdf",
+        "section": "1.19 A student can register for a maximum of two courses in",
+        "page": 9,
+        "score": 0.79253906,
+        "match_kind": "dense",
+        "dense_score": 0.79253906
+      }
+    ],
+    "provider": "ollama"
+  },
+  "method": "Noncached follow-up query; observed request logs in target pod before graceful deletion; response completed while pod drained; three replacement endpoints ready."
+}
