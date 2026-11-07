@@ -98,6 +98,16 @@ function chip(text, kind) {
   return el("span", { class: kind ? `chip ${kind}` : "chip" }, text);
 }
 
+if (location.protocol === "file:") {
+  const notice = el("div", { class: "err", role: "alert" });
+  notice.append(el("p", {}, "Open RAHBAR through the running service to ask questions. This HTML file cannot connect to the API by itself."));
+  notice.append(el("a", { href: "http://localhost:18080" }, "Open the local RAHBAR service"));
+  thread.append(notice);
+  form.hidden = true;
+  input.disabled = true;
+  send.disabled = true;
+}
+
 function cite(c) {
   return c.page != null ? `${c.source} / ${c.section}, p. ${c.page}` : `${c.source} / ${c.section}`;
 }
@@ -160,6 +170,7 @@ function errorMessage(status, body) {
 }
 
 async function ask(question) {
+  if (location.protocol === "file:") return;
   thread.append(el("div", { class: "q" }, question));
   const pending = el("div", { class: "pending" }, "Retrieving passages and writing an answer…");
   thread.append(pending);
