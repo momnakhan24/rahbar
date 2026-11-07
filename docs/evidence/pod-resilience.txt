@@ -1,0 +1,17 @@
+Captured 2026-11-07T14:03:04.8916199+05:00; context rahbar
+NAME   ENDPOINTS                                            AGE
+api    10.244.3.32:8000,10.244.3.33:8000,10.244.3.34:8000   26h
+Deleting api-7664cf8d59-8g6gh
+pod "api-7664cf8d59-8g6gh" deleted from rahbar namespace
+{"status":"alive"}
+NAME   ENDPOINTS                           AGE
+api    10.244.3.32:8000,10.244.3.33:8000   26h
+Waiting for deployment "api" rollout to finish: 2 of 3 updated replicas are available...
+Waiting for deployment "api" rollout to finish: 2 of 3 updated replicas are available...
+deployment "api" successfully rolled out
+NAME                   READY   STATUS    RESTARTS   AGE
+api-7664cf8d59-8kftx   1/1     Running   0          8m51s
+api-7664cf8d59-l6s4k   1/1     Running   0          31s
+api-7664cf8d59-pgb68   1/1     Running   0          9m18s
+NAME   ENDPOINTS                                            AGE
+api    10.244.3.32:8000,10.244.3.33:8000,10.244.3.37:8000   26h
