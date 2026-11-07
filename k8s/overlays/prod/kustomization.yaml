@@ -23,12 +23,13 @@ patches:
 images:
   - name: rahbar-api
     newName: aimwnoaim/rahbar-api
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
   - name: rahbar-indexer
     newName: aimwnoaim/rahbar-indexer
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
   - name: rahbar-ui
     newName: aimwnoaim/rahbar-ui
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
+
 
 
