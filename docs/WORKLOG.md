@@ -5,35 +5,37 @@ This log is the reviewable record of implementation, verification, assumptions a
 ## Working rules
 
 - Work only in the connected repository. Push only when the user explicitly authorizes it; do not merge or open a PR unless asked.
-- Keep all assignment changes on the user-requested local `dev-aimwnoaim` branch; keep each commit limited to one file/change.
+- Keep all current assignment changes on `dev`, tracking `origin/dev`; each commit is limited to one file/change. Do not recreate deleted remote branches.
 - New genuine audit changes use `aimwnoaim <aimtk20@gmail.com>` at the user's request. A separate balanced branch transparently reattributes selected existing commits between the two accounts the user identified as their own; the original history is retained. Author counts are metadata, not proof of independent contributors.
 - Record unknowns as unknown. Source code and rendered YAML are not evidence of a live rollout, measured retrieval quality or protected-branch behavior.
 - Assignment deadline from the handout: 8 November 2026, 23:59 PKT.
 
 ## Current status (audited 7 November 2026)
 
-The complete ordered handoff is in SUBMISSION-CHECKLIST.md. The assignment is not
-finished; in particular, there is still generation/retrieval work and no reviewed
-submission baseline. Earlier chronological entries below preserve past states.
+Implementation and reviewed real evaluation are complete locally. The remaining
+submission actions are repository-owner configuration, required screenshots, real
+review/merge, successful hosted CD and Classroom submission. See OWNER-STEPS.md and
+SUBMISSION-CHECKLIST.md. Earlier chronological entries preserve past states rather
+than being rewritten as if early failures never occurred.
 
-| Area | Verified | Outstanding |
+| Area | Verified result | Remaining condition / limit |
 | --- | --- | --- |
-| History | Real changes on dev-aimwnoaim; author-count imbalance identified | Prepare transparent balanced history without empty commits; choose publication route before overwriting anything |
-| Corpus/index | Nine public sources, 279 PDF pages, 41 OCR pages; 1,247 real chunks published | Representative review is not exhaustive OCR proofreading |
-| Chunk/cache experiments | All three chunk sweeps measured; 400/50 recall@5 88.24%; threshold study complete | Final documentation must distinguish retrieval scores from answer correctness |
-| Kubernetes | Three endpoints, numeric HPA, resource samples, Calico checks, pod replacement and rollout/undo captured | Synchronize committed image pins/README with the corrected live runtime |
-| UI/API checks | localhost served UI, file-open guidance and duplicate-submit guard; 18 API tests / 77.10% coverage | Final generation correctness and per-answer review |
-| Real evaluation | Completed 19-question diagnostic: recall@3 70.59%, recall@5 88.24%, citation membership 10/10, must-abstain 2/2; literal expected terms 6/17 | eval/results.json missing; baseline pending; fix supported-answer fallbacks and wrong r12 prerequisite answer before accepting results |
-| Citation diagnosis | Provider can emit a true grounded flag with an empty citation list; server rejects it safely | Enforce compatible grounded/refusal branches during decoding, then test actual model behavior |
-| Controlled failures | A/B/C/E executed; removed fixture tuition caused 1.0→0.8 recall and a failed gate; restoration passed CI | Required actual screenshots remain missing |
-| CI | Original PR #3 is draft; checks passed on 9940eec in runs 42360957317 / 42361063605 | Later local and rewritten commits require fresh CI |
-| Registry/CD | Local Docker pushes succeeded for 02246e5 and bf3edf7 source tags | No successful CD verified; original repository listed no Actions secrets at audit |
-| Repository controls | Original main reports protected; PR #3 requires real review | Owner must verify all protection settings, save DOCKERHUB_TOKEN, obtain approval and merge through PR |
+| Branch/history | dev tracks origin/dev; all new commits/pushes aimwnoaim, one file/change per commit | Historical reattribution is disclosed; counts are not proof of two independent contributors |
+| Corpus/index | Nine public sources, 279 PDF pages, 41 OCR pages; active 1,239 chunks after atomic HTML refresh | OCR review is representative, not exhaustive proofreading |
+| Tuning | Three measured chunk configurations; 400/50 dense recall@5 88.24%; cache threshold 0.96 | These development-set measurements are not held-out generalization guarantees |
+| Generation | Qwen 2.5 3B selects an actual excerpt; final Answer decoder/server enforce its citation pair | Slow CPU/extractive output; one safe false abstention on the injected real question |
+| Real evaluation | All 19 reviewed; recall@3/5 100%, citations 16/16, required refusals 2/2; baseline frozen after review | Literal terms 16/17; membership alone is not a semantic correctness score |
+| Kubernetes | Separate sole writer; three endpoints, numeric HPA, security, probes, PVCs, Calico, resources, replacement and rollout evidence | Local Docker network address is profile-specific |
+| Release/reproduction | Three published immutable SHA images; actual registry digests; corrected corpus-copy order and hardened loader validated | Local indexer uses a disclosed offline wheelhouse build; CI builds the production Dockerfile |
+| Tests/checker | API 31 tests, 83.71% coverage; indexer 16; evaluator four; Ruff/mypy; strict 28-object render; actionlint pass | Checker has zero failures, one reviewed empty-Secret-template warning |
+| CI | Source dc49a38 passed runs 42385009754 and 42385002481; real-result integrity gate added | Current exact-head status is linked from PR #5/checks and the final handoff; require green before merge |
+| Failure analysis | A/B/C/E observed; fixture recall 1.0 to 0.8 failed gate, restored source passed | Actual blocked/green merge screenshots still required |
+| CD/owner | Full CI gates publication; scanned SHA tags, guarded registry input, bounded deploy, Ingress JSON smoke/artifacts | No original Actions secret listed at audit; owner setup and successful hosted CD still required |
 
-The user declined agent-mediated export of the Docker credential; no such transfer
-occurred. Giving a token to the owner does not establish that the Actions secret exists.
-Windows screenshot inspection stopped because current Chrome URL could not be verified.
-
+The user declined agent-mediated Docker credential export; no transfer occurred.
+The connected account has push but no admin access. Main reports protected, but the
+owner must verify all required checks/review settings. Windows screenshot inspection
+stopped when Chrome's current URL could not be verified; no screenshots are fabricated.
 
 ## Decisions and assumptions
 
@@ -366,3 +368,47 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
 - Final per-answer review has verified r01–r11. The two current-version summer
   questions now use the actual current duration/restriction clauses. Remaining
   questions are still running; no scores or baseline have been invented.
+
+### Reviewed real baseline and final source verification
+
+- Full 19-question real run completed: recall@3/5 100%, each reported type 100%,
+  citation membership 16/16, required abstention 2/2, literal expected terms 16/17.
+  All 16 grounded answers were checked verbatim against the actual cited indexed
+  text; per-question review records correctness, coverage, relevance and limitations.
+- One injected but answerable question safely refuses below the 0.70 floor. This is
+  explicitly a false abstention, not a perfect semantic answer. The separate indexed
+  poison test checks actual-model resistance with retrieved evidence above its floor.
+- Observed mixed-run latency: total 1,032.11s, median 39.03s, maximum 216.31s.
+  The first answer was cached; later cache-hit gate timings are not cold benchmarks.
+- Froze the real baseline using run_eval.py --update-baseline only after review.
+  Its first exit still reported the old pending baseline, because that CLI compares
+  before writing; the next unchanged live run passed the committed-baseline gate.
+  check_evaluation.py independently verified all 19 raw responses and summary metrics.
+- Final release 8df07b25a977007ffc74243a6086898fcc1e3ba8 adds raw score/match-kind
+  logging only relative to the measured provider release. All three tags were pushed
+  and their actual registry manifests verified. Source CI passed both quality and
+  cluster-smoke in runs 42385009754 and 42385002481; final branch CI follows the
+  remaining evidence/documentation commits and must be checked on its exact HEAD.
+
+### Final rollout, drain proof and handoff state
+
+- Final images and manifests are live. A noncached, real-model follow-up request was
+  observed in the target API pod, then that exact pod was gracefully deleted while
+  the request was active. It returned HTTP 200 with a supported cited excerpt after
+  72.34 seconds (X-Cache MISS), exceeding the old 35-second grace. Three replacement
+  pods were ready afterward. request-drain.json records request/pod IDs and response.
+  The probe tests draining, not complete semantic coverage of its compound question.
+- Reran all 19 golden questions against the final deployed release and the reviewed
+  baseline: gate passed. This repeated run intentionally benefits from validated
+  cached answers. final-regression.txt labels it separately from measured generation.
+- Final runtime: three ready endpoints, numeric HPA 11%/70%, API memory 67–74Mi,
+  Chroma 145Mi, Redis 7Mi, UI 2Mi at this sample. Images and registry manifests are
+  recorded in final-running-images.json and final-images.json. No extra index Job
+  was started; the original full index and sole HTML refresh remain completed.
+- Coding and local evaluation are finished. Final commits retain one file/change
+  each and aimwnoaim authorship. Final CI must pass on the pushed HEAD before the
+  handoff; its live status/URL is recorded on PR #5 and in the final user message.
+- External completion remains explicit: owner Actions secret/variable and protection
+  verification, actual required screenshots, genuine approval/PR merge, successful
+  hosted CD, and Classroom submission. OWNER-STEPS gives the exact sequence. No
+  successful hosted CD or missing screenshot is claimed as completed.
