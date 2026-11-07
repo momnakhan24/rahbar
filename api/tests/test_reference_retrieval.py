@@ -1,7 +1,7 @@
 """Explicit policy links must retain child provenance and current-version filters."""
 from app.config import Settings
 from app.retrieval.chroma import ChromaRetriever
-from app.retrieval.references import rank_children, referenced_section
+from app.retrieval.references import rank_children, referenced_section, requested_source
 from app.schemas import Passage
 
 
@@ -50,3 +50,33 @@ def test_expansion_uses_child_citation_and_keeps_source_version_filter():
     assert expanded.score == anchor.score
     assert expanded.match_kind == "section_reference"
     assert referenced_section(anchor) == "7"
+
+
+def test_named_page_resolves_only_a_unique_corpus_source():
+    sources = {"fee-structure-page.html", "grading-page.html", "policy.pdf"}
+    assert requested_source("What fee is on the fee page?", sources) == "fee-structure-page.html"
+    assert requested_source("What grade is on the grading page?", sources) == "grading-page.html"
+    assert requested_source("What is on the hostel page?", sources) is None
+    assert requested_source("What is on the fee page?", sources | {"old-fee-page.html"}) is None
+
+
+def test_named_source_filter_retains_actual_dense_score_and_version_boundary():
+    class Collection:
+        def get(self, where, include):
+            assert where == {"superseded": False}
+            return {"metadatas": [{"source": "grading-page.html"}]}
+
+        def query(self, **kwargs):
+            assert kwargs["where"] == {"$and": [{"source": "grading-page.html"},
+                                               {"superseded": False}]}
+            return {"ids": [["grade"]], "documents": [["A+ | Excellent | 4.00"]],
+                    "metadatas": [[{"source": "grading-page.html", "section": "Grades"}]],
+                    "distances": [[.4]]}
+
+    retriever = ChromaRetriever.__new__(ChromaRetriever)
+    retriever.settings = Settings()
+    retriever.active_collection = lambda: Collection()
+    result = retriever.retrieve("What does A+ mean on the grading page?", 5, [1., 0.])
+    assert result[0].match_kind == "source_reference"
+    assert result[0].score == 1.
+    assert result[0].dense_score == .6
