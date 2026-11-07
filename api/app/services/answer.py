@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import math
+import re
 import time
 
 from redis import Redis
@@ -55,6 +56,18 @@ def _validate_citations(answer: Answer, passages: list[Passage]) -> Answer:
     invalid = [c for c in answer.citations if (c.source, c.section, c.page) not in valid]
     if invalid:
         raise ValueError("one or more citations do not match retrieved passages")
+    if answer.answer.strip().rstrip(".! ").lower() in {"yes", "no"}:
+        citation = answer.citations[0]
+        cited = next(p for p in passages if (p.source, p.section, p.page)
+                     == (citation.source, citation.section, citation.page))
+        text = re.sub(r"^\d+(?:\.\d+)*\.?\s+", "", cited.text).strip()
+        if len(text) > 650:
+            sentences = re.split(r"(?<=[.!?])\s+", text)
+            text = sentences[0]
+        if 5 < len(text) <= 650:
+            # Show the actual policy rather than an ambiguous, potentially misleading
+            # bare yes/no. This is an attributed excerpt, not invented explanation.
+            return answer.model_copy(update={"answer": f'The cited policy states: "{text}"'})
     return answer
 
 
@@ -77,6 +90,23 @@ def _response(
         retrieved=_retrieval_refs(passages),
         provider=provider,
     )
+
+
+def _select_evidence(question: str, passages: list[Passage], floor: float) -> list[Passage]:
+    eligible = [p for p in passages if p.score >= floor]
+    if not eligible:
+        return []
+    if re.search(r"\b(?:clause|section|rule)s?\b", question, re.IGNORECASE):
+        numbers = re.findall(r"\b\d+(?:\.\d+)+\b", question)
+        exact = [p for p in eligible if any(
+            p.section == number or p.section.startswith(number + " ")
+            or p.section.startswith(number + ".") for number in numbers)]
+        if exact:
+            return exact[:3]
+    # Keep similarly numbered facts in weakly related passages from distracting
+    # the generator (for example a grade-point table versus an academic warning).
+    cutoff = max(floor, max(p.score for p in eligible) - .10)
+    return [p for p in eligible if p.score >= cutoff][:3]
 
 
 def answer_question(
@@ -116,7 +146,7 @@ def answer_question(
         passages = retriever.retrieve(question, k=settings.top_k, query_embedding=query_embedding)
         RETRIEVAL_LATENCY.observe(time.perf_counter() - started)
 
-        evidence = [p for p in passages if p.score >= settings.relevance_floor]
+        evidence = _select_evidence(question, passages, settings.relevance_floor)
         if not evidence:
             answer = Answer(
                 reasoning="No retrieved passage cleared the configured relevance floor.",
