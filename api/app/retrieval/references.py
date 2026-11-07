@@ -29,6 +29,17 @@ def referenced_section(passage: Passage) -> str | None:
     return explicit[1] if explicit else None
 
 
+def requested_source(question: str, sources: set[str]) -> str | None:
+    alias = re.search(r"\b(?:on|from|in)\s+the\s+([a-z][a-z -]{1,60}?)\s+(?:page|document)\b",
+                      question, re.IGNORECASE)
+    if not alias:
+        return None
+    words = set(_terms(alias[1]))
+    matches = [source for source in sources
+               if words and words <= set(_terms(source.replace('-', ' ').replace('_', ' ')))]
+    return matches[0] if len(matches) == 1 else None
+
+
 def rank_children(question: str, passages: list[Passage]) -> list[Passage]:
     """BM25 within a linked section adds specificity to its children's own cosine."""
     tokens = [_terms(p.text) for p in passages]
