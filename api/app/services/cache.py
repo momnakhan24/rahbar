@@ -37,7 +37,7 @@ class SemanticCache:
     def __init__(self, client: Redis, settings: Settings) -> None:
         self.client = client
         self.settings = settings
-        policy = {"version": 3, "floor": settings.relevance_floor,
+        policy = {"version": 4, "floor": settings.relevance_floor,
                   "top_k": settings.top_k, "provider": settings.llm_provider,
                   "model": settings.llm_model, "temperature": settings.temperature,
                   "contract": Answer.model_json_schema()}
