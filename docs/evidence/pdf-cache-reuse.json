@@ -1,0 +1,35 @@
+{
+  "method": "Existing OCR extraction reused only after raw SHA-256 and unchanged PDF extractor/dispatcher AST verification; HTML is re-extracted.",
+  "original_source_commit": "7b4daae5a28f50df37d3a1c6fa5734a70f6f3bc0",
+  "new_module_sha256": "93a76e5a2ea412808ffac1a942a4f14e24435bf5bf68696ffe008c6bae91cf2c",
+  "sources": [
+    {
+      "source": "academic-rules-handbook-jun-2026.pdf",
+      "source_sha256": "4cfee3e191b84aeb9168f17656c7642212ff52b90f2780d028b33c154aa74b62"
+    },
+    {
+      "source": "annual-report-2019-20.pdf",
+      "source_sha256": "4d1961e340b13273bb039805ab5fd5e2c7bd0144a5bd5870f2ce4da13becd650"
+    },
+    {
+      "source": "annual-report-2023-24.pdf",
+      "source_sha256": "3c9d89e84af24df4b939f10e32c620a3877b276acea1db52f1aae4098e5c057a"
+    },
+    {
+      "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "source_sha256": "c2d5c7648d1593daf34d5c0596ede476e8984b0551830cc1690017e6e22f1359"
+    },
+    {
+      "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "source_sha256": "a7e7f6896a59eb9413c9e8826e6c4c018ebe52045d10cebfcba92ded10a3174a"
+    },
+    {
+      "source": "student-handbook-jun-2026.pdf",
+      "source_sha256": "717eb4b8d37e50185ffe952735c08ef19edd16074d547f10ebd22cf23da67c4d"
+    },
+    {
+      "source": "undergraduate-academic-rules-aug-2023.pdf",
+      "source_sha256": "cddfe1f5e9770132e27d686abd1c2e6742ef4732f0c2f431ed514bc1691d2004"
+    }
+  ]
+}
