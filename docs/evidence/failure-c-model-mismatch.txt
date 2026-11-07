@@ -1,0 +1,29 @@
+Captured 2026-11-06T15:34:31.2771446+05:00; context rahbar; fault C
+configmap/rahbar-config patched
+deployment.apps/api restarted
+pod/api-7b46b74b46-lp57b condition met
+NAME                   READY   STATUS    RESTARTS   AGE
+api-66b4d949bb-bx9r7   1/1     Running   0          109s
+api-66b4d949bb-c8rgl   1/1     Running   0          2m5s
+api-66b4d949bb-gsfg7   1/1     Running   0          92s
+api-7b46b74b46-lp57b   0/1     Running   0          11s
+configmap/rahbar-config patched
+deployment.apps/api rolled back
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
+Repeat with explicit process-listening wait (first probe raced process startup):
+configmap/rahbar-config patched
+deployment.apps/api restarted
+pod/api-58d869d9-frdqp condition met
+{"path": "healthz", "status": 200, "body": {"status": "alive"}}
+{"path": "readyz", "status": 503, "body": {"status": "not_ready", "checks": {"chroma": {"ok": true, "count": 1247}, "embedding_model": {"ok": false, "indexed": "nomic-embed-text", "configured": "deliberately-wrong-model"}, "redis": {"ok": true}}}}
+NAME                   READY   STATUS    RESTARTS   AGE
+api-58d869d9-frdqp     0/1     Running   0          24s
+api-66b4d949bb-bx9r7   1/1     Running   0          3m6s
+api-66b4d949bb-c8rgl   1/1     Running   0          3m22s
+api-66b4d949bb-gsfg7   1/1     Running   0          2m49s
+{"ts": "2026-11-06T10:36:00Z", "level": "ERROR", "logger": "rahbar.health", "msg": "embedding model conflict", "request_id": "900edd89e7a34914a0347466d8226936", "indexed_model": "nomic-embed-text", "configured_model": "deliberately-wrong-model"}
+configmap/rahbar-config patched
+deployment.apps/api rolled back
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
