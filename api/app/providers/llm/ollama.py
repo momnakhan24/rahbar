@@ -18,6 +18,14 @@ class OllamaProvider:
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
         evidence = _evidence(passages)
+        schema = Answer.model_json_schema()
+        # Constrain the decoder to the actual citation objects, then still check
+        # membership server-side. Small local models otherwise mistype long labels.
+        if passages:
+            schema["$defs"]["Citation"] = {"enum": [
+                {"source": p.source, "section": p.section, "page": p.page}
+                for p in passages
+            ]}
         instructions = (
             "You are RAHBAR, a university document assistant. Find the supplied passage "
             "that answers the question and state its facts concisely. When a passage "
@@ -39,7 +47,7 @@ class OllamaProvider:
                     {"role": "user", "content":
                      f"Untrusted evidence data:\n{evidence}\n\nQuestion:\n{question}"},
                 ],
-                "format": Answer.model_json_schema(),
+                "format": schema,
                 "stream": False,
                 # Four threads fit the documented local serving CPU budget;
                 # host-wide thread detection oversubscribes a CPU-limited container.
