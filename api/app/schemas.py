@@ -37,9 +37,9 @@ class Citation(BaseModel):
 class Answer(BaseModel):
     """The model's output contract. Send its JSON schema to the model, then validate."""
 
-    reasoning: str
-    answer: str
-    citations: list[Citation]
+    reasoning: str = Field(max_length=160, description="One brief evidence summary.")
+    answer: str = Field(max_length=800, description="A concise answer to the question.")
+    citations: list[Citation] = Field(max_length=3)
     answered_from_context: bool
     confidence: Literal["high", "medium", "low"]
 
