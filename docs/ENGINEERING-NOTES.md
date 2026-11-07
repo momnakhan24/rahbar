@@ -51,10 +51,10 @@ steady work, with a 750m limit for startup bursts and 768Mi memory ceiling. New 
 were around 68–126Mi after transport reuse; the 256Mi memory request covers those
 observations. The old probe implementation grew toward 511Mi, so it was corrected.
 Chroma reached 894Mi and was actually OOMKilled under 1Gi: its new 1Gi request/2Gi
-limit is supported by observed near-1Gi use and leaves write/query headroom, though the
-request remains below that peak. Redis observed 62–87m/4–8Mi versus request 100m/96Mi,
-limit 300m/256Mi; its CPU request is below sustained samples and should be revisited
-for larger traffic. UI observed 1m/3–4Mi versus 25m/32Mi request, 200m/96Mi limit;
+limit is supported by observed near-1Gi use and leaves write/query headroom; the
+request covers that observed peak. Redis observed 62–87m/4–8Mi versus request 100m/96Mi,
+limit 300m/256Mi; its CPU request covers these samples and needs remeasurement under
+larger traffic. UI observed 1m/3–4Mi versus 25m/32Mi request, 200m/96Mi limit;
 these small absolute reservations leave startup/burst margin but are not utilization
 optima. These are assignment-scale budgets, not proof of production capacity.
 
