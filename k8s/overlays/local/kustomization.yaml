@@ -5,11 +5,11 @@ resources:
   - ../../base
 images:
   - name: rahbar-api
-    newTag: 68306dd3b19217a367f80b08f687eb14f6343377
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
   - name: rahbar-indexer
-    newTag: 7b4daae5a28f50df37d3a1c6fa5734a70f6f3bc0
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
   - name: rahbar-ui
-    newTag: 7b4daae5a28f50df37d3a1c6fa5734a70f6f3bc0
+    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
 patches:
   - target:
       kind: ConfigMap
@@ -23,7 +23,7 @@ patches:
       data:
         RETRIEVER: chroma
         LLM_PROVIDER: ollama-host
-        LLM_MODEL: qwen2.5:1.5b
+        LLM_MODEL: qwen2.5:3b
         RELEVANCE_FLOOR: "0.70"
         EMBED_MODEL: nomic-embed-text
         OLLAMA_URL: http://192.168.49.11:11434
@@ -41,5 +41,7 @@ patches:
       - op: replace
         path: /spec/egress/2/to/0/ipBlock/cidr
         value: 192.168.49.11/32
+
+
 
 
