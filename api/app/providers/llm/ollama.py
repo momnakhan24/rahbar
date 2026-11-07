@@ -45,9 +45,9 @@ class OllamaProvider:
                 # Four threads fit the documented local serving CPU budget;
                 # host-wide thread detection oversubscribes a CPU-limited container.
                 "options": {"temperature": self.settings.temperature,
-                            "num_predict": 384, "num_thread": 4},
+                            "num_predict": 256, "num_thread": 4},
             },
-            timeout=120.0,
+            timeout=180.0,
         )
         response.raise_for_status()
         content = response.json().get("message", {}).get("content", "")
