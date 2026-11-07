@@ -37,4 +37,7 @@ def test_ollama_separates_system_instructions_from_untrusted_evidence(monkeypatc
     assert "Attendance is 80%." not in captured["messages"][0]["content"]
     assert captured["messages"][1]["role"] == "user"
     assert '"citation"' in captured["messages"][1]["content"]
+    assert captured["format"]["$defs"]["Citation"]["enum"] == [
+        {"source": evidence.source, "section": evidence.section, "page": evidence.page}
+    ]
     assert 0 < captured["options"]["num_predict"] <= 512
