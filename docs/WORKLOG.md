@@ -273,3 +273,23 @@ Windows screenshot inspection stopped because current Chrome URL could not be ve
   now invalidates resumed results on corpus/extractor/chunker/gold/model changes.
 - The final 19-question live evaluation is running and writes eval/results.json
   plus complete API responses. A baseline will be accepted only after answer review.
+
+### Final completion on dev — 7 November 2026
+
+- User renamed the published working branch to dev; local dev tracks origin/dev.
+  Deleted remote development branches will not be recreated. All new commits and
+  pushes use aimwnoaim; existing author metadata is retained.
+- Live review found a correct summer restriction paired with an unrelated clause,
+  and a grading-page question answered from a different document. Citation membership
+  alone did not catch either relevance defect. The pending baseline was not accepted.
+- Ollama now selects an actual source excerpt and its paired citation, or refuses.
+  The same Answer contract drives the decoder; independent server checks reject
+  excerpt/citation mismatches. This is evidence-excerpt generation, not free paraphrase.
+- Explicit unique page aliases constrain retrieval to that source while preserving
+  the version filter. Raw dense_score is retained separately; source_reference score
+  1.0 indicates a literal source match and is not a cosine measurement.
+- Cache policy 5 invalidates prior generated results. Regression checks cover paired
+  excerpts, poisoned instructions, named-source ambiguity and version boundaries.
+  API: 29 tests passed, 83.43% coverage; Ruff and mypy (24 files) passed.
+- Actual model evaluation, final deployment pins, CD hardening and final CI remain
+  in progress at this entry. No final answer correctness is claimed from unit tests.
