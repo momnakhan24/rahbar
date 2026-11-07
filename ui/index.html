@@ -118,7 +118,7 @@ function renderAnswer(data, cacheHeader) {
   const chips = el("div", { class: "chips" });
   chips.append(data.answered_from_context
     ? chip("From the documents", "ok")
-    : chip("Not covered by the documents", "warn"));
+    : chip("No grounded answer", "warn"));
   if (data.confidence) chips.append(chip(`confidence: ${data.confidence}`));
   if (data.provider) chips.append(chip(`provider: ${data.provider}`));
   const cached = typeof data.cached === "boolean" ? data.cached
@@ -202,6 +202,7 @@ async function ask(question) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (send.disabled) return;
   const q = input.value.trim();
   if (q.length < 3) return;
   input.value = "";
