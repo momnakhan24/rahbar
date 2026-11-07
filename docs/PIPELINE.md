@@ -18,15 +18,30 @@ threshold-bearing lines that an aggressive short-line cleanup would destroy.
 
 ## Chunking
 
-`indexer/pipeline/chunk.py` uses whitespace-delimited words as a practical token approximation (not a model tokenizer). It detects numbered/Markdown headings, groups paragraphs, prefers sentence boundaries, caps long sentences with sliding windows, and carries overlap across adjacent chunks. Every chunk records source, section, page, document version and superseded status. The configuration is currently 400 words with 50 words of overlap; these are provisional defaults, not empirically selected parameters.
+`indexer/pipeline/chunk.py` uses whitespace-delimited words as a practical token approximation (not a model tokenizer). It detects numbered/Markdown headings, groups paragraphs, prefers sentence boundaries, caps long sentences with sliding windows, and carries overlap across adjacent chunks. Every chunk records source, section, page, document version and superseded status. The configuration is currently 400 words with 50 words of overlap; these are the shipped parameters selected from the measured comparison below.
 
-| Approx. size (words) | Overlap (words) | Recall@5 | Chunks stored | Status |
-| ---: | ---: | ---: | ---: | --- |
-| 250 | 30 | Not measured | Not measured | Experiment required |
-| 400 | 50 | Not measured | Not measured | Current implementation default |
-| 600 | 75 | Not measured | Not measured | Experiment required |
+| Approx. size (words) | Overlap | Recall@3 | Recall@5 | Chunks | Stored/source word ratio |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 250 | 30 | 70.59% | 82.35% | 1,332 | 1.0492 |
+| **400** | **50** | **70.59%** | **88.24%** | **1,247** | **1.0320** |
+| 600 | 75 | 70.59% | 88.24% | 1,206 | 1.0109 |
 
-The three configurations are specified to make the required experiment reproducible, but recall and chunk-count results are intentionally not invented. Run the same golden set against each configuration and record each result before claiming a winner. Storage amplification is likewise not yet measured: report `sum(chunk word counts) / sum(clean source word counts)` after extracting the full corpus. Overlap necessarily duplicates some text, while boundary-aware splitting may make the ratio differ from the simple `size / (size - overlap)` estimate.
+Measured on the unchanged 19-question golden set with local nomic embeddings, 768
+vector dimensions, exact cosine ranking and current-version metadata filtering.
+Raw data: `evidence/chunk-sweep.json`; runner: `scripts/measure_pipeline.py`.
+This is retrieval-only, separate from API generation evaluation. Identical texts reuse
+vectors from the successful published index or the model-digest/text-hash measurement
+cache; only changed texts are re-embedded. No fixture scores enter this table.
+
+Ship 400/50: it improves recall over 250/30, ties 600/75, and bounds individual evidence
+windows more tightly for the CPU-only generator. The 600/75 alternative saves 41
+chunks and about two percentage points of word amplification, but brings no measured
+recall improvement. All three preserve page/section boundaries, so many policy clauses
+are already shorter than either target. Amplification uses whitespace words as the
+documented token approximation, not an exact model-token or disk-byte ratio. At the
+shipped setting, ordinary recall@5 is 100%, exact 83.33%, version 50%, injection 100%.
+Version selection remains the weakest measured category; current filtering prevents
+obsolete candidates but does not itself rank the correct current clause first.
 
 ## Embedding and version pin
 
@@ -62,4 +77,4 @@ separate live checks; this experiment measures the cosine decision only.
 
 `eval/run_eval.py` compares each golden `(source, section)` pair with retrieved passages, accepting an exact normalized section or a retrieved subsection whose label begins with the expected label. It reports macro recall@3 and recall@5 for answerable questions, plus recall@5 by question type, citation validity (citation tuple must occur in retrieved passages), and must-abstain correctness. The gate permits at most a five percentage-point recall@5 regression from baseline, requires 95% citation validity, and requires every must-abstain question to be declined.
 
-Evaluation against the real corpus is blocked until a supported local cluster/model is available and the OCR-bearing documents have been reviewed. The fixture set can exercise the API and gate shape offline, but it is not a substitute for a measured real-corpus baseline. Never label a placeholder or fixture result as the production baseline.
+The real corpus is published on local Minikube and representative OCR review is complete. Live generation evaluation is in progress; the completed retrieval-only results above do not stand in for it. The fixture set can exercise the API and gate shape offline, but it is not a substitute for a measured real-corpus baseline. Never label a placeholder or fixture result as the production baseline.
