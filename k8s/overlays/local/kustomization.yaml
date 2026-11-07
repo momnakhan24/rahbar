@@ -5,11 +5,11 @@ resources:
   - ../../base
 images:
   - name: rahbar-api
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
   - name: rahbar-indexer
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
   - name: rahbar-ui
-    newTag: dc49a384480c7c7663d75349c1c1135f1ecf0d73
+    newTag: 8df07b25a977007ffc74243a6086898fcc1e3ba8
 patches:
   - target:
       kind: ConfigMap
@@ -41,6 +41,7 @@ patches:
       - op: replace
         path: /spec/egress/2/to/0/ipBlock/cidr
         value: 192.168.49.11/32
+
 
 
 
