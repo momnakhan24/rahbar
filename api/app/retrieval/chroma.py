@@ -88,7 +88,7 @@ class ChromaRetriever:
             expanded = [p.model_copy(update={"score": max(p.score, anchor.score),
                                              "match_kind": "section_reference"}) for p in chosen]
             output: list[Passage] = []
-            for p in [*passages[:k - len(expanded)], *expanded, *passages]:
+            for p in [*expanded, *passages[:k - len(expanded)], *passages]:
                 if all(prior.chunk_id != p.chunk_id for prior in output):
                     output.append(p)
                 if len(output) == k:
