@@ -74,7 +74,7 @@ def _validate_citations(answer: Answer, passages: list[Passage]) -> Answer:
 def _retrieval_refs(passages: list[Passage]) -> list[RetrievedRef]:
     return [RetrievedRef(
         chunk_id=p.chunk_id, source=p.source, section=p.section, page=p.page, score=p.score,
-        match_kind=p.match_kind,
+        match_kind=p.match_kind, dense_score=p.dense_score,
     ) for p in passages]
 
 
