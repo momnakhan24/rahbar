@@ -1,33 +1,98 @@
 {
-  "indexer_build": "Production source/requirements with offline wheelhouse pip install; API/UI standard Dockerfiles",
-  "publication": "Normal local Docker CLI push; not a hosted CD run",
+  "evaluation_source": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
+  "publication": "Normal local Docker CLI push; registry manifest verified; not a hosted CD run",
   "images": [
     {
-      "repo_digests": [
-        "aimwnoaim/rahbar-api@sha256:7e5e7e92916664fd78c07eed3076b0fe2f305cddefb36a792d8fc41d4185ab56",
-        "rahbar-api@sha256:7e5e7e92916664fd78c07eed3076b0fe2f305cddefb36a792d8fc41d4185ab56"
-      ],
       "component": "api",
-      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
-      "image": "aimwnoaim/rahbar-api:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+      "registry_digest": "sha256:7a7502261dd7768f6b677f2c32de64ab008e936442441f963ac7d13f8ab4e402",
+      "source_sha": "8df07b25a977007ffc74243a6086898fcc1e3ba8",
+      "platform_manifests": [
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:a29e9794ba9e0c8cc5a63b4e1ce91df57b67b392e8e9a3d79d1db870d623bf21",
+          "size": 2001,
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:05ca14d56d576dc6e7e71a3d9f79340947c0978df4beffa89a36e01385245786",
+          "size": 837,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:a29e9794ba9e0c8cc5a63b4e1ce91df57b67b392e8e9a3d79d1db870d623bf21",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        }
+      ],
+      "image": "aimwnoaim/rahbar-api:8df07b25a977007ffc74243a6086898fcc1e3ba8"
     },
     {
-      "repo_digests": [
-        "aimwnoaim/rahbar-indexer@sha256:2836350a9730e07fa2523524a4f5a387f4c046f21511e21690af489f05691ee5",
-        "rahbar-indexer@sha256:2836350a9730e07fa2523524a4f5a387f4c046f21511e21690af489f05691ee5"
-      ],
       "component": "indexer",
-      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
-      "image": "aimwnoaim/rahbar-indexer:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+      "registry_digest": "sha256:987e5e5d8d85d015201515504821a6a59c80cb9ab980485b983b8d7686f21c28",
+      "source_sha": "8df07b25a977007ffc74243a6086898fcc1e3ba8",
+      "platform_manifests": [
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:a4f6ea88607363eb1a386e04bcfa3977f687fb9b0661fee911134ef7a082ddc1",
+          "size": 2006,
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:ff3385b61f7b028a741268d3920ce41565ff5b5d30e21b4c74d0fbcf51552f25",
+          "size": 837,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:a4f6ea88607363eb1a386e04bcfa3977f687fb9b0661fee911134ef7a082ddc1",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        }
+      ],
+      "image": "aimwnoaim/rahbar-indexer:8df07b25a977007ffc74243a6086898fcc1e3ba8"
     },
     {
-      "repo_digests": [
-        "aimwnoaim/rahbar-ui@sha256:203f02b580f384d1fb6ae796631e7cdf9a27593ee78ffe80af32a30665f4bfad",
-        "rahbar-ui@sha256:203f02b580f384d1fb6ae796631e7cdf9a27593ee78ffe80af32a30665f4bfad"
-      ],
       "component": "ui",
-      "source_sha": "dc49a384480c7c7663d75349c1c1135f1ecf0d73",
-      "image": "aimwnoaim/rahbar-ui:dc49a384480c7c7663d75349c1c1135f1ecf0d73"
+      "registry_digest": "sha256:cc11212099fe452e0efeddf8f4751542bcfccaf49c3a843e5eed9a4860383054",
+      "source_sha": "8df07b25a977007ffc74243a6086898fcc1e3ba8",
+      "platform_manifests": [
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:436db217d1535e90d192c5321c39a338c3d78d7b5f5f66274f6c046084b80650",
+          "size": 2567,
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:d5de406fc627adb37e45fd883b2d3ddf93bd7c0dfa76dc236b644cd9aa39d83f",
+          "size": 837,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:436db217d1535e90d192c5321c39a338c3d78d7b5f5f66274f6c046084b80650",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        }
+      ],
+      "image": "aimwnoaim/rahbar-ui:8df07b25a977007ffc74243a6086898fcc1e3ba8"
     }
-  ]
+  ],
+  "release_difference": "Request logging now additionally records raw dense scores and match kinds; generation/retrieval/cache code unchanged",
+  "indexer_build": "Production source/requirements with offline wheelhouse pip install; API/UI standard Dockerfiles"
 }
