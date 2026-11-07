@@ -4,8 +4,8 @@ metadata:
   name: rahbar
   namespace: rahbar
   annotations:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "480"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "480"
 spec:
   ingressClassName: nginx
   rules:
