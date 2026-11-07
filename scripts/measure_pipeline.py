@@ -15,6 +15,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
+import httpx
 
 from pipeline.chunk import chunk
 from pipeline.clean import clean
@@ -53,7 +54,8 @@ def main() -> None:
             saved.write_text(json.dumps(data), encoding="utf-8")
         extraction.append({"source": doc.source, "pages": len(doc.pages),
                            "ocr_pages": [p.page for p in doc.pages if p.ocr],
-                           "words": sum(len(p.text.split()) for p in doc.pages)})
+                           "words": sum(len(p.text.split()) for p in doc.pages),
+                           "verified_pdf_cache_reuse": bool(data.get("reused_pdf_extractor_from"))})
         documents.append(clean(doc))
         print(json.dumps(extraction[-1]), flush=True)
     (evidence / "extraction.json").write_text(json.dumps(extraction, indent=2))
@@ -63,6 +65,18 @@ def main() -> None:
     from run_eval import load_golden, recall_at_k
 
     settings = get_settings()
+    model_response = httpx.get(f"{settings.ollama_url}/api/tags", timeout=15)
+    model_response.raise_for_status()
+    model_digest = next(m["digest"] for m in model_response.json()["models"]
+                        if m["name"].split(":")[0] == settings.embed_model.split(":")[0])
+    fingerprint = hashlib.sha256(json.dumps({
+        "extractor": extractor_hash,
+        "chunker": hashlib.sha256(Path(inspect.getfile(chunk)).read_bytes()).hexdigest(),
+        "sources": [(p.name, hashlib.sha256(p.read_bytes()).hexdigest())
+                    for p, _, _ in discover(str(root / "corpus" / "raw"))],
+        "golden": hashlib.sha256((root / "eval" / "golden.yaml").read_bytes()).hexdigest(),
+        "model": model_digest,
+    }, sort_keys=True).encode()).hexdigest()
     golden = load_golden(root / "eval" / "golden.yaml")
     query_vectors = np.array(embed([q["question"] for q in golden], settings))
     query_vectors /= np.linalg.norm(query_vectors, axis=1, keepdims=True)
@@ -71,7 +85,8 @@ def main() -> None:
     for size, overlap in ((250, 30), (400, 50), (600, 75)):
         previous = evidence / "chunk-sweep.json"
         prior = json.loads(previous.read_text()) if previous.exists() else []
-        completed = next((r for r in prior if r['size'] == size and r['overlap'] == overlap), None)
+        completed = next((r for r in prior if r['size'] == size and r['overlap'] == overlap
+                          and r.get('fingerprint') == fingerprint), None)
         if completed:
             results.append(completed)
             continue
@@ -92,6 +107,7 @@ def main() -> None:
                     if k == 5:
                         by_type.setdefault(question.get("type", "ordinary"), []).append(value)
         row = {"size": size, "overlap": overlap, "chunks": len(chunks),
+               "fingerprint": fingerprint, "model_digest": model_digest,
                "dimension": vectors.shape[1], "embed_model": settings.embed_model,
                "storage_amplification": sum(len(c.text.split()) for c in chunks) / original,
                "recall_at_3": float(np.mean(recalls[3])),
