@@ -39,8 +39,8 @@ Save actual screenshots in `docs/evidence/` and commit/push each file on dev bef
 final merge. JSON and text evidence already recorded do not replace rubric screenshots.
 
 - UI: run the README's Ingress port-forward; open http://localhost:18080, ask a
-  supported question, and capture the answer with citations. Capture a hostel
-  question showing refusal as well.
+  supported question such as "What minimum CGPA avoids academic warning?", and capture the answer with citations. Capture a hostel
+  question such as "What is the application deadline for reserving a hostel room?" showing refusal as well.
 - Branch protection settings showing the required checks/review.
 - Deliberately failing evaluation PR with a disabled merge button, then restored
   green checks. Earlier failed/restored run metadata is recorded; a historical
@@ -92,3 +92,4 @@ Run `python scripts/check_submission.py`, inspect warnings, confirm a clean Git
 status and verify every intended commit is pushed. Review the implementation so
 you can explain indexing separation, grounding, measurements and known limitations.
 A green local check or CI run is not a substitute for successful hosted CD.
+
