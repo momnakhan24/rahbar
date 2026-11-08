@@ -55,3 +55,22 @@ reusable fixture CI gate. It records observed results, limitations and failed pr
 in WORKLOG and evidence. The owner must still configure Actions credentials, provide
 actual review/approval, capture required screenshots and submit the work. The agent
 did not export Docker credentials or fabricate a successful hosted CD run.
+
+
+Claude (Anthropic chat assistant) tutored Member 1 step by step. It guided the Windows/WSL 2
+setup, Docker Desktop, installing kubectl and minikube, creating the GitHub repository, the
+`dev` branch and the `protect-main` ruleset, the MIT LICENSE, and a first draft of
+`docs/CONTRACTS.md` (the interface agreement between the two members). Member 1 ran every
+command, took the branch-protection and blocked-merge evidence from the real repository
+(`docs/evidence/direct-push-blocked.txt`), and kept the contracts file.
+
+Near the deadline Claude audited pull request #5 against the assignment's deduction list
+(secrets in history, `:latest`, namespace, `needs:`, requests, PVCs). Member 1 then reviewed
+`k8s/base/api.yaml`, `api/app/routes/health.py` and ADR 0001 herself. That review found that
+ADR 0001 said the indexer flushes Redis, which contradicts ADR 0003 and the NetworkPolicy.
+Member 1 corrected the ADR in her own words (commit c87424c).
+
+What Member 1 did NOT write: the application code, Dockerfiles, Kubernetes manifests, CI/CD
+workflows and evaluation were written with Codex under Member 2's account (see above), and
+Member 1 reviewed and merged them. The measurements in `eval/` and `docs/evidence/` were
+produced by Member 2's runs, not by Member 1.
