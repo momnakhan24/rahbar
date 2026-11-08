@@ -26,8 +26,6 @@ cluster before enabling the real pipeline.
   registry collection only after all chunks have been written. API reads resolve that
   active generation, so a failed build leaves the previously published collection in
   service.
-- Cache keys include the active index revision. After publication, the indexer flushes
-  Redis so stale entries are removed; revision scoping also prevents old keys being used
-  if the flush fails.
+- Only the API connects to Redis, and the NetworkPolicy blocks the indexer from reaching it, so the indexer never flushes the cache. Cache keys include the index revision, so when a new index is published, old cache entries can no longer be found. The API removes them when it looks up the cache (see ADR 0003).
 - Old physical index generations are retained for rollback/debugging. A later maintenance
   task should prune them only after the new generation has been observed healthy.
