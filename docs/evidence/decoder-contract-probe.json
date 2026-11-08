@@ -1,0 +1,1 @@
+{"method": "actual local model, synthetic single-passage decoder probe", "answer": "2.00", "grounded": true, "citations": [{"source": "probe-policy.txt", "section": "Academic warning", "page": 1}]}

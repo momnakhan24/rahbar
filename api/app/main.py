@@ -15,6 +15,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
+from redis import Redis
 
 from .config import get_settings
 from .logjson import configure_logging, request_id_var
@@ -32,15 +33,17 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.settings = settings
     app.state.retriever = get_retriever(settings)
     app.state.provider = get_provider(settings)
-    # STARTER-TODO(4.4): compare the collection's embedding-model metadata with
-    # settings.embed_model here, and make /readyz fail on a mismatch.
-    # This process only reads the index. The indexer Job writes it.
+    app.state.redis = Redis.from_url(settings.redis_url, decode_responses=True,
+                                     socket_connect_timeout=2, socket_timeout=2)
     log.info(
         "api started",
         extra={"retriever": settings.retriever, "llm_provider": settings.llm_provider,
                "embed_model": settings.embed_model, "top_k": settings.top_k},
     )
-    yield
+    try:
+        yield
+    finally:
+        app.state.redis.close()
 
 
 app = FastAPI(title="RAHBAR API", lifespan=lifespan)

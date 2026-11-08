@@ -1,0 +1,7 @@
+Captured: 2026-11-05T23:50:49.2830538+05:00
+Commit: 035ccafef2f45820bddfb803467b388063dcf0b9
+Host: Windows; Docker Desktop Linux engine
+minikube version: v1.39.0
+commit: 7a9f6a841470a207de8cf4bafcccee0969d8ba10
+Docker server=29.8.0 CPUs=12 MemoryBytes=12351389696
+Profile rahbar requested: Docker driver; Calico; 4 CPUs; 4096 MB; ingress and metrics-server. Bootstrap not yet verified complete.

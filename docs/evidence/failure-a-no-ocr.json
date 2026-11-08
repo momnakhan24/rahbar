@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-11-06T10:06:19.247736+00:00",
+  "fault": "A: index scanned PDF with OCR disabled",
+  "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+  "pages": 8,
+  "without_ocr_characters": 0,
+  "without_ocr_chunks": 0,
+  "publication_outcome": "refusing to replace the active index with an empty corpus",
+  "with_ocr_words": 1814,
+  "diagnosis": "No text layer; zero evidence before embedding. Empty-index publication guard rejects the damaged replacement.",
+  "remedy": "Restore Poppler/Tesseract OCR with reviewed single-block reading order."
+}

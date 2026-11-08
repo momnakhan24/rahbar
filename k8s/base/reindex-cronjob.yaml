@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: reindex
+  namespace: rahbar
+spec:
+  schedule: "0 3 * * 1"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app: indexer
+        spec:
+          serviceAccountName: indexer
+          automountServiceAccountToken: false
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: indexer
+              image: rahbar-indexer:dev
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - configMapRef:
+                    name: rahbar-config
+              resources:
+                requests:
+                  cpu: 1
+                  memory: 768Mi
+                limits:
+                  cpu: 2
+                  memory: 2Gi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL
+              volumeMounts:
+                - name: tmp
+                  mountPath: /tmp
+                - name: corpus
+                  mountPath: /corpus
+                  readOnly: true
+          volumes:
+            - name: tmp
+              emptyDir: {}
+            - name: corpus
+              persistentVolumeClaim:
+                claimName: corpus-data

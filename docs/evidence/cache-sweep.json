@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-11-05T18:53:30.666814+00:00",
+  "embed_model": "nomic-embed-text",
+  "pairs": [
+    {
+      "query": "What minimum CGPA avoids academic warning?",
+      "candidate": "What CGPA do I need to avoid an academic warning?",
+      "same_answer": true,
+      "similarity": 0.9073448679207152
+    },
+    {
+      "query": "How long is the summer semester?",
+      "candidate": "How many weeks does the summer semester last?",
+      "same_answer": true,
+      "similarity": 0.9057778844490988
+    },
+    {
+      "query": "How many grade points does an A+ carry?",
+      "candidate": "What is the grade point value of A+?",
+      "same_answer": true,
+      "similarity": 0.8326789546447066
+    },
+    {
+      "query": "Can a student repeat a course to improve CGPA?",
+      "candidate": "Can I improve my CGPA by repeating a course?",
+      "same_answer": true,
+      "similarity": 0.9491657934484021
+    },
+    {
+      "query": "What is the tuition fee for a BS program?",
+      "candidate": "What is the tuition fee for an MBA program?",
+      "same_answer": false,
+      "similarity": 0.7822834274442909
+    },
+    {
+      "query": "How many grade points does an A+ carry?",
+      "candidate": "How many grade points does a B+ carry?",
+      "same_answer": false,
+      "similarity": 0.9283507344346528
+    },
+    {
+      "query": "What attendance is required in a regular semester?",
+      "candidate": "What attendance is required in a summer semester?",
+      "same_answer": false,
+      "similarity": 0.8687661983670334
+    },
+    {
+      "query": "What are the academic warning rules in the 2026 handbook?",
+      "candidate": "What are the academic warning rules in the 2023 handbook?",
+      "same_answer": false,
+      "similarity": 0.9547452084684949
+    }
+  ],
+  "thresholds": [
+    {
+      "threshold": 0.85,
+      "true_hits": 3,
+      "false_hits": 3,
+      "misses": 1
+    },
+    {
+      "threshold": 0.9,
+      "true_hits": 3,
+      "false_hits": 2,
+      "misses": 1
+    },
+    {
+      "threshold": 0.94,
+      "true_hits": 1,
+      "false_hits": 1,
+      "misses": 3
+    },
+    {
+      "threshold": 0.96,
+      "true_hits": 0,
+      "false_hits": 0,
+      "misses": 4
+    },
+    {
+      "threshold": 0.98,
+      "true_hits": 0,
+      "false_hits": 0,
+      "misses": 4
+    }
+  ],
+  "scope": "offline cosine decision study; Redis latency measured separately"
+}

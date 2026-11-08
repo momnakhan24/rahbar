@@ -1,0 +1,151 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            api/requirements-dev.txt
+            indexer/requirements-dev.txt
+      - name: Install project tools
+        run: python -m pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: Lint and type check
+        run: |
+          ruff check api indexer eval corpus scripts/check_evaluation.py
+          (cd api && mypy app)
+          (cd indexer && mypy pipeline)
+      - name: Unit and evaluation gate tests
+        run: |
+          (cd api && pytest --cov=app --cov-fail-under=60 --cov-report=term-missing --cov-report=xml:../coverage-api.xml -q)
+          (cd indexer && pytest --cov=pipeline --cov-report=term-missing --cov-report=xml:../coverage-indexer.xml -q)
+          (cd eval && pytest -q)
+          python eval/run_eval.py --help
+          python scripts/check_evaluation.py
+      - name: Validate rendered Kubernetes manifests
+        run: |
+          for overlay in dev prod; do
+            kubectl kustomize "k8s/overlays/$overlay" \
+              | docker run --rm -i ghcr.io/yannh/kubeconform:v0.6.7 -strict -summary -
+          done
+
+  cluster-smoke:
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: helm/kind-action@v1.10.0
+        with:
+          cluster_name: rahbar-ci
+      - name: Build and load local images
+        run: |
+          docker build -t rahbar-api:dev -t rahbar-api:${{ github.sha }} api
+          docker build -t rahbar-indexer:dev -t rahbar-indexer:${{ github.sha }} indexer
+          docker build -t rahbar-ui:dev -t rahbar-ui:${{ github.sha }} ui
+          kind load docker-image rahbar-api:dev rahbar-indexer:dev rahbar-ui:dev --name rahbar-ci
+      - name: Scan images
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:0.58.1 image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL rahbar-api:dev
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:0.58.1 image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL rahbar-indexer:dev
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:0.58.1 image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL rahbar-ui:dev
+      - name: Deploy the stub indexer Job and workloads
+        run: |
+          kubectl apply -k k8s/overlays/dev
+          if ! kubectl wait --for=condition=ready pod/chroma-0 -n rahbar --timeout=90s; then
+            kubectl get pods,pvc -n rahbar -o wide || true
+            kubectl describe pod chroma-0 -n rahbar || true
+            kubectl logs chroma-0 -n rahbar --all-containers=true --tail=100 || true
+            kubectl get events -n rahbar --sort-by=.lastTimestamp || true
+            exit 1
+          fi
+          kubectl rollout status statefulset/chroma -n rahbar --timeout=5m
+          kubectl rollout status deployment/redis -n rahbar --timeout=3m
+          kubectl wait --for=condition=complete job/indexer -n rahbar --timeout=5m
+          kubectl rollout status deployment/api -n rahbar --timeout=5m
+          kubectl rollout status deployment/ui -n rahbar --timeout=3m
+          kubectl get endpoints -n rahbar
+          kubectl get hpa -n rahbar
+      - name: Capture failed workload diagnostics
+        if: failure()
+        run: |
+          kubectl get pods,pvc -n rahbar -o wide || true
+          kubectl describe pods -n rahbar || true
+          for pod in $(kubectl get pods -n rahbar -o name); do
+            kubectl logs "$pod" -n rahbar --all-containers=true --tail=100 || true
+            kubectl logs "$pod" -n rahbar --all-containers=true --previous --tail=100 || true
+          done
+          kubectl get events -n rahbar --sort-by=.lastTimestamp || true
+      - name: Smoke test question endpoint
+        run: |
+          kubectl port-forward service/api 8000:8000 -n rahbar >/tmp/rahbar-port-forward.log 2>&1 &
+          for _ in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:8000/readyz >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail http://127.0.0.1:8000/healthz
+          curl --fail -X POST http://127.0.0.1:8000/api/ask \
+            -H 'Content-Type: application/json' \
+            -d '{"question":"What does the stub handbook say?"}'
+      - name: Start pinned fixture embedding service
+        run: |
+          docker run -d --name fixture-ollama --network kind ollama/ollama@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
+          for _ in $(seq 1 30); do
+            if docker exec fixture-ollama ollama list >/dev/null 2>&1; then break; fi
+            sleep 2
+          done
+          docker exec fixture-ollama ollama list
+          docker exec fixture-ollama ollama pull nomic-embed-text
+          address=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' fixture-ollama)
+          echo "FIXTURE_OLLAMA_URL=http://$address:11434" >> "$GITHUB_ENV"
+      - name: Index actual fixture documents and deploy real retrieval
+        run: |
+          kubectl create configmap fixture-corpus -n rahbar --from-file=eval/fixtures
+          kubectl patch configmap rahbar-config -n rahbar --type merge -p "{\"data\":{\"RETRIEVER\":\"chroma\",\"LLM_PROVIDER\":\"stub\",\"EMBED_MODEL\":\"nomic-embed-text\",\"CHROMA_COLLECTION\":\"rahbar-fixture\",\"RELEVANCE_FLOOR\":\"0.6\",\"OLLAMA_URL\":\"$FIXTURE_OLLAMA_URL\"}}"
+          kubectl create job --from=cronjob/reindex fixture-index -n rahbar --dry-run=client -o json \
+            | python -c 'import json,sys; j=json.load(sys.stdin); p=j["spec"]["template"]["spec"]; p["containers"][0]["args"]=[]; p["volumes"]=[{"name":"corpus","configMap":{"name":"fixture-corpus"}} if v["name"]=="corpus" else v for v in p["volumes"]]; print(json.dumps(j))' \
+            | kubectl apply -f -
+          kubectl wait --for=condition=complete job/fixture-index -n rahbar --timeout=5m
+          kubectl rollout restart deployment/api -n rahbar
+          kubectl rollout status deployment/api -n rahbar --timeout=5m
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce measured fixture evaluation gate
+        run: |
+          python -m pip install httpx==0.28.1 pyyaml==6.0.2
+          kubectl port-forward service/api 8001:8000 -n rahbar > /tmp/fixture-forward.log 2>&1 &
+          for _ in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:8001/readyz >/dev/null; then break; fi
+            sleep 2
+          done
+          python eval/run_eval.py --api http://127.0.0.1:8001 --golden eval/fixtures/golden.fixture.yaml --baseline eval/fixtures/baseline.fixture.json --out fixture-results.json
+      - name: Fixture diagnostics
+        if: failure()
+        run: |
+          kubectl get pods,events -n rahbar || true
+          kubectl logs job/fixture-index -n rahbar --tail=100 || true
+          kubectl logs deployment/api -n rahbar --tail=100 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixture-evaluation
+          path: fixture-results.json
+          if-no-files-found: ignore
+

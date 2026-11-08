@@ -1,0 +1,387 @@
+{
+  "fault": "E: remove superseded filter on read-only query; same published index/model",
+  "active_collection": "rahbar-1793960893-475fc7c5",
+  "questions": [
+    {
+      "question": "How long is the summer semester?",
+      "fault_without_filter": [
+        {
+          "id": "378b8473261c1d68659e",
+          "score": 0.85248506,
+          "metadata": {
+            "section": "6.1 Summer semester will be offered as an optional semester of 8 to 9",
+            "doc_version": "2023-08",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "page": 20,
+            "superseded": true
+          },
+          "text": "6.1 Summer semester will be offered as an optional semester of 8 to 9 weeks' duration."
+        },
+        {
+          "id": "7fbffea3cf878562ca54",
+          "score": 0.78356344,
+          "metadata": {
+            "page": 20,
+            "superseded": true,
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "6. Rules for Summer Semester",
+            "doc_version": "2023-08"
+          },
+          "text": "6. Rules for Summer Semester"
+        },
+        {
+          "id": "568304caf18f5c42cf57",
+          "score": 0.78356344,
+          "metadata": {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6. Rules for Summer Semester",
+            "page": 28,
+            "superseded": false,
+            "doc_version": "2026-06"
+          },
+          "text": "6. Rules for Summer Semester"
+        },
+        {
+          "id": "31c794874856dd07aa57",
+          "score": 0.7747244799999999,
+          "metadata": {
+            "page": 20,
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "6.2 The contact hours per week during the Summer Semester will be",
+            "doc_version": "2023-08",
+            "superseded": true
+          },
+          "text": "6.2 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        },
+        {
+          "id": "2c6530d825d14f6dcd7c",
+          "score": 0.7728164200000001,
+          "metadata": {
+            "superseded": false,
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6.4 The contact hours per week during the Summer Semester will",
+            "doc_version": "2026-06",
+            "page": 28
+          },
+          "text": "6.4 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        }
+      ],
+      "restored_current_filter": [
+        {
+          "id": "568304caf18f5c42cf57",
+          "score": 0.78356344,
+          "metadata": {
+            "page": 28,
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "superseded": false,
+            "doc_version": "2026-06",
+            "section": "6. Rules for Summer Semester"
+          },
+          "text": "6. Rules for Summer Semester"
+        },
+        {
+          "id": "2c6530d825d14f6dcd7c",
+          "score": 0.7728164200000001,
+          "metadata": {
+            "page": 28,
+            "superseded": false,
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6.4 The contact hours per week during the Summer Semester will",
+            "doc_version": "2026-06"
+          },
+          "text": "6.4 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        },
+        {
+          "id": "b8c9d94856dec29a2565",
+          "score": 0.75740051,
+          "metadata": {
+            "section": "1.19 A student can register for a maximum of two courses in",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "doc_version": "2026-06",
+            "superseded": false,
+            "page": 9
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester in accordance with the rules for summer semester. For more details, please see rule no 6: Rules for Summer Semester."
+        },
+        {
+          "id": "0e290fac1e1707e35632",
+          "score": 0.7498322,
+          "metadata": {
+            "superseded": false,
+            "section": "6.1 Summer semester is an 8-week semester and is meant to",
+            "doc_version": "2026-06",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "page": 28
+          },
+          "text": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. A. Academic Warning I/II B. Graduating C. Eligible for registering FYP-I in Fall by earning minimum required credits in the summer D. Eligible for registering a course/lab in Fall by passing its pre-requisite in summer"
+        },
+        {
+          "id": "748d5c75b1098859ca24",
+          "score": 0.7258930800000001,
+          "metadata": {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "page": 3,
+            "section": "19. Rules for Summer Semester",
+            "doc_version": "2026",
+            "superseded": false
+          },
+          "text": "19. Rules for Summer Semester is not available in summer \u00b7 Iddat Summer semester is an 8-week semester. \u00b7 Maternity/Delivery semester and is meant to \u00b7 Death in the immediate facilitate students who are in one j) A minimum of TEN (10) family member of the following four categories. students should register in a \u00b7 Any other subject to summer course. Otherwise, i) Academic Warning I/II acceptance on justified the course shall be dropped. ii) Graduating rationale k) W a r n i n g C o u n t i s iii) Eligible for registering FYP-I in incremented/decremented 22. Double Admission Fall by earning minimum Concurrent admission in more in summer semester. required credits in the than one degree is not allowed. l) A student can study summer summer semester in another campus, iv) Eligible for registering a 23. Suspension of Registration provided that the parent Registration of a student is course/lab in Fall by passing campus is not offering that suspended in any of the its pre-requisite in summer course. Student must obtain, following situations: a) Any course(s) offered can a) On the recommendations of in writing, prior permission only be a repeat course. No the Disciplinary Committee from Director of the parent new courses are allowed for campus. Prospectus 2026 219 [Extracted table rows] FAST-NUCES Academic Rules & Regulations 17. Repeating a Course any of the above four 20. Transfer of Students between A student must repeat all failed categories Campuses courses. Students under warning Request of a student for transfer b) Students can repeat only should also repeat such passed from one campus of the such courses, in which they courses in which their GPA was University to another will be has registered in a previous less than the minimum CGPA considered only on the following required for their degree. A semester and was awarded a grounds: student can also repeat a course letter grade. a) Death of a parent. if S(he) desire to improve his/her c) The contact hours per week b) Posting of a parent to the city grade. Only the most recent grade where the transfer is desired. during the Summer Semester is used in calculating the CGPA."
+        }
+      ]
+    },
+    {
+      "question": "How many weeks does an optional summer semester last?",
+      "fault_without_filter": [
+        {
+          "id": "378b8473261c1d68659e",
+          "score": 0.88746673,
+          "metadata": {
+            "doc_version": "2023-08",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "page": 20,
+            "superseded": true,
+            "section": "6.1 Summer semester will be offered as an optional semester of 8 to 9"
+          },
+          "text": "6.1 Summer semester will be offered as an optional semester of 8 to 9 weeks' duration."
+        },
+        {
+          "id": "31c794874856dd07aa57",
+          "score": 0.76679415,
+          "metadata": {
+            "page": 20,
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "6.2 The contact hours per week during the Summer Semester will be",
+            "superseded": true,
+            "doc_version": "2023-08"
+          },
+          "text": "6.2 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        },
+        {
+          "id": "2c6530d825d14f6dcd7c",
+          "score": 0.76397651,
+          "metadata": {
+            "superseded": false,
+            "section": "6.4 The contact hours per week during the Summer Semester will",
+            "page": 28,
+            "doc_version": "2026-06",
+            "source": "academic-rules-handbook-jun-2026.pdf"
+          },
+          "text": "6.4 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        },
+        {
+          "id": "93e32022f9d3ce8ddc53",
+          "score": 0.7309947,
+          "metadata": {
+            "superseded": true,
+            "page": 7,
+            "section": "1.19 A student can register for a maximum of two courses in summer",
+            "doc_version": "2023-08",
+            "source": "undergraduate-academic-rules-aug-2023.pdf"
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester, in accordance with the rules for summer semester."
+        },
+        {
+          "id": "b8c9d94856dec29a2565",
+          "score": 0.72679687,
+          "metadata": {
+            "doc_version": "2026-06",
+            "section": "1.19 A student can register for a maximum of two courses in",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "superseded": false,
+            "page": 9
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester in accordance with the rules for summer semester. For more details, please see rule no 6: Rules for Summer Semester."
+        }
+      ],
+      "restored_current_filter": [
+        {
+          "id": "2c6530d825d14f6dcd7c",
+          "score": 0.76397651,
+          "metadata": {
+            "doc_version": "2026-06",
+            "page": 28,
+            "superseded": false,
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6.4 The contact hours per week during the Summer Semester will"
+          },
+          "text": "6.4 The contact hours per week during the Summer Semester will be doubled to ensure that the course is completely taught in summer (with half the duration as compared to a regular semester)."
+        },
+        {
+          "id": "b8c9d94856dec29a2565",
+          "score": 0.72679687,
+          "metadata": {
+            "superseded": false,
+            "section": "1.19 A student can register for a maximum of two courses in",
+            "page": 9,
+            "doc_version": "2026-06",
+            "source": "academic-rules-handbook-jun-2026.pdf"
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester in accordance with the rules for summer semester. For more details, please see rule no 6: Rules for Summer Semester."
+        },
+        {
+          "id": "0e290fac1e1707e35632",
+          "score": 0.7222355,
+          "metadata": {
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6.1 Summer semester is an 8-week semester and is meant to",
+            "superseded": false,
+            "doc_version": "2026-06",
+            "page": 28
+          },
+          "text": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. A. Academic Warning I/II B. Graduating C. Eligible for registering FYP-I in Fall by earning minimum required credits in the summer D. Eligible for registering a course/lab in Fall by passing its pre-requisite in summer"
+        },
+        {
+          "id": "568304caf18f5c42cf57",
+          "score": 0.7197830000000001,
+          "metadata": {
+            "doc_version": "2026-06",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "section": "6. Rules for Summer Semester",
+            "superseded": false,
+            "page": 28
+          },
+          "text": "6. Rules for Summer Semester"
+        },
+        {
+          "id": "748d5c75b1098859ca24",
+          "score": 0.71687043,
+          "metadata": {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "19. Rules for Summer Semester",
+            "superseded": false,
+            "page": 3,
+            "doc_version": "2026"
+          },
+          "text": "19. Rules for Summer Semester is not available in summer \u00b7 Iddat Summer semester is an 8-week semester. \u00b7 Maternity/Delivery semester and is meant to \u00b7 Death in the immediate facilitate students who are in one j) A minimum of TEN (10) family member of the following four categories. students should register in a \u00b7 Any other subject to summer course. Otherwise, i) Academic Warning I/II acceptance on justified the course shall be dropped. ii) Graduating rationale k) W a r n i n g C o u n t i s iii) Eligible for registering FYP-I in incremented/decremented 22. Double Admission Fall by earning minimum Concurrent admission in more in summer semester. required credits in the than one degree is not allowed. l) A student can study summer summer semester in another campus, iv) Eligible for registering a 23. Suspension of Registration provided that the parent Registration of a student is course/lab in Fall by passing campus is not offering that suspended in any of the its pre-requisite in summer course. Student must obtain, following situations: a) Any course(s) offered can a) On the recommendations of in writing, prior permission only be a repeat course. No the Disciplinary Committee from Director of the parent new courses are allowed for campus. Prospectus 2026 219 [Extracted table rows] FAST-NUCES Academic Rules & Regulations 17. Repeating a Course any of the above four 20. Transfer of Students between A student must repeat all failed categories Campuses courses. Students under warning Request of a student for transfer b) Students can repeat only should also repeat such passed from one campus of the such courses, in which they courses in which their GPA was University to another will be has registered in a previous less than the minimum CGPA considered only on the following required for their degree. A semester and was awarded a grounds: student can also repeat a course letter grade. a) Death of a parent. if S(he) desire to improve his/her c) The contact hours per week b) Posting of a parent to the city grade. Only the most recent grade where the transfer is desired. during the Summer Semester is used in calculating the CGPA."
+        }
+      ]
+    },
+    {
+      "question": "May a graduating student register for new elective courses in summer?",
+      "fault_without_filter": [
+        {
+          "id": "0bb69bc75961966c83ac",
+          "score": 0.8174218,
+          "metadata": {
+            "doc_version": "2023-08",
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "section": "6.4  Astudent cannot register for a new course. Exception to this rule is",
+            "superseded": true,
+            "page": 20
+          },
+          "text": "6.4  Astudent cannot register for a new course. Exception to this rule is granted for the following cases: (i) For internship, as required by HEC (ii) An elective course is being offered by a distinguished scholar or professional who is only available during summer (iii) A student needs one or two new elective courses to graduate at the end of summer."
+        },
+        {
+          "id": "93e32022f9d3ce8ddc53",
+          "score": 0.78982633,
+          "metadata": {
+            "superseded": true,
+            "source": "undergraduate-academic-rules-aug-2023.pdf",
+            "doc_version": "2023-08",
+            "page": 7,
+            "section": "1.19 A student can register for a maximum of two courses in summer"
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester, in accordance with the rules for summer semester."
+        },
+        {
+          "id": "b8c9d94856dec29a2565",
+          "score": 0.77392733,
+          "metadata": {
+            "doc_version": "2026-06",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "page": 9,
+            "section": "1.19 A student can register for a maximum of two courses in",
+            "superseded": false
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester in accordance with the rules for summer semester. For more details, please see rule no 6: Rules for Summer Semester."
+        },
+        {
+          "id": "748d5c75b1098859ca24",
+          "score": 0.75436401,
+          "metadata": {
+            "doc_version": "2026",
+            "page": 3,
+            "section": "19. Rules for Summer Semester",
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "superseded": false
+          },
+          "text": "19. Rules for Summer Semester is not available in summer \u00b7 Iddat Summer semester is an 8-week semester. \u00b7 Maternity/Delivery semester and is meant to \u00b7 Death in the immediate facilitate students who are in one j) A minimum of TEN (10) family member of the following four categories. students should register in a \u00b7 Any other subject to summer course. Otherwise, i) Academic Warning I/II acceptance on justified the course shall be dropped. ii) Graduating rationale k) W a r n i n g C o u n t i s iii) Eligible for registering FYP-I in incremented/decremented 22. Double Admission Fall by earning minimum Concurrent admission in more in summer semester. required credits in the than one degree is not allowed. l) A student can study summer summer semester in another campus, iv) Eligible for registering a 23. Suspension of Registration provided that the parent Registration of a student is course/lab in Fall by passing campus is not offering that suspended in any of the its pre-requisite in summer course. Student must obtain, following situations: a) Any course(s) offered can a) On the recommendations of in writing, prior permission only be a repeat course. No the Disciplinary Committee from Director of the parent new courses are allowed for campus. Prospectus 2026 219 [Extracted table rows] FAST-NUCES Academic Rules & Regulations 17. Repeating a Course any of the above four 20. Transfer of Students between A student must repeat all failed categories Campuses courses. Students under warning Request of a student for transfer b) Students can repeat only should also repeat such passed from one campus of the such courses, in which they courses in which their GPA was University to another will be has registered in a previous less than the minimum CGPA considered only on the following required for their degree. A semester and was awarded a grounds: student can also repeat a course letter grade. a) Death of a parent. if S(he) desire to improve his/her c) The contact hours per week b) Posting of a parent to the city grade. Only the most recent grade where the transfer is desired. during the Summer Semester is used in calculating the CGPA."
+        },
+        {
+          "id": "b7d92a956ff1b7673728",
+          "score": 0.7518698,
+          "metadata": {
+            "page": 20,
+            "superseded": true,
+            "section": "6.5 Students are not allowed to register in summer semester for courses",
+            "doc_version": "2023-08",
+            "source": "undergraduate-academic-rules-aug-2023.pdf"
+          },
+          "text": "6.5 Students are not allowed to register in summer semester for courses which they have previously taken, and were awarded a W grade."
+        }
+      ],
+      "restored_current_filter": [
+        {
+          "id": "b8c9d94856dec29a2565",
+          "score": 0.77392733,
+          "metadata": {
+            "section": "1.19 A student can register for a maximum of two courses in",
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "page": 9,
+            "doc_version": "2026-06",
+            "superseded": false
+          },
+          "text": "1.19 A student can register for a maximum of two courses in summer semester in accordance with the rules for summer semester. For more details, please see rule no 6: Rules for Summer Semester."
+        },
+        {
+          "id": "748d5c75b1098859ca24",
+          "score": 0.75436401,
+          "metadata": {
+            "superseded": false,
+            "doc_version": "2026",
+            "page": 3,
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "19. Rules for Summer Semester"
+          },
+          "text": "19. Rules for Summer Semester is not available in summer \u00b7 Iddat Summer semester is an 8-week semester. \u00b7 Maternity/Delivery semester and is meant to \u00b7 Death in the immediate facilitate students who are in one j) A minimum of TEN (10) family member of the following four categories. students should register in a \u00b7 Any other subject to summer course. Otherwise, i) Academic Warning I/II acceptance on justified the course shall be dropped. ii) Graduating rationale k) W a r n i n g C o u n t i s iii) Eligible for registering FYP-I in incremented/decremented 22. Double Admission Fall by earning minimum Concurrent admission in more in summer semester. required credits in the than one degree is not allowed. l) A student can study summer summer semester in another campus, iv) Eligible for registering a 23. Suspension of Registration provided that the parent Registration of a student is course/lab in Fall by passing campus is not offering that suspended in any of the its pre-requisite in summer course. Student must obtain, following situations: a) Any course(s) offered can a) On the recommendations of in writing, prior permission only be a repeat course. No the Disciplinary Committee from Director of the parent new courses are allowed for campus. Prospectus 2026 219 [Extracted table rows] FAST-NUCES Academic Rules & Regulations 17. Repeating a Course any of the above four 20. Transfer of Students between A student must repeat all failed categories Campuses courses. Students under warning Request of a student for transfer b) Students can repeat only should also repeat such passed from one campus of the such courses, in which they courses in which their GPA was University to another will be has registered in a previous less than the minimum CGPA considered only on the following required for their degree. A semester and was awarded a grounds: student can also repeat a course letter grade. a) Death of a parent. if S(he) desire to improve his/her c) The contact hours per week b) Posting of a parent to the city grade. Only the most recent grade where the transfer is desired. during the Summer Semester is used in calculating the CGPA."
+        },
+        {
+          "id": "7aed5e500f3678fca06d",
+          "score": 0.72857058,
+          "metadata": {
+            "section": "6.11 A minimum of TEN (10) students should register in a summer",
+            "doc_version": "2026-06",
+            "superseded": false,
+            "source": "academic-rules-handbook-jun-2026.pdf",
+            "page": 29
+          },
+          "text": "6.11 A minimum of TEN (10) students should register in a summer course. Otherwise, the course shall be dropped."
+        },
+        {
+          "id": "0e290fac1e1707e35632",
+          "score": 0.7257743999999999,
+          "metadata": {
+            "doc_version": "2026-06",
+            "superseded": false,
+            "section": "6.1 Summer semester is an 8-week semester and is meant to",
+            "page": 28,
+            "source": "academic-rules-handbook-jun-2026.pdf"
+          },
+          "text": "6.1 Summer semester is an 8-week semester and is meant to facilitate students who are in one of the following four categories. A. Academic Warning I/II B. Graduating C. Eligible for registering FYP-I in Fall by earning minimum required credits in the summer D. Eligible for registering a course/lab in Fall by passing its pre-requisite in summer"
+        },
+        {
+          "id": "b9a901f00251f0605b1e",
+          "score": 0.7227040499999999,
+          "metadata": {
+            "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+            "section": "19. Rules for Summer Semester",
+            "superseded": false,
+            "doc_version": "2026",
+            "page": 3
+          },
+          "text": "be finalized Under following special hardship refunded nor carried forward before the start of next semester, circumstances, freezing of first Retake exam fee is payable to next semester(s). semester can be considered by before the examination. i) Financial assistance, the approval of the Competent scholarship or fee concession Authority. 19. Rules for Summer Semester is not available in summer \u00b7 Iddat Summer semester is an 8-week semester. \u00b7 Maternity/Delivery semester and is meant to \u00b7 Death in the immediate facilitate students who are in one j) A minimum of TEN (10) family member of the following four categories. students should register in a \u00b7 Any other subject to summer course. Otherwise, i) Academic Warning I/II acceptance on justified the course shall be dropped. ii) Graduating rationale k) W a r n i n g C o u n t i s iii) Eligible for registering FYP-I in incremented/decremented 22. Double Admission Fall by earning minimum Concurrent admission in more in summer semester. required credits in the than one degree is not allowed. l) A student can study summer summer semester in another campus, iv) Eligible for registering a 23. Suspension of Registration provided that the parent Registration of a student is course/lab in Fall by passing campus is not offering that suspended in any of the its pre-requisite in summer course. Student must obtain, following situations: a) Any course(s) offered can a) On the recommendations of in writing, prior permission only be a repeat course. No the Disciplinary Committee from Director of the parent new courses are allowed for campus. Prospectus 2026 219 |"
+        }
+      ]
+    }
+  ]
+}

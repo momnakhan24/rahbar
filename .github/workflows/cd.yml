@@ -1,0 +1,123 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    # Publish only after the same scan, real fixture index and live gate as CI.
+    uses: ./.github/workflows/ci.yml
+
+  build-push:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check registry configuration
+        env:
+          REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          REGISTRY_USER: ${{ vars.DOCKERHUB_USERNAME || 'aimwnoaim' }}
+        run: |
+          test -n "$REGISTRY_TOKEN" || { echo '::error::Repository owner must add DOCKERHUB_TOKEN (Docker Hub Read & Write access token).'; exit 1; }
+          [[ "$REGISTRY_USER" =~ ^[a-z0-9][a-z0-9_-]+$ ]] || { echo '::error::Invalid DOCKERHUB_USERNAME'; exit 1; }
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME || 'aimwnoaim' }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build, scan and publish immutable images
+        env:
+          REGISTRY_USER: ${{ vars.DOCKERHUB_USERNAME || 'aimwnoaim' }}
+        run: |
+          set -euo pipefail
+          for component in api indexer ui; do
+            image="$REGISTRY_USER/rahbar-$component:$GITHUB_SHA"
+            docker build -t "$image" "$component"
+            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.58.1 image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL "$image"
+            docker push "$image"
+            docker image inspect "$image" --format '{{json .RepoDigests}}' >> published-images.txt
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: published-images
+          path: published-images.txt
+
+  deploy:
+    needs: build-push
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: helm/kind-action@v1.10.0
+        with:
+          cluster_name: rahbar-cd
+      - name: Install Ingress controller
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.1/deploy/static/provider/cloud/deploy.yaml
+          kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=180s
+          kubectl wait --namespace ingress-nginx --for=condition=complete job/ingress-nginx-admission-create job/ingress-nginx-admission-patch --timeout=180s
+      - name: Deploy published SHA images to ephemeral acceptance cluster
+        env:
+          REGISTRY_USER: ${{ vars.DOCKERHUB_USERNAME || 'aimwnoaim' }}
+        run: |
+          set -euo pipefail
+          mkdir -p k8s/overlays/cd
+          cat > k8s/overlays/cd/kustomization.yaml <<EOF
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          resources:
+            - ../dev
+          images:
+            - name: rahbar-api
+              newName: $REGISTRY_USER/rahbar-api
+              newTag: $GITHUB_SHA
+            - name: rahbar-indexer
+              newName: $REGISTRY_USER/rahbar-indexer
+              newTag: $GITHUB_SHA
+            - name: rahbar-ui
+              newName: $REGISTRY_USER/rahbar-ui
+              newTag: $GITHUB_SHA
+          EOF
+          kubectl apply -k k8s/overlays/cd
+          kubectl rollout status statefulset/chroma -n rahbar --timeout=5m
+          kubectl rollout status deployment/redis -n rahbar --timeout=3m
+          kubectl wait --for=condition=complete job/indexer -n rahbar --timeout=5m
+          kubectl rollout status deployment/api -n rahbar --timeout=5m
+          kubectl rollout status deployment/ui -n rahbar --timeout=3m
+          kubectl port-forward -n ingress-nginx service/ingress-nginx-controller 8080:80 > /tmp/ingress.log 2>&1 &
+          for _ in $(seq 1 30); do
+            if curl --fail --silent -H 'Host: rahbar.local' http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail -H 'Host: rahbar.local' http://127.0.0.1:8080/
+          curl --fail -H 'Host: rahbar.local' -H 'Content-Type: application/json' -d '{"question":"What does the stub handbook say?"}' http://127.0.0.1:8080/api/ask > smoke-answer.json
+          python -c 'import json; a=json.load(open("smoke-answer.json")); assert a["answered_from_context"] and a["citations"], a'
+          kubectl get deployments,statefulsets,jobs,endpoints -n rahbar -o yaml > acceptance-workloads.yaml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ingress-acceptance
+          path: |
+            smoke-answer.json
+            acceptance-workloads.yaml
+            /tmp/ingress.log
+      - name: Diagnostics
+        if: failure()
+        run: |
+          kubectl get pods,events -n rahbar || true
+          kubectl get pods,jobs -n ingress-nginx || true
+          kubectl describe pods -n rahbar || true
+          for pod in $(kubectl get pods -n rahbar -o name); do
+            kubectl logs "$pod" -n rahbar --all-containers=true --tail=100 || true
+          done
+

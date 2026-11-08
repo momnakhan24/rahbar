@@ -1,0 +1,25 @@
+NAME                             READY   STATUS      RESTARTS   AGE     IP            NODE     NOMINATED NODE   READINESS GATES
+pod/api-5fc9445d4c-8cjq7         1/1     Running     0          2m47s   10.244.3.28   rahbar   <none>           <none>
+pod/api-5fc9445d4c-8dkqt         1/1     Running     0          3m5s    10.244.3.31   rahbar   <none>           <none>
+pod/api-5fc9445d4c-lzv8l         1/1     Running     0          3m37s   10.244.3.21   rahbar   <none>           <none>
+pod/chroma-0                     1/1     Running     0          6h32m   10.244.3.36   rahbar   <none>           <none>
+pod/html-policy-refresh-zwsdd    0/1     Completed   0          72m     10.244.3.11   rahbar   <none>           <none>
+pod/real-index-corrected-rl9pz   0/1     Completed   0          29h     10.244.3.18   rahbar   <none>           <none>
+pod/redis-6df6cb6758-k68b9       1/1     Running     0          6h32m   10.244.3.35   rahbar   <none>           <none>
+pod/ui-76c4d8d47b-lhfws          1/1     Running     0          3m36s   10.244.3.20   rahbar   <none>           <none>
+
+NAME               ENDPOINTS                                            AGE
+endpoints/api      10.244.3.21:8000,10.244.3.28:8000,10.244.3.31:8000   32h
+endpoints/chroma   10.244.3.36:8000                                     32h
+endpoints/redis    10.244.3.35:6379                                     32h
+endpoints/ui       10.244.3.20:8080                                     32h
+
+NAME                                      REFERENCE        TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/api   Deployment/api   cpu: 11%/70%   3         8         3          32h
+NAME                     CPU(cores)   MEMORY(bytes)   
+api-5fc9445d4c-8cjq7     11m          67Mi            
+api-5fc9445d4c-8dkqt     12m          67Mi            
+api-5fc9445d4c-lzv8l     11m          74Mi            
+chroma-0                 11m          145Mi           
+redis-6df6cb6758-k68b9   49m          7Mi             
+ui-76c4d8d47b-lhfws      1m           2Mi             

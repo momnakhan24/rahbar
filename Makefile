@@ -48,7 +48,7 @@ images: ## build the three images and load them into minikube (needs yours: Dock
 	minikube image load rahbar-indexer:$(TAG)
 	minikube image load rahbar-ui:$(TAG)
 
-apply: ## apply the dev overlay (needs yours: manifests)
+apply: ## apply the dev overlay
 	kubectl apply -k k8s/overlays/dev
 
 secret: ## create the LLM key Secret from the LLM_API_KEY variable; never from a file

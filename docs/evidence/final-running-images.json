@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "Deployment",
+    "name": "api",
+    "images": [
+      "rahbar-api:8df07b25a977007ffc74243a6086898fcc1e3ba8"
+    ]
+  },
+  {
+    "kind": "Deployment",
+    "name": "redis",
+    "images": [
+      "redis:7.4.2-alpine"
+    ]
+  },
+  {
+    "kind": "Deployment",
+    "name": "ui",
+    "images": [
+      "rahbar-ui:8df07b25a977007ffc74243a6086898fcc1e3ba8"
+    ]
+  },
+  {
+    "kind": "StatefulSet",
+    "name": "chroma",
+    "images": [
+      "chromadb/chroma:1.0.12"
+    ]
+  },
+  {
+    "kind": "CronJob",
+    "name": "reindex",
+    "images": [
+      "rahbar-indexer:8df07b25a977007ffc74243a6086898fcc1e3ba8"
+    ]
+  }
+]

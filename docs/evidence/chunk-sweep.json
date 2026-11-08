@@ -1,0 +1,59 @@
+[
+  {
+    "size": 250,
+    "overlap": 30,
+    "chunks": 1322,
+    "fingerprint": "05a51c66515bc4ee8283f51d3f902c035e46ac853dcba696ff82cec1fac425b3",
+    "model_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "dimension": 768,
+    "embed_model": "nomic-embed-text",
+    "storage_amplification": 1.0493072842020568,
+    "recall_at_3": 0.7058823529411765,
+    "recall_at_5": 0.8235294117647058,
+    "recall_at_5_by_type": {
+      "ordinary": 1.0,
+      "exact": 0.8333333333333334,
+      "version": 0.0,
+      "injection": 1.0
+    },
+    "method": "exact cosine over current-version chunks; retrieval only"
+  },
+  {
+    "size": 400,
+    "overlap": 50,
+    "chunks": 1239,
+    "fingerprint": "05a51c66515bc4ee8283f51d3f902c035e46ac853dcba696ff82cec1fac425b3",
+    "model_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "dimension": 768,
+    "embed_model": "nomic-embed-text",
+    "storage_amplification": 1.0326242739684695,
+    "recall_at_3": 0.7058823529411765,
+    "recall_at_5": 0.8823529411764706,
+    "recall_at_5_by_type": {
+      "ordinary": 1.0,
+      "exact": 0.8333333333333334,
+      "version": 0.5,
+      "injection": 1.0
+    },
+    "method": "exact cosine over current-version chunks; retrieval only"
+  },
+  {
+    "size": 600,
+    "overlap": 75,
+    "chunks": 1198,
+    "fingerprint": "05a51c66515bc4ee8283f51d3f902c035e46ac853dcba696ff82cec1fac425b3",
+    "model_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "dimension": 768,
+    "embed_model": "nomic-embed-text",
+    "storage_amplification": 1.0112519172261196,
+    "recall_at_3": 0.7058823529411765,
+    "recall_at_5": 0.8823529411764706,
+    "recall_at_5_by_type": {
+      "ordinary": 1.0,
+      "exact": 0.8333333333333334,
+      "version": 0.5,
+      "injection": 1.0
+    },
+    "method": "exact cosine over current-version chunks; retrieval only"
+  }
+]

@@ -1,0 +1,194 @@
+{
+  "recall_at_3": 1.0,
+  "recall_at_5": 1.0,
+  "recall_at_5_by_type": {
+    "exact": 1.0,
+    "injection": 1.0,
+    "ordinary": 1.0,
+    "version": 1.0
+  },
+  "citation_validity": 1.0,
+  "abstention_correctness": 1.0,
+  "must_abstain_correct": 2,
+  "must_abstain_total": 2,
+  "citation_valid": 16,
+  "citation_total": 16,
+  "expected_term_accuracy": 0.9411764705882353,
+  "expected_term_correct": 16,
+  "expected_term_total": 17,
+  "per_question": [
+    {
+      "id": "r01",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r02",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r03",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r04",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r05",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r06",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r07",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r08",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r09",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r10",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r11",
+      "type": "version",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r12",
+      "type": "version",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r13",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r14",
+      "type": "exact",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r15",
+      "type": "abstain",
+      "recall_at_3": null,
+      "recall_at_5": null,
+      "citation_validity": null,
+      "expected_term_match": null,
+      "abstention_correct": true
+    },
+    {
+      "id": "r16",
+      "type": "abstain",
+      "recall_at_3": null,
+      "recall_at_5": null,
+      "citation_validity": null,
+      "expected_term_match": null,
+      "abstention_correct": true
+    },
+    {
+      "id": "r17",
+      "type": "injection",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": null,
+      "expected_term_match": false,
+      "abstention_correct": null
+    },
+    {
+      "id": "r18",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    },
+    {
+      "id": "r19",
+      "type": "ordinary",
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "citation_validity": 1.0,
+      "expected_term_match": true,
+      "abstention_correct": null
+    }
+  ],
+  "golden": "eval\\golden.yaml",
+  "questions": 19
+}

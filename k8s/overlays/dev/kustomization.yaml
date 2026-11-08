@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rahbar
+resources:
+  - ../../base
+patches:
+  - target:
+      kind: Job
+      name: indexer
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args
+        value: ["--dummy"]
+  - target:
+      kind: CronJob
+      name: reindex
+    patch: |-
+      - op: add
+        path: /spec/jobTemplate/spec/template/spec/containers/0/args
+        value: ["--dummy"]
+images:
+  - name: rahbar-api
+    newName: rahbar-api
+    newTag: dev
+  - name: rahbar-indexer
+    newName: rahbar-indexer
+    newTag: dev
+  - name: rahbar-ui
+    newName: rahbar-ui
+    newTag: dev

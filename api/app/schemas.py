@@ -25,7 +25,9 @@ class Passage(BaseModel):
     source: str
     section: str
     page: int | None = None
-    score: float = Field(description="Similarity, higher is closer (1 - cosine distance).")
+    score: float = Field(description="Retrieval relevance: dense cosine, inherited section match, or exact source match (1).")
+    match_kind: str = "dense"
+    dense_score: float | None = None
 
 
 class Citation(BaseModel):
@@ -37,9 +39,9 @@ class Citation(BaseModel):
 class Answer(BaseModel):
     """The model's output contract. Send its JSON schema to the model, then validate."""
 
-    reasoning: str
-    answer: str
-    citations: list[Citation]
+    reasoning: str = Field(max_length=160, description="One brief evidence summary.")
+    answer: str = Field(max_length=800, description="A concise answer to the question.")
+    citations: list[Citation] = Field(max_length=3)
     answered_from_context: bool
     confidence: Literal["high", "medium", "low"]
 
@@ -52,6 +54,8 @@ class RetrievedRef(BaseModel):
     section: str
     page: int | None = None
     score: float
+    match_kind: str = "dense"
+    dense_score: float | None = None
 
 
 class AskResponse(BaseModel):

@@ -1,0 +1,21 @@
+Captured 2026-11-06T15:23:31.6159000+05:00; context rahbar; Calico
+NAME             POD-SELECTOR   AGE
+allow-dns        <none>         3h23m
+api-policy       app=api        3h23m
+chroma-policy    app=chroma     3h23m
+default-deny     <none>         3h23m
+indexer-egress   app=indexer    3h23m
+redis-policy     app=redis      3h23m
+ui-policy        app=ui         3h23m
+{"source": "API pod", "checks": {"chroma": {"status": 200}, "local_model": {"status": 200}, "redis": {"response": "+PONG"}}}
+UI -> Chroma (expected denied)
+wget: download timed out
+command terminated with exit code 1
+UI Chroma exit code: 1
+UI -> API liveness (expected allowed)
+wget: download timed out
+command terminated with exit code 1
+UI API exit code: 1
+UI -> API pod 10.244.3.8 liveness after egress correction (Service has no ready endpoints yet)
+{"status":"alive"}
+UI API pod exit code: 0

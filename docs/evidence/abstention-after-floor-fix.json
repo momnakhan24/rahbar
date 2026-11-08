@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is the application deadline for reserving a hostel room?",
+    "seconds": 3.27,
+    "cache": "MISS",
+    "response": {
+      "request_id": "35cb1442f90b108922b8ad252e00e35c",
+      "answer": "The available documents do not contain enough relevant information to answer that.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "1ca5904dfc7517c41c90",
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "8. Group Study Rooms can only be booked for a group (at-",
+          "page": 31,
+          "score": 0.66277635
+        },
+        {
+          "chunk_id": "e8ea6f0f30eb39daa337",
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "6. Procedure for submitting the application",
+          "page": 2,
+          "score": 0.6330672500000001
+        },
+        {
+          "chunk_id": "e679fbdd223c30e235f6",
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "6.5. Applications must be submitted through the campus Director office.",
+          "page": 2,
+          "score": 0.63251758
+        },
+        {
+          "chunk_id": "95ea5c7d54c2edd1d88e",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "1.24 When a student is readmitted with credit exemptions from a",
+          "page": 10,
+          "score": 0.61813176
+        },
+        {
+          "chunk_id": "c2eaaef2db313131f34b",
+          "source": "academic-rules-handbook-jun-2026.pdf",
+          "section": "4.18 A student may request freezing of his/her admission for up to",
+          "page": 22,
+          "score": 0.6160031
+        }
+      ],
+      "provider": "ollama"
+    }
+  },
+  {
+    "question": "Which hostel form and deposit are required to apply for accommodation?",
+    "seconds": 0.18,
+    "cache": "MISS",
+    "response": {
+      "request_id": "65be05257fbcb1cc84f207fa666a59aa",
+      "answer": "The available documents do not contain enough relevant information to answer that.",
+      "citations": [],
+      "answered_from_context": false,
+      "confidence": "low",
+      "retrieved": [
+        {
+          "chunk_id": "b72c547a5b7d52eec577",
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "6.2. Application must be submitted on the prescribed form (Annex -I) with all the required",
+          "page": 2,
+          "score": 0.673746
+        },
+        {
+          "chunk_id": "e679fbdd223c30e235f6",
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "6.5. Applications must be submitted through the campus Director office.",
+          "page": 2,
+          "score": 0.6398634999999999
+        },
+        {
+          "chunk_id": "34af15e3071f5c3ed5f6",
+          "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+          "section": "6.4. Following information should be provided on the prescribed form:",
+          "page": 2,
+          "score": 0.62340927
+        },
+        {
+          "chunk_id": "ddfa0b2aba0fbe665b2d",
+          "source": "student-handbook-jun-2026.pdf",
+          "section": "Document",
+          "page": 45,
+          "score": 0.61776507
+        },
+        {
+          "chunk_id": "fc0702fe4c29b5fd1a78",
+          "source": "fee-structure-page.html",
+          "section": "2. Security deposit is refundable at the time of completion of degree or closing of admission.",
+          "page": 1,
+          "score": 0.6095612
+        }
+      ],
+      "provider": "ollama"
+    }
+  }
+]

@@ -1,0 +1,27 @@
+# Labels are fixed before measuring embeddings. Different program/season/grade
+# questions must not reuse one another's answers even when wording is similar.
+pairs:
+  - query: What minimum CGPA avoids academic warning?
+    candidate: What CGPA do I need to avoid an academic warning?
+    same_answer: true
+  - query: How long is the summer semester?
+    candidate: How many weeks does the summer semester last?
+    same_answer: true
+  - query: How many grade points does an A+ carry?
+    candidate: What is the grade point value of A+?
+    same_answer: true
+  - query: Can a student repeat a course to improve CGPA?
+    candidate: Can I improve my CGPA by repeating a course?
+    same_answer: true
+  - query: What is the tuition fee for a BS program?
+    candidate: What is the tuition fee for an MBA program?
+    same_answer: false
+  - query: How many grade points does an A+ carry?
+    candidate: How many grade points does a B+ carry?
+    same_answer: false
+  - query: What attendance is required in a regular semester?
+    candidate: What attendance is required in a summer semester?
+    same_answer: false
+  - query: What are the academic warning rules in the 2026 handbook?
+    candidate: What are the academic warning rules in the 2023 handbook?
+    same_answer: false
