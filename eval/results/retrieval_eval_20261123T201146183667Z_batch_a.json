@@ -1,0 +1,576 @@
+{
+  "environment": {
+    "timestamp": "2026-11-23T20:11:46.183667+00:00",
+    "git_commit": "5e8509d3a7c300ecb12291219cad86a0b8669078",
+    "collection": "rahbar_v1_nomic",
+    "embedding_model": "nomic-embed-text",
+    "embedding_version": "0a109f422b47",
+    "chunk_size": 400,
+    "chunk_overlap": 50,
+    "top_k": 5,
+    "llm_name": "qwen2.5:3b",
+    "seed": 0,
+    "split": "a",
+    "golden_sha256": "dd0be806ca33fe5d78bb082984019d41c3f6493b2fe9e2f84c188b715219c67c",
+    "question_count": 29,
+    "retrieval_only": true
+  },
+  "module": [
+    {
+      "paraphrase_cosine": 0.7232730126996259,
+      "unrelated_cosine": 0.35870256036813275,
+      "cosine_gap": 0.3645704523314931,
+      "embedding_mean_ms": 1682.9114619999018,
+      "embedding_p95_ms": 1836.714013071157,
+      "max_absolute_embedding_difference": 0.0,
+      "float32_bytes_per_embedding": 3072,
+      "pairs": [
+        {
+          "kind": "paraphrase",
+          "left": "What is the lecture credit range?",
+          "right": "How many credits is a theory class?",
+          "cosine": 0.7176193571969481,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What counts as acceptable attendance?",
+          "right": "How often must students attend?",
+          "cosine": 0.712038700280137,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can I take a new summer course?",
+          "right": "May I enroll in a class for the first time in summer?",
+          "cosine": 0.7749695598811854,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What academic standing triggers warning?",
+          "right": "What GPA level leads to an academic warning?",
+          "cosine": 0.7750155306617483,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What are the points for A plus?",
+          "right": "How many grade points does an A+ earn?",
+          "cosine": 0.7368068469144041,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Where are the visitor bicycles kept?",
+          "right": "Which rack can guests use to park a bike?",
+          "cosine": 0.7232968345675196,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Who can fetch my transcript for me?",
+          "right": "May I authorize another person to collect my transcript?",
+          "cosine": 0.8110668385755039,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "How do I reserve the recording booth?",
+          "right": "How can I book a recording studio slot?",
+          "cosine": 0.7821977889783444,
+          "ms_per_text": 1402.009024812287
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What is the recorder borrowing period?",
+          "right": "How long do I get to keep a loan audio recorder?",
+          "cosine": 0.7465812691877097,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Where do I return loan gear at night?",
+          "right": "Where can I drop borrowed equipment after closing?",
+          "cosine": 0.675697129922869,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can I get an aisle seat during finals?",
+          "right": "How do I request accessible examination seating?",
+          "cosine": 0.6433381839485521,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Which ID should I take to the pickup desk?",
+          "right": "Do I need to show my student card at collection?",
+          "cosine": 0.5958175784855643,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What day does the registrar hand out copies?",
+          "right": "Which weekdays can I pick up printed transcripts?",
+          "cosine": 0.6536155765524939,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "How long is a summer term?",
+          "right": "How many weeks does summer semester last?",
+          "cosine": 0.8423972511355035,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can a repeat raise my GPA?",
+          "right": "Does retaking a class help improve my CGPA?",
+          "cosine": 0.6586367442059037,
+          "ms_per_text": 1833.1185306430727
+        },
+        {
+          "kind": "unrelated",
+          "left": "What is the lecture credit range?",
+          "right": "best museum for a day in Lisbon",
+          "cosine": 0.4014616593964224,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "What counts as acceptable attendance?",
+          "right": "how often should i water a cactus in winter",
+          "cosine": 0.3873892827590117,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can I take a new summer course?",
+          "right": "how many players in a volleyball team",
+          "cosine": 0.2838765107433473,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "What academic standing triggers warning?",
+          "right": "oven temp for roasting cauliflower",
+          "cosine": 0.33011625597224853,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "What are the points for A plus?",
+          "right": "will it rain in Multan on Friday",
+          "cosine": 0.3255400913213373,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "Where are the visitor bicycles kept?",
+          "right": "who composed the planets orchestral suite",
+          "cosine": 0.31843153837375393,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "Who can fetch my transcript for me?",
+          "right": "can i fix a dripping tap with a new washer",
+          "cosine": 0.39316084588323164,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "How do I reserve the recording booth?",
+          "right": "how far away is Proxima Centauri",
+          "cosine": 0.2713710789672817,
+          "ms_per_text": 1697.8054819373938
+        },
+        {
+          "kind": "unrelated",
+          "left": "What is the recorder borrowing period?",
+          "right": "how often to brush a long-haired cat",
+          "cosine": 0.4146304893844218,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "Where do I return loan gear at night?",
+          "right": "what is the second novel in the Earthsea series",
+          "cosine": 0.34819875301166625,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can I get an aisle seat during finals?",
+          "right": "how to calculate simple interest on a three month deposit",
+          "cosine": 0.3179807663643258,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "Which ID should I take to the pickup desk?",
+          "right": "what thread should i use for embroidery",
+          "cosine": 0.4498556770673848,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "What day does the registrar hand out copies?",
+          "right": "best museum for a day in Lisbon",
+          "cosine": 0.41893417442413494,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "How long is a summer term?",
+          "right": "how often should i water a cactus in winter",
+          "cosine": 0.4426330035999235,
+          "ms_per_text": 1836.714013071157
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can a repeat raise my GPA?",
+          "right": "how many players in a volleyball team",
+          "cosine": 0.27695827825349967,
+          "ms_per_text": 1836.714013071157
+        }
+      ]
+    },
+    {
+      "paraphrase_cosine": 0.7232730126996259,
+      "unrelated_cosine": 0.35870256036813275,
+      "cosine_gap": 0.3645704523314931,
+      "embedding_mean_ms": 1189.615093433046,
+      "embedding_p95_ms": 2163.0690002493793,
+      "max_absolute_embedding_difference": 0.0,
+      "float32_bytes_per_embedding": 3072,
+      "pairs": [
+        {
+          "kind": "paraphrase",
+          "left": "What is the lecture credit range?",
+          "right": "How many credits is a theory class?",
+          "cosine": 0.7176193571969481,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What counts as acceptable attendance?",
+          "right": "How often must students attend?",
+          "cosine": 0.712038700280137,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can I take a new summer course?",
+          "right": "May I enroll in a class for the first time in summer?",
+          "cosine": 0.7749695598811854,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What academic standing triggers warning?",
+          "right": "What GPA level leads to an academic warning?",
+          "cosine": 0.7750155306617483,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What are the points for A plus?",
+          "right": "How many grade points does an A+ earn?",
+          "cosine": 0.7368068469144041,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Where are the visitor bicycles kept?",
+          "right": "Which rack can guests use to park a bike?",
+          "cosine": 0.7232968345675196,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Who can fetch my transcript for me?",
+          "right": "May I authorize another person to collect my transcript?",
+          "cosine": 0.8110668385755039,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "How do I reserve the recording booth?",
+          "right": "How can I book a recording studio slot?",
+          "cosine": 0.7821977889783444,
+          "ms_per_text": 983.0158897493675
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What is the recorder borrowing period?",
+          "right": "How long do I get to keep a loan audio recorder?",
+          "cosine": 0.7465812691877097,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Where do I return loan gear at night?",
+          "right": "Where can I drop borrowed equipment after closing?",
+          "cosine": 0.675697129922869,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can I get an aisle seat during finals?",
+          "right": "How do I request accessible examination seating?",
+          "cosine": 0.6433381839485521,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Which ID should I take to the pickup desk?",
+          "right": "Do I need to show my student card at collection?",
+          "cosine": 0.5958175784855643,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "What day does the registrar hand out copies?",
+          "right": "Which weekdays can I pick up printed transcripts?",
+          "cosine": 0.6536155765524939,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "How long is a summer term?",
+          "right": "How many weeks does summer semester last?",
+          "cosine": 0.8423972511355035,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "paraphrase",
+          "left": "Can a repeat raise my GPA?",
+          "right": "Does retaking a class help improve my CGPA?",
+          "cosine": 0.6586367442059037,
+          "ms_per_text": 262.3066432144177
+        },
+        {
+          "kind": "unrelated",
+          "left": "What is the lecture credit range?",
+          "right": "best museum for a day in Lisbon",
+          "cosine": 0.4014616593964224,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "What counts as acceptable attendance?",
+          "right": "how often should i water a cactus in winter",
+          "cosine": 0.3873892827590117,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can I take a new summer course?",
+          "right": "how many players in a volleyball team",
+          "cosine": 0.2838765107433473,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "What academic standing triggers warning?",
+          "right": "oven temp for roasting cauliflower",
+          "cosine": 0.33011625597224853,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "What are the points for A plus?",
+          "right": "will it rain in Multan on Friday",
+          "cosine": 0.3255400913213373,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "Where are the visitor bicycles kept?",
+          "right": "who composed the planets orchestral suite",
+          "cosine": 0.31843153837375393,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "Who can fetch my transcript for me?",
+          "right": "can i fix a dripping tap with a new washer",
+          "cosine": 0.39316084588323164,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "How do I reserve the recording booth?",
+          "right": "how far away is Proxima Centauri",
+          "cosine": 0.2713710789672817,
+          "ms_per_text": 2163.0690002493793
+        },
+        {
+          "kind": "unrelated",
+          "left": "What is the recorder borrowing period?",
+          "right": "how often to brush a long-haired cat",
+          "cosine": 0.4146304893844218,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "Where do I return loan gear at night?",
+          "right": "what is the second novel in the Earthsea series",
+          "cosine": 0.34819875301166625,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can I get an aisle seat during finals?",
+          "right": "how to calculate simple interest on a three month deposit",
+          "cosine": 0.3179807663643258,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "Which ID should I take to the pickup desk?",
+          "right": "what thread should i use for embroidery",
+          "cosine": 0.4498556770673848,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "What day does the registrar hand out copies?",
+          "right": "best museum for a day in Lisbon",
+          "cosine": 0.41893417442413494,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "How long is a summer term?",
+          "right": "how often should i water a cactus in winter",
+          "cosine": 0.4426330035999235,
+          "ms_per_text": 1240.5181686429257
+        },
+        {
+          "kind": "unrelated",
+          "left": "Can a repeat raise my GPA?",
+          "right": "how many players in a volleyball team",
+          "cosine": 0.27695827825349967,
+          "ms_per_text": 1240.5181686429257
+        }
+      ]
+    }
+  ],
+  "run_1": {
+    "mrr": 0.8196969696969697,
+    "ndcg_at_5": 0.8536200939976779,
+    "precision_at_5": 0.19090909090909092,
+    "recall_at_3": 0.9090909090909091,
+    "recall_at_5": 0.9545454545454546,
+    "p50_embed_ms": 2887.82090699533,
+    "p95_embed_ms": 6618.728872999782,
+    "p50_retrieve_ms": 41.597709991037846,
+    "p95_retrieve_ms": 268.30487299594097,
+    "p50_rerank_ms": 0.04095099575351924,
+    "p95_rerank_ms": 0.11874000483658165,
+    "p50_rail_ms": 0.2101480058627203,
+    "p95_rail_ms": 0.5071850027889013,
+    "p50_generate_ms": 0.002739994670264423,
+    "p95_generate_ms": 0.004742993041872978,
+    "p50_total_ms": 2920.140440997784,
+    "p95_total_ms": 6670.94850599824
+  },
+  "run_2": {
+    "mrr": 0.8196969696969697,
+    "ndcg_at_5": 0.8536200939976779,
+    "precision_at_5": 0.19090909090909092,
+    "recall_at_3": 0.9090909090909091,
+    "recall_at_5": 0.9545454545454546,
+    "p50_embed_ms": 2367.107414000202,
+    "p95_embed_ms": 7238.131040998269,
+    "p50_retrieve_ms": 38.023179993615486,
+    "p95_retrieve_ms": 113.44361900410149,
+    "p50_rerank_ms": 0.037896999856457114,
+    "p95_rerank_ms": 0.04999998782295734,
+    "p50_rail_ms": 0.21002399444114417,
+    "p95_rail_ms": 1.2329330056672916,
+    "p50_generate_ms": 0.00274599005933851,
+    "p95_generate_ms": 0.0051249953685328364,
+    "p50_total_ms": 2397.0658629987156,
+    "p95_total_ms": 7313.186858998961
+  },
+  "noise": {
+    "mrr": 0.8560606060606061,
+    "ndcg_at_5": 0.8695877160714299,
+    "precision_at_5": 0.18181818181818182,
+    "recall_at_3": 0.9090909090909091,
+    "recall_at_5": 0.9090909090909091,
+    "p50_embed_ms": 1927.630706995842,
+    "p95_embed_ms": 5152.274838997982,
+    "p50_retrieve_ms": 53.63040399970487,
+    "p95_retrieve_ms": 345.1383479987271,
+    "p50_rerank_ms": 0.0349340116372332,
+    "p95_rerank_ms": 0.05195099220145494,
+    "p50_rail_ms": 0.11959100083913654,
+    "p95_rail_ms": 0.4780279996339232,
+    "p50_generate_ms": 0.002024011337198317,
+    "p95_generate_ms": 0.003354987711645663,
+    "p50_total_ms": 1967.1943470020778,
+    "p95_total_ms": 5248.545879003359
+  },
+  "mean": {
+    "mrr": 0.8196969696969697,
+    "ndcg_at_5": 0.8536200939976779,
+    "p50_embed_ms": 2627.464160497766,
+    "p50_generate_ms": 0.0027429923648014665,
+    "p50_rail_ms": 0.21008600015193224,
+    "p50_rerank_ms": 0.039423997804988176,
+    "p50_retrieve_ms": 39.810444992326666,
+    "p50_total_ms": 2658.60315199825,
+    "p95_embed_ms": 6928.429956999025,
+    "p95_generate_ms": 0.004933994205202907,
+    "p95_rail_ms": 0.8700590042280965,
+    "p95_rerank_ms": 0.08436999632976949,
+    "p95_retrieve_ms": 190.87424600002123,
+    "p95_total_ms": 6992.0676824986,
+    "precision_at_5": 0.19090909090909092,
+    "recall_at_3": 0.9090909090909091,
+    "recall_at_5": 0.9545454545454546
+  },
+  "absolute_difference": {
+    "mrr": 0.0,
+    "ndcg_at_5": 0.0,
+    "p50_embed_ms": 520.713492995128,
+    "p50_generate_ms": 5.995389074087143e-06,
+    "p50_rail_ms": 0.0001240114215761423,
+    "p50_rerank_ms": 0.003053995897062123,
+    "p50_retrieve_ms": 3.57452999742236,
+    "p50_total_ms": 523.0745779990684,
+    "p95_embed_ms": 619.4021679984871,
+    "p95_generate_ms": 0.0003820023266598582,
+    "p95_rail_ms": 0.7257480028783903,
+    "p95_rerank_ms": 0.06874001701362431,
+    "p95_retrieve_ms": 154.86125399183948,
+    "p95_total_ms": 642.238353000721,
+    "precision_at_5": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0
+  },
+  "noise_delta": {
+    "mrr": 0.036363636363636376,
+    "ndcg_at_5": 0.01596762207375202,
+    "p50_embed_ms": -960.190199999488,
+    "p50_generate_ms": -0.0007159833330661058,
+    "p50_rail_ms": -0.09055700502358377,
+    "p50_rerank_ms": -0.006016984116286039,
+    "p50_retrieve_ms": 12.032694008667022,
+    "p50_total_ms": -952.9460939957062,
+    "p95_embed_ms": -1466.4540340017993,
+    "p95_generate_ms": -0.0013880053302273154,
+    "p95_rail_ms": -0.029157003154978156,
+    "p95_rerank_ms": -0.06678901263512671,
+    "p95_retrieve_ms": 76.83347500278614,
+    "p95_total_ms": -1422.4026269948808,
+    "precision_at_5": -0.009090909090909094,
+    "recall_at_3": 0.0,
+    "recall_at_5": -0.045454545454545525
+  }
+}

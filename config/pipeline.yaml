@@ -1,0 +1,8 @@
+seed: 0
+collection: rahbar_v1_nomic
+embedding_model: nomic-embed-text
+chunk_size: 400
+chunk_overlap: 50
+top_k: 5
+near_duplicate_threshold: 0.95
+minimum_document_length: 80

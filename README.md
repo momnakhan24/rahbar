@@ -1,6 +1,6 @@
 # RAHBAR
 
-[![CI](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/momnakhan24/rahbar/actions/workflows/ci.yml)
+[![CI](https://github.com/aimwnoaim/rahbar/actions/workflows/ci.yml/badge.svg?branch=codex%2Fdev-ragops)](https://github.com/aimwnoaim/rahbar/actions/workflows/ci.yml?query=branch%3Acodex%2Fdev-ragops)
 
 Grounded question answering over nine public FAST-NUCES documents. The indexer Job
 extracts/OCRs, cleans, chunks and embeds documents, then atomically publishes Chroma.
@@ -20,7 +20,7 @@ flowchart LR
   Job --> Ollama
 ```
 
-`dev` is the working Git branch. Separately, `k8s/overlays/dev` is a **stub plumbing
+Assignment 03 work is on `codex/dev-ragops`. The Assignment 02 `k8s/overlays/dev` is a **stub plumbing
 configuration**, `local` is the real Docker/Minikube configuration, and `prod` uses
 published images and the real provider. CD deploys a disposable stub acceptance
 cluster after the full real-retrieval fixture CI gate; it does not host the university
@@ -203,3 +203,23 @@ for remaining requirements, and `docs/AI-USAGE.md` for the extent of AI assistan
 
 The clean-clone `kubectl apply` order above creates storage and loads the corpus
 before the real indexing Job. All namespace operations explicitly target rahbar.
+# Assignment 03 RAGOps
+
+The Assignment 03 CLI is `python -m ragops`. Run in an environment with the API and indexer requirements installed. Set `OLLAMA_URL`, `CHROMA_HOST`, `CHROMA_PORT`, `CHROMA_COLLECTION`, and `EMBEDDING_VERSION` for your local services. For the required demo, follow the [Kubernetes walkthrough](k8s/README.md).
+
+| Part | Command |
+| --- | --- |
+| A | `python scripts/stage_ragops_batch_a.py --out work/ragops/batch-a`, then `python -m ragops --data work/ragops/lake ingest --inbox work/ragops/batch-a --snapshot` |
+| A, Batch B | `python -m ragops --data work/ragops/lake ingest --inbox data/batch_b` |
+| B | `python -m ragops eval --collection rahbar_v1_nomic --target-url http://localhost:8000 --out eval/results --label batch_a` |
+| C | `python -m ragops compare --baseline "$baseline" --candidate "$candidate" --out eval/results/comparison`, then `python -m ragops gate --baseline "$baseline" --candidate "$candidate" --config config/gate.yaml` |
+| D | `python -m ragops trace "$trace_id"` and `python -m ragops metrics --since 24h` |
+| E | `python -m ragops coverage --live eval/live_queries.jsonl --golden eval/golden.jsonl --threshold "$threshold"` |
+| F | `kubectl --context ragops-dev apply -f k8s/eval-job.yaml` after the baseline and candidate are ready |
+
+For the new API outside Kubernetes, run `python -m uvicorn ragops.api:app --port 8000`. To repeat the evaluation after Batch B, pass `--split ab` and a new label. For the expanded coverage check, use `eval/golden_expanded.jsonl`.
+
+For the passing candidate, set `CHROMA_COLLECTION=rahbar_v3_nomic` and `CHUNK_SIZE=420` while keeping the baseline embedding version and overlap. Run `python -m ragops --data work/ragops/lake sync --reuse-from rahbar_v1_nomic`. The optional `eval --retrieval-only` mode emits separate module and retrieval evidence for diagnosing a slow or unavailable generator.
+
+[Design explanation](docs/EXPLAIN.md) · [Worklog](docs/RAGOPS-WORKLOG.md) · [Report notes](docs/REPORT_NOTES.md) · [Screenshot checklist](docs/SCREENSHOT_CHECKLIST.md)
+

@@ -1,0 +1,390 @@
+{
+  "baseline_result": "eval\\results\\retrieval_eval_20261123T201146183667Z_batch_a.json",
+  "candidate_result": "eval\\results\\retrieval_eval_20261123T201952348480Z_candidate.json",
+  "metrics": {
+    "module/cosine_gap": {
+      "baseline": 0.3645704523314931,
+      "candidate": 0.3645704523314931,
+      "delta": 0.0
+    },
+    "module/embedding_mean_ms": {
+      "baseline": 1436.263277716474,
+      "candidate": 983.3514908913154,
+      "delta": -452.91178682515863
+    },
+    "module/embedding_p95_ms": {
+      "baseline": 1999.891506660268,
+      "candidate": 2248.6203458389095,
+      "delta": 248.72883917864146
+    },
+    "module/float32_bytes_per_embedding": {
+      "baseline": 3072,
+      "candidate": 3072,
+      "delta": 0
+    },
+    "module/max_absolute_embedding_difference": {
+      "baseline": 0.0,
+      "candidate": 0.0,
+      "delta": 0.0
+    },
+    "module/paraphrase_cosine": {
+      "baseline": 0.7232730126996259,
+      "candidate": 0.7232730126996259,
+      "delta": 0.0
+    },
+    "module/unrelated_cosine": {
+      "baseline": 0.35870256036813275,
+      "candidate": 0.35870256036813275,
+      "delta": 0.0
+    },
+    "mrr": {
+      "baseline": 0.8196969696969697,
+      "candidate": 0.8181818181818182,
+      "delta": -0.0015151515151514694
+    },
+    "ndcg_at_5": {
+      "baseline": 0.8536200939976779,
+      "candidate": 0.8419872279220831,
+      "delta": -0.011632866075594772
+    },
+    "p50_embed_ms": {
+      "baseline": 2627.464160497766,
+      "candidate": 228.8951395021286,
+      "delta": -2398.5690209956374
+    },
+    "p50_generate_ms": {
+      "baseline": 0.0027429923648014665,
+      "candidate": 0.002713495632633567,
+      "delta": -2.949673216789961e-05
+    },
+    "p50_rail_ms": {
+      "baseline": 0.21008600015193224,
+      "candidate": 0.19047850219067186,
+      "delta": -0.01960749796126038
+    },
+    "p50_rerank_ms": {
+      "baseline": 0.039423997804988176,
+      "candidate": 0.03928250225726515,
+      "delta": -0.00014149554772302508
+    },
+    "p50_retrieve_ms": {
+      "baseline": 39.810444992326666,
+      "candidate": 33.36438850237755,
+      "delta": -6.446056489949115
+    },
+    "p50_total_ms": {
+      "baseline": 2658.60315199825,
+      "candidate": 265.54124299582327,
+      "delta": -2393.0619090024265
+    },
+    "p95_embed_ms": {
+      "baseline": 6928.429956999025,
+      "candidate": 444.37576399650425,
+      "delta": -6484.054193002521
+    },
+    "p95_generate_ms": {
+      "baseline": 0.004933994205202907,
+      "candidate": 0.004072498995810747,
+      "delta": -0.0008614952093921602
+    },
+    "p95_rail_ms": {
+      "baseline": 0.8700590042280965,
+      "candidate": 0.6903194953338243,
+      "delta": -0.17973950889427215
+    },
+    "p95_rerank_ms": {
+      "baseline": 0.08436999632976949,
+      "candidate": 0.05995450192131102,
+      "delta": -0.02441549440845847
+    },
+    "p95_retrieve_ms": {
+      "baseline": 190.87424600002123,
+      "candidate": 58.811097500438336,
+      "delta": -132.0631484995829
+    },
+    "p95_total_ms": {
+      "baseline": 6992.0676824986,
+      "candidate": 477.734968502773,
+      "delta": -6514.332713995827
+    },
+    "precision_at_5": {
+      "baseline": 0.19090909090909092,
+      "candidate": 0.18181818181818182,
+      "delta": -0.009090909090909094
+    },
+    "recall_at_3": {
+      "baseline": 0.9090909090909091,
+      "candidate": 0.9090909090909091,
+      "delta": 0.0
+    },
+    "recall_at_5": {
+      "baseline": 0.9545454545454546,
+      "candidate": 0.9090909090909091,
+      "delta": -0.045454545454545525
+    }
+  },
+  "shared_question_count": 29,
+  "top1_comparison": [
+    {
+      "id": "human-01",
+      "before_similarity": 0.77859873,
+      "after_similarity": 0.77859873,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "human-02",
+      "before_similarity": 0.7096047400000001,
+      "after_similarity": 0.70960462,
+      "before_doc_version": "2026",
+      "after_doc_version": "2026",
+      "before_doc_id": "prospectus-2026-academic-rules-and-regulations",
+      "after_doc_id": "prospectus-2026-academic-rules-and-regulations"
+    },
+    {
+      "id": "human-03",
+      "before_similarity": 0.76169038,
+      "after_similarity": 0.76169038,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "human-04",
+      "before_similarity": 0.75173873,
+      "after_similarity": 0.75173873,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "human-05",
+      "before_similarity": 0.6277898,
+      "after_similarity": 0.6277898,
+      "before_doc_version": "2026",
+      "after_doc_version": "2026",
+      "before_doc_id": "prospectus-2026-academic-rules-and-regulations",
+      "after_doc_id": "prospectus-2026-academic-rules-and-regulations"
+    },
+    {
+      "id": "human-06",
+      "before_similarity": 0.69312388,
+      "after_similarity": 0.69312388,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "human-07",
+      "before_similarity": 0.5999344,
+      "after_similarity": 0.5999344,
+      "before_doc_version": "2022-05",
+      "after_doc_version": "2022-05",
+      "before_doc_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+      "after_doc_id": "faculty-entrepreneurship-and-technical-start-ups-policy"
+    },
+    {
+      "id": "rgo-01",
+      "before_similarity": 0.7891041599999999,
+      "after_similarity": 0.7891041599999999,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-02",
+      "before_similarity": 0.7415666599999999,
+      "after_similarity": 0.7415666599999999,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-03",
+      "before_similarity": 0.73717904,
+      "after_similarity": 0.73717904,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-04",
+      "before_similarity": 0.74531126,
+      "after_similarity": 0.74531126,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-05",
+      "before_similarity": 0.81417859,
+      "after_similarity": 0.81417853,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-06",
+      "before_similarity": 0.732081,
+      "after_similarity": 0.732081,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-07",
+      "before_similarity": 0.77398229,
+      "after_similarity": 0.77398229,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-08",
+      "before_similarity": 0.77494407,
+      "after_similarity": 0.77494407,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-09",
+      "before_similarity": 0.75419348,
+      "after_similarity": 0.7474121,
+      "before_doc_version": "2026",
+      "after_doc_version": "2026",
+      "before_doc_id": "prospectus-2026-academic-rules-and-regulations",
+      "after_doc_id": "prospectus-2026-academic-rules-and-regulations"
+    },
+    {
+      "id": "rgo-10",
+      "before_similarity": 0.77293259,
+      "after_similarity": 0.77293259,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-11",
+      "before_similarity": 0.8319695,
+      "after_similarity": 0.8319695,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-12",
+      "before_similarity": 0.73287362,
+      "after_similarity": 0.73287362,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-13",
+      "before_similarity": 0.69680333,
+      "after_similarity": 0.69680333,
+      "before_doc_version": "2026-27",
+      "after_doc_version": "2026-27",
+      "before_doc_id": "fee-structure-page",
+      "after_doc_id": "fee-structure-page"
+    },
+    {
+      "id": "rgo-14",
+      "before_similarity": 0.7719003,
+      "after_similarity": 0.7719003,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-15",
+      "before_similarity": 0.80234516,
+      "after_similarity": 0.80234516,
+      "before_doc_version": "2026-01",
+      "after_doc_version": "2026-01",
+      "before_doc_id": "equipment-loan",
+      "after_doc_id": "equipment-loan"
+    },
+    {
+      "id": "rgo-16",
+      "before_similarity": 0.58649993,
+      "after_similarity": 0.58649993,
+      "before_doc_version": "2026-27",
+      "after_doc_version": "2026-27",
+      "before_doc_id": "fee-structure-page",
+      "after_doc_id": "fee-structure-page"
+    },
+    {
+      "id": "rgo-17",
+      "before_similarity": 0.65899098,
+      "after_similarity": 0.65899098,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "academic-rules-handbook",
+      "after_doc_id": "academic-rules-handbook"
+    },
+    {
+      "id": "rgo-18",
+      "before_similarity": 0.5990545700000001,
+      "after_similarity": 0.5990545700000001,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "student-handbook-jun-2026",
+      "after_doc_id": "student-handbook-jun-2026"
+    },
+    {
+      "id": "rgo-19",
+      "before_similarity": 0.58293748,
+      "after_similarity": 0.58293748,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "student-handbook-jun-2026",
+      "after_doc_id": "student-handbook-jun-2026"
+    },
+    {
+      "id": "rgo-20",
+      "before_similarity": 0.6312926400000001,
+      "after_similarity": 0.6312926400000001,
+      "before_doc_version": "2026-06",
+      "after_doc_version": "2026-06",
+      "before_doc_id": "student-handbook-jun-2026",
+      "after_doc_id": "student-handbook-jun-2026"
+    },
+    {
+      "id": "rgo-21",
+      "before_similarity": 0.6298561,
+      "after_similarity": 0.6298561,
+      "before_doc_version": "2026-01",
+      "after_doc_version": "2026-01",
+      "before_doc_id": "equipment-loan",
+      "after_doc_id": "equipment-loan"
+    },
+    {
+      "id": "rgo-22",
+      "before_similarity": 0.68065012,
+      "after_similarity": 0.6812488999999999,
+      "before_doc_version": "2026",
+      "after_doc_version": "2026",
+      "before_doc_id": "prospectus-2026-academic-rules-and-regulations",
+      "after_doc_id": "prospectus-2026-academic-rules-and-regulations"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "run_id": "20261123T204001Z-cbf7e0ff",
+  "near_duplicate_threshold": 0.95,
+  "min_length": 80,
+  "snapshot": false,
+  "counts": {
+    "seen": 1,
+    "unchanged": 0,
+    "new": 1,
+    "changed": 0,
+    "quarantined": 0,
+    "deleted": 0
+  },
+  "documents": [
+    {
+      "file": "poster-printer.md",
+      "doc_id": "poster-printer",
+      "version": "2026-01",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    }
+  ]
+}

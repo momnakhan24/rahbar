@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: eval
+  namespace: ragops
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: eval
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: eval
+        image: rahbar-ragops:dev
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: ragops-config
+        env:
+        - name: TARGET_URL
+          value: http://candidate:8000
+        - name: COLLECTION
+          value: rahbar_v3_nomic
+        - name: CHUNK_SIZE
+          value: '420'
+        - name: DATASET_SPLIT
+          value: a
+        - name: BASELINE_PATH
+          value: /data/results/baseline.json
+        - name: RAGOPS_READ_ONLY
+          value: 'true'
+        command:
+        - sh
+        - -c
+        - |
+          set -eu
+          result=${EVALUATED_CANDIDATE_PATH:-}
+          if [ -z "$result" ]; then
+            result=$(python -m ragops eval --target-url "$TARGET_URL" --collection "$COLLECTION" \
+              --split "$DATASET_SPLIT" --out /data/results --label "$COLLECTION")
+          fi
+          printf '%s\n' "$result"
+          python -m ragops gate --baseline "$BASELINE_PATH" --candidate "$result" --config /gate/gate.yaml
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: gate
+          mountPath: /gate
+          readOnly: true
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: ragops-data
+      - name: gate
+        configMap:
+          name: gate-config
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      restartPolicy: Never

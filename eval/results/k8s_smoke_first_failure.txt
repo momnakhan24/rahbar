@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/app/ragops/__main__.py", line 127, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/app/ragops/__main__.py", line 69, in main
+    print(evaluate(
+          ^^^^^^^^^
+  File "/app/ragops/evaluation.py", line 153, in evaluate
+    second, second_rows = suite(client, endpoint, questions, collection)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/ragops/evaluation.py", line 119, in suite
+    response.raise_for_status()
+  File "/usr/local/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Server error '502 Bad Gateway' for url 'http://candidate:8000/query?bypass_cache=true'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502

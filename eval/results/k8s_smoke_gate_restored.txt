@@ -1,0 +1,8 @@
+/data/results/eval_20261123T203630637143Z_rahbar_kube_v2_nomic.json
+| Rule | Candidate | Requirement | Result |
+| --- | ---: | ---: | --- |
+| recall_at_5 | 1 | >= 0.98 | PASS |
+| faithfulness | 1 | >= 0.95 | PASS |
+| p95_total_ms | 25593.7 | <= 293264 | PASS |
+| abstention_correctness | 1 | >= 1 | PASS |
+RELEASE

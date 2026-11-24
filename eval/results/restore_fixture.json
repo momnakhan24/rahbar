@@ -1,0 +1,9 @@
+{
+  "chunks_embedded": 1,
+  "chunks_deleted": 1,
+  "chunks_kept": 4,
+  "orphan_check": "pass",
+  "inactive_doc_chunk_counts": {
+    "locker": 0
+  }
+}

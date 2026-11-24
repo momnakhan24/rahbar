@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: ragops
+spec:
+  selector:
+    app.kubernetes.io/name: api
+  ports:
+  - port: 8000
+    targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: ragops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: api
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: api
+        image: rahbar-ragops:dev
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: ragops-config
+        env:
+        - name: CHROMA_COLLECTION
+          value: rahbar_v1_nomic
+        - name: CHUNK_SIZE
+          value: '400'
+        - name: RAGOPS_READ_ONLY
+          value: 'true'
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 300m
+            memory: 320Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8000
+          periodSeconds: 5
+          failureThreshold: 3
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 5
+          failureThreshold: 3
+          timeoutSeconds: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: ragops-data
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001

@@ -1,0 +1,15 @@
+{
+  "seen": 1,
+  "unchanged": 0,
+  "new": 1,
+  "changed": 0,
+  "quarantined": 0,
+  "deleted": 0,
+  "chunks_embedded": 1,
+  "chunks_deleted": 0,
+  "chunks_kept": 1,
+  "chunks_reused": 0,
+  "orphan_check": "pass",
+  "inactive_doc_chunk_counts": {}
+}
+{"peak_rss_kib": 81368, "elapsed_ms": 5431.542691992945}

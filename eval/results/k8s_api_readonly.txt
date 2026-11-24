@@ -1,0 +1,5 @@
+usage: python -m ragops [-h] [--data DATA]
+                        {verify,ingest,restore,sync,trace,metrics,eval,gate,coverage}
+                        ...
+python -m ragops: error: this workload is configured read-only and cannot modify the lake or index
+command terminated with exit code 2

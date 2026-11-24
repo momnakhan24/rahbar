@@ -1,0 +1,306 @@
+{
+  "run_id": "20261123T202520Z-d6eb3766",
+  "near_duplicate_threshold": 0.95,
+  "min_length": 80,
+  "snapshot": true,
+  "counts": {
+    "seen": 10,
+    "unchanged": 8,
+    "new": 0,
+    "changed": 0,
+    "quarantined": 2,
+    "deleted": 0
+  },
+  "documents": [
+    {
+      "file": "undergraduate-academic-rules-aug-2023.pdf",
+      "doc_id": "academic-rules-handbook",
+      "version": "2023-08",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": false,
+          "reason": "older than active version 2026-06"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "academic-rules-handbook-jun-2026.pdf",
+      "doc_id": "academic-rules-handbook",
+      "version": "2026-06",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "doc_id": "prospectus-2026-academic-rules-and-regulations",
+      "version": "2026",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "student-handbook-jun-2026.pdf",
+      "doc_id": "student-handbook-jun-2026",
+      "version": "2026-06",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "annual-report-2019-20.pdf",
+      "doc_id": "annual-report-2019-20",
+      "version": "2019-20",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "annual-report-2023-24.pdf",
+      "doc_id": "annual-report-2023-24",
+      "version": "2023-24",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": false,
+          "reason": "near duplicate of annual-report-2019-20 (cosine 0.951385)"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "fee-structure-page.html",
+      "doc_id": "fee-structure-page",
+      "version": "2026-27",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "grading-page.html",
+      "doc_id": "grading-page",
+      "version": "2026",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "doc_id": "faculty-entrepreneurship-and-technical-start-ups-policy",
+      "version": "2022-05",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "equipment-loan.md",
+      "doc_id": "equipment-loan",
+      "version": "2026-01",
+      "outcome": "unchanged",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    }
+  ]
+}

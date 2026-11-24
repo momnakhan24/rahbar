@@ -1,0 +1,7 @@
+| Rule | Candidate | Requirement | Result |
+| --- | ---: | ---: | --- |
+| recall_at_5 | 0.909091 | >= 0.934545 | FAIL |
+| faithfulness | missing | unmeasured baseline | FAIL |
+| p95_total_ms | missing | unmeasured baseline | FAIL |
+| abstention_correctness | missing | unmeasured baseline | FAIL |
+REJECT

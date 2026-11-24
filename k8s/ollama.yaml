@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama
+  namespace: ragops
+spec:
+  selector:
+    app.kubernetes.io/name: ollama
+  ports:
+  - port: 11434
+    targetPort: 11434
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: ragops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ollama
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ollama
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: ollama
+        image: ollama/ollama@sha256:ebaef4f4c5d93660e1f25f8ad085a112f51ccfb0e8458073e71793959dba91c9
+        ports:
+        - containerPort: 11434
+        volumeMounts:
+        - name: models
+          mountPath: /root/.ollama
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: '3'
+            memory: 4Gi
+        readinessProbe:
+          httpGet:
+            path: /api/tags
+            port: 11434
+          periodSeconds: 5
+          failureThreshold: 3
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: ollama-models

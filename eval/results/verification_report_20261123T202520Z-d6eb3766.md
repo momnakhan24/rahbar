@@ -1,0 +1,12 @@
+| File | Outcome | Quality | Completeness | Recency | Uniqueness | Suspicious |
+| --- | --- | --- | --- | --- | --- | --- |
+| undergraduate-academic-rules-aug-2023.pdf | quarantined | pass | pass | fail | pass | False |
+| academic-rules-handbook-jun-2026.pdf | unchanged | pass | pass | pass | pass | False |
+| prospectus-2026-academic-rules-and-regulations.pdf | unchanged | pass | pass | pass | pass | False |
+| student-handbook-jun-2026.pdf | unchanged | pass | pass | pass | pass | False |
+| annual-report-2019-20.pdf | unchanged | pass | pass | pass | pass | False |
+| annual-report-2023-24.pdf | quarantined | pass | pass | pass | fail | False |
+| fee-structure-page.html | unchanged | pass | pass | pass | pass | False |
+| grading-page.html | unchanged | pass | pass | pass | pass | False |
+| faculty-entrepreneurship-and-technical-start-ups-policy.pdf | unchanged | pass | pass | pass | pass | False |
+| equipment-loan.md | unchanged | pass | pass | pass | pass | False |

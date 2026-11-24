@@ -1,0 +1,7 @@
+| Rule | Candidate | Requirement | Result |
+| --- | ---: | ---: | --- |
+| recall_at_5 | 0.954545 | >= 0.934545 | PASS |
+| faithfulness | 1 | >= 0.95 | PASS |
+| p95_total_ms | 25845.4 | <= 109109 | PASS |
+| abstention_correctness | 0.857143 | >= 0.714286 | PASS |
+RELEASE

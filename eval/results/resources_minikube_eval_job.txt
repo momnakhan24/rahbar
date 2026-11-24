@@ -1,0 +1,7 @@
+NAME                           CPU(cores)   MEMORY(bytes)   
+api-bb9cdf45d-bnnbn            18m          270Mi           
+candidate-56fffd75d6-295kg     18m          264Mi           
+chroma-0                       6m           466Mi           
+eval-5dsvq                     0m           25Mi            
+inbox-loader-f999bdffd-2mdtp   0m           3Mi             
+ollama-67cbcbccd7-mplqz        1m           12Mi            

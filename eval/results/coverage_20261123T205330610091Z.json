@@ -1,0 +1,374 @@
+{
+  "threshold": 0.540987786533879,
+  "coverage": 1.0,
+  "environment": {
+    "timestamp": "2026-11-23T20:53:30.610091+00:00",
+    "embedding_model": "nomic-embed-text",
+    "embedding_version": "0a109f422b47",
+    "live_sha256": "c7da0d9a0ad01bfdc6c05271e0f39f864a44fbe56836d33edf7a001be0099a42",
+    "golden_sha256": "2b52fe5d85ce64f40e8b81fae2086e480c2dc8ba8a4ff5abfa171f8b6536699b"
+  },
+  "queries": [
+    {
+      "id": "live-01",
+      "topic": "academics",
+      "question": "lecture course has how many credits?",
+      "domain": "in",
+      "best_id": "rgo-01",
+      "cosine": 0.8071230685585002,
+      "covered": true
+    },
+    {
+      "id": "live-02",
+      "topic": "academics",
+      "question": "wht percentage attendance in 1.21?",
+      "domain": "in",
+      "best_id": "rgo-02",
+      "cosine": 0.8233287787068182,
+      "covered": true
+    },
+    {
+      "id": "live-03",
+      "topic": "academics",
+      "question": "will low attendance stop me from taking exams?",
+      "domain": "in",
+      "best_id": "rgo-03",
+      "cosine": 0.7512432561104029,
+      "covered": true
+    },
+    {
+      "id": "live-04",
+      "topic": "academics",
+      "question": "cutoff cgpa for academic warning",
+      "domain": "in",
+      "best_id": "rgo-04",
+      "cosine": 0.7689455637690549,
+      "covered": true
+    },
+    {
+      "id": "live-05",
+      "topic": "academics",
+      "question": "what % is regular semester work worth",
+      "domain": "in",
+      "best_id": "rgo-05",
+      "cosine": 0.7807737364018327,
+      "covered": true
+    },
+    {
+      "id": "live-06",
+      "topic": "academics",
+      "question": "retake to boost cumulative gpa?",
+      "domain": "in",
+      "best_id": "rgo-06",
+      "cosine": 0.886299554346435,
+      "covered": true
+    },
+    {
+      "id": "live-07",
+      "topic": "summer",
+      "question": "summer session weeks pls",
+      "domain": "in",
+      "best_id": "rgo-07",
+      "cosine": 0.7522795366769811,
+      "covered": true
+    },
+    {
+      "id": "live-08",
+      "topic": "summer",
+      "question": "how many repeat classes can i do this summer",
+      "domain": "in",
+      "best_id": "rgo-08",
+      "cosine": 0.9209200796348889,
+      "covered": true
+    },
+    {
+      "id": "live-09",
+      "topic": "summer",
+      "question": "could i try a class new to me in summer",
+      "domain": "in",
+      "best_id": "rgo-09",
+      "cosine": 0.7825822281625582,
+      "covered": true
+    },
+    {
+      "id": "live-10",
+      "topic": "summer",
+      "question": "any financial aid for summer term",
+      "domain": "in",
+      "best_id": "human-04",
+      "cosine": 0.6727628713093224,
+      "covered": true
+    },
+    {
+      "id": "live-11",
+      "topic": "academics",
+      "question": "three terms under 2.00 - am i dismissed?",
+      "domain": "in",
+      "best_id": "rgo-11",
+      "cosine": 0.6091842411804893,
+      "covered": true
+    },
+    {
+      "id": "live-12",
+      "topic": "grading",
+      "question": "A+ equals how many points",
+      "domain": "in",
+      "best_id": "rgo-14",
+      "cosine": 0.7421653548589966,
+      "covered": true
+    },
+    {
+      "id": "live-13",
+      "topic": "fees",
+      "question": "where on fee chart is BBA BS amount",
+      "domain": "in",
+      "best_id": "rgo-13",
+      "cosine": 0.8680875648731229,
+      "covered": true
+    },
+    {
+      "id": "live-14",
+      "topic": "grading",
+      "question": "what is the A+ GPA on grading webpage",
+      "domain": "in",
+      "best_id": "rgo-14",
+      "cosine": 0.831855400541483,
+      "covered": true
+    },
+    {
+      "id": "live-15",
+      "topic": "media",
+      "question": "borrow audio recorder how many days",
+      "domain": "in",
+      "best_id": "rgo-15",
+      "cosine": 0.8298902099292146,
+      "covered": true
+    },
+    {
+      "id": "live-16",
+      "topic": "media",
+      "question": "do recorder loan days start at pickup",
+      "domain": "in",
+      "best_id": "rgo-21",
+      "cosine": 0.7582606598122502,
+      "covered": true
+    },
+    {
+      "id": "live-17",
+      "topic": "summer",
+      "question": "new elective in summer if graduating",
+      "domain": "in",
+      "best_id": "rgo-22",
+      "cosine": 0.7863518357524311,
+      "covered": true
+    },
+    {
+      "id": "live-18",
+      "topic": "transcripts",
+      "question": "what papers for a friend to collect transcript",
+      "domain": "in",
+      "best_id": "rgo-30",
+      "cosine": 0.6556582292671376,
+      "covered": true
+    },
+    {
+      "id": "live-19",
+      "topic": "media",
+      "question": "radio studio duration?",
+      "domain": "in",
+      "best_id": "rgo-24",
+      "cosine": 0.7711140563028483,
+      "covered": true
+    },
+    {
+      "id": "live-20",
+      "topic": "accessibility",
+      "question": "how early must i request accessible seating for exams",
+      "domain": "in",
+      "best_id": "rgo-25",
+      "cosine": 0.7665941655200552,
+      "covered": true
+    },
+    {
+      "id": "live-21",
+      "topic": "media",
+      "question": "after closing where return recorder",
+      "domain": "in",
+      "best_id": "rgo-26",
+      "cosine": 0.732256349218344,
+      "covered": true
+    },
+    {
+      "id": "live-22",
+      "topic": "bicycles",
+      "question": "where park a visitor bike on campus",
+      "domain": "in",
+      "best_id": "rgo-28",
+      "cosine": 0.7575143841630628,
+      "covered": true
+    },
+    {
+      "id": "live-23",
+      "topic": "bicycles",
+      "question": "who gives bike claim tag",
+      "domain": "in",
+      "best_id": "rgo-28",
+      "cosine": 0.6467720244423365,
+      "covered": true
+    },
+    {
+      "id": "live-24",
+      "topic": "recording",
+      "question": "how long before studio booking need room key",
+      "domain": "in",
+      "best_id": "rgo-29",
+      "cosine": 0.7970471635807075,
+      "covered": true
+    },
+    {
+      "id": "live-25",
+      "topic": "transcripts",
+      "question": "which window for a paper transcript",
+      "domain": "in",
+      "best_id": "rgo-30",
+      "cosine": 0.6692848222222215,
+      "covered": true
+    },
+    {
+      "id": "live-26",
+      "topic": "accessibility",
+      "question": "when does access desk confirm exam room",
+      "domain": "in",
+      "best_id": "rgo-31",
+      "cosine": 0.8049343423968719,
+      "covered": true
+    },
+    {
+      "id": "live-27",
+      "topic": "recording",
+      "question": "who takes bookings for Studio C",
+      "domain": "in",
+      "best_id": "rgo-33",
+      "cosine": 0.8458816801006344,
+      "covered": true
+    },
+    {
+      "id": "live-28",
+      "topic": "media",
+      "question": "what do i show to pick up recorder",
+      "domain": "in",
+      "best_id": "rgo-32",
+      "cosine": 0.68422524844316,
+      "covered": true
+    },
+    {
+      "id": "live-29",
+      "topic": "travel",
+      "question": "best museum for a day in Lisbon",
+      "domain": "off",
+      "best_id": "rgo-34",
+      "cosine": 0.993467888647068,
+      "covered": true
+    },
+    {
+      "id": "live-30",
+      "topic": "gardening",
+      "question": "how often should i water a cactus in winter",
+      "domain": "off",
+      "best_id": "rgo-35",
+      "cosine": 0.9973182890375153,
+      "covered": true
+    },
+    {
+      "id": "live-31",
+      "topic": "sports",
+      "question": "how many players in a volleyball team",
+      "domain": "off",
+      "best_id": "rgo-36",
+      "cosine": 0.9955400749528995,
+      "covered": true
+    },
+    {
+      "id": "live-32",
+      "topic": "cooking",
+      "question": "oven temp for roasting cauliflower",
+      "domain": "off",
+      "best_id": "rgo-37",
+      "cosine": 0.9917698302961033,
+      "covered": true
+    },
+    {
+      "id": "live-33",
+      "topic": "weather",
+      "question": "will it rain in Multan on Friday",
+      "domain": "off",
+      "best_id": "rgo-38",
+      "cosine": 0.9963973603559564,
+      "covered": true
+    },
+    {
+      "id": "live-34",
+      "topic": "music",
+      "question": "who composed the planets orchestral suite",
+      "domain": "off",
+      "best_id": "rgo-39",
+      "cosine": 0.990527458896999,
+      "covered": true
+    },
+    {
+      "id": "live-35",
+      "topic": "home repairs",
+      "question": "can i fix a dripping tap with a new washer",
+      "domain": "off",
+      "best_id": "rgo-40",
+      "cosine": 0.9964379191309363,
+      "covered": true
+    },
+    {
+      "id": "live-36",
+      "topic": "astronomy",
+      "question": "how far away is Proxima Centauri",
+      "domain": "off",
+      "best_id": "rgo-41",
+      "cosine": 0.9973999234984884,
+      "covered": true
+    },
+    {
+      "id": "live-37",
+      "topic": "pets",
+      "question": "how often to brush a long-haired cat",
+      "domain": "off",
+      "best_id": "rgo-42",
+      "cosine": 0.9966516951743515,
+      "covered": true
+    },
+    {
+      "id": "live-38",
+      "topic": "books",
+      "question": "what is the second novel in the Earthsea series",
+      "domain": "off",
+      "best_id": "rgo-43",
+      "cosine": 0.9966509547333828,
+      "covered": true
+    },
+    {
+      "id": "live-39",
+      "topic": "finance",
+      "question": "how to calculate simple interest on a three month deposit",
+      "domain": "off",
+      "best_id": "rgo-44",
+      "cosine": 0.9958023966238451,
+      "covered": true
+    },
+    {
+      "id": "live-40",
+      "topic": "crafts",
+      "question": "what thread should i use for embroidery",
+      "domain": "off",
+      "best_id": "rgo-45",
+      "cosine": 0.9960104492251463,
+      "covered": true
+    }
+  ],
+  "uncovered_topics": []
+}

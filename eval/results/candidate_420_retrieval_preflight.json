@@ -1,0 +1,248 @@
+{
+  "collection": "rahbar_v3_nomic",
+  "recall_at_5": 0.9545454545454546,
+  "details": [
+    {
+      "id": "rgo-01",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations"
+      ]
+    },
+    {
+      "id": "rgo-02",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "fee-structure-page",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-03",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-04",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations"
+      ]
+    },
+    {
+      "id": "rgo-05",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "grading-page",
+        "student-handbook-jun-2026",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-06",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-07",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-08",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-09",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations"
+      ]
+    },
+    {
+      "id": "rgo-10",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "annual-report-2019-20",
+        "student-handbook-jun-2026",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-11",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "grading-page",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-12",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-13",
+      "expected": "fee-structure-page",
+      "retrieved": [
+        "fee-structure-page",
+        "academic-rules-handbook",
+        "fee-structure-page",
+        "student-handbook-jun-2026",
+        "annual-report-2019-20"
+      ]
+    },
+    {
+      "id": "rgo-14",
+      "expected": "grading-page",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations"
+      ]
+    },
+    {
+      "id": "rgo-15",
+      "expected": "equipment-loan",
+      "retrieved": [
+        "equipment-loan",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "rgo-21",
+      "expected": "equipment-loan",
+      "retrieved": [
+        "equipment-loan",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "academic-rules-handbook",
+        "student-handbook-jun-2026"
+      ]
+    },
+    {
+      "id": "rgo-22",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "human-01",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "fee-structure-page",
+        "prospectus-2026-academic-rules-and-regulations"
+      ]
+    },
+    {
+      "id": "human-02",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "human-04",
+      "expected": "academic-rules-handbook",
+      "retrieved": [
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook",
+        "prospectus-2026-academic-rules-and-regulations",
+        "academic-rules-handbook"
+      ]
+    },
+    {
+      "id": "human-06",
+      "expected": "grading-page",
+      "retrieved": [
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "academic-rules-handbook",
+        "student-handbook-jun-2026",
+        "grading-page"
+      ]
+    },
+    {
+      "id": "human-07",
+      "expected": "student-handbook-jun-2026",
+      "retrieved": [
+        "faculty-entrepreneurship-and-technical-start-ups-policy",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "student-handbook-jun-2026",
+        "faculty-entrepreneurship-and-technical-start-ups-policy"
+      ]
+    }
+  ]
+}

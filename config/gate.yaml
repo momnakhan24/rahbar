@@ -1,0 +1,8 @@
+# Limit the allowable regression to the assignment's two percentage points.
+recall_at_5_max_drop: 0.02
+# Lower bound is measured baseline faithfulness minus five percentage points.
+faithfulness_max_drop: 0.05
+# Allow up to 50% headroom over the measured baseline p95 on a shared CPU.
+p95_latency_baseline_factor: 1.5
+# Abstention correctness must meet or exceed the measured baseline directly.
+coverage_minimum: 0.85

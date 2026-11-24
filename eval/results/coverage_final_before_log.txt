@@ -1,0 +1,14 @@
+Coverage: 65.00% at cosine 0.541 (eval/results/coverage_20261123T205246044150Z.json)
+bicycles: where park a visitor bike on campus, who gives bike claim tag
+travel: best museum for a day in Lisbon
+gardening: how often should i water a cactus in winter
+sports: how many players in a volleyball team
+cooking: oven temp for roasting cauliflower
+weather: will it rain in Multan on Friday
+music: who composed the planets orchestral suite
+home repairs: can i fix a dripping tap with a new washer
+astronomy: how far away is Proxima Centauri
+pets: how often to brush a long-haired cat
+books: what is the second novel in the Earthsea series
+finance: how to calculate simple interest on a three month deposit
+crafts: what thread should i use for embroidery

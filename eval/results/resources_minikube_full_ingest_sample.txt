@@ -1,0 +1,7 @@
+NAME                           CPU(cores)   MEMORY(bytes)   
+full-corpus-ingest-6mslr       1447m        511Mi           
+chroma-0                       6m           454Mi           
+ollama-67cbcbccd7-mplqz        2m           304Mi           
+candidate-58556d9886-ztrrg     18m          235Mi           
+api-68cd984596-wd5r6           17m          181Mi           
+inbox-loader-f999bdffd-2mdtp   0m           27Mi            

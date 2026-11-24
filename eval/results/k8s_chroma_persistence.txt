@@ -1,0 +1,2 @@
+1 [{'source': 'equipment-loan.md', 'superseded': False, 'access': 'public', 'chunk_hash': '905949f86458cecb4dbd71bca15ec4ae7f15023dcac631367f25e0c418686c54', 'section': 'Campus media desk equipment loan', 'status': 'active', 'doc_id': 'equipment-loan', 'doc_version': '2026-01', 'page': 1}]
+1 [{'superseded': False, 'chunk_hash': '905949f86458cecb4dbd71bca15ec4ae7f15023dcac631367f25e0c418686c54', 'doc_version': '2026-01', 'source': 'equipment-loan.md', 'page': 1, 'status': 'active', 'doc_id': 'equipment-loan', 'access': 'public', 'section': 'Campus media desk equipment loan'}]

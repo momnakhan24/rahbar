@@ -1,0 +1,335 @@
+{
+  "run_id": "20261123T200954Z-f924f005",
+  "near_duplicate_threshold": 0.95,
+  "min_length": 80,
+  "snapshot": false,
+  "counts": {
+    "seen": 11,
+    "unchanged": 0,
+    "new": 5,
+    "changed": 1,
+    "quarantined": 5,
+    "deleted": 0
+  },
+  "documents": [
+    {
+      "file": "copy-a.md",
+      "doc_id": "copy-a",
+      "version": "2026-02",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": false,
+          "reason": "exact duplicate of equipment-loan"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "copy-b.md",
+      "doc_id": "copy-b",
+      "version": "2026-02",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": false,
+          "reason": "exact duplicate of equipment-loan"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "similar.md",
+      "doc_id": "similar",
+      "version": "2026-02",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": false,
+          "reason": "near duplicate of equipment-loan (cosine 0.997345)"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "equipment-loan.md",
+      "doc_id": "equipment-loan",
+      "version": "2026-02",
+      "outcome": "changed",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "truncated.md",
+      "doc_id": "truncated",
+      "version": "2026-02",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": false,
+          "reason": "truncation marker or page count mismatch"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "missing.md",
+      "doc_id": "missing",
+      "version": "2026-02",
+      "outcome": "quarantined",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": false,
+          "reason": "missing title"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "locker.md",
+      "doc_id": "locker",
+      "version": "2026-02",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": true
+    },
+    {
+      "file": "parking.md",
+      "doc_id": "parking",
+      "version": "2026-02",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "recording.md",
+      "doc_id": "recording",
+      "version": "2026-02",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "transcripts.md",
+      "doc_id": "transcripts",
+      "version": "2026-02",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    },
+    {
+      "file": "access.md",
+      "doc_id": "access",
+      "version": "2026-02",
+      "outcome": "new",
+      "checks": [
+        {
+          "name": "quality",
+          "passed": true,
+          "reason": "extracted text passed quality checks"
+        },
+        {
+          "name": "completeness",
+          "passed": true,
+          "reason": "metadata and page count confirmed"
+        },
+        {
+          "name": "recency",
+          "passed": true,
+          "reason": "version is current or newer"
+        },
+        {
+          "name": "uniqueness",
+          "passed": true,
+          "reason": "no exact or semantic duplicate"
+        }
+      ],
+      "suspicious_content": false
+    }
+  ]
+}

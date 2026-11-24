@@ -1,0 +1,9 @@
+{
+  "collection": "rahbar_kube_full_nomic",
+  "chunk_count": 724,
+  "metadata": {
+    "lake_revision": 9,
+    "embed_model": "nomic-embed-text",
+    "embedding_version": "8688dbc0926c"
+  }
+}

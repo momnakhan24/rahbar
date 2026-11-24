@@ -1,0 +1,13 @@
+{
+  "seen": 10,
+  "unchanged": 0,
+  "new": 8,
+  "changed": 1,
+  "quarantined": 1,
+  "deleted": 0,
+  "chunks_embedded": 724,
+  "chunks_deleted": 0,
+  "chunks_kept": 0,
+  "orphan_check": "pass",
+  "inactive_doc_chunk_counts": {}
+}

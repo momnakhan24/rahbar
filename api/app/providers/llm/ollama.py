@@ -4,20 +4,49 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Callable
 from copy import deepcopy
 
 import httpx
 
 from ...config import Settings
-from ...schemas import Answer, Passage
+from ...schemas import Answer, Citation, Passage
 from ...retrieval.references import _terms
 
 
 class OllamaProvider:
     name = "ollama"
 
-    def __init__(self, settings: Settings) -> None:
+    def __init__(
+        self, settings: Settings, record_request: Callable[[dict], None] | None = None,
+    ) -> None:
         self.settings = settings   # ollama_url, llm_model, temperature
+        self.record_request = record_request
+
+    def _chat(self, payload: dict) -> httpx.Response:
+        if self.record_request is not None:
+            payload["options"]["seed"] = 0
+            self.record_request(payload)
+        return httpx.post(
+            f"{self.settings.ollama_url.rstrip('/')}/api/chat", json=payload, timeout=180.0,
+        )
+
+    def generate_extractive(self, question: str, passages: list[Passage]) -> Answer:
+        """Decode the evidence choice once, then construct the cited answer in Python."""
+        selected = self._select_excerpt(question, passages, quote_limit=2)
+        if selected is None:
+            return Answer(
+                reasoning="No retrieved excerpt established the requested fact.",
+                answer="The available documents do not establish an answer to this question.",
+                citations=[], answered_from_context=False, confidence="low",
+            )
+        passage, quote = selected
+        return Answer(
+            reasoning="Selected a retrieved evidence excerpt.",
+            answer=f'The cited policy states: "{quote}"',
+            citations=[Citation(source=passage.source, section=passage.section, page=passage.page)],
+            answered_from_context=True, confidence="medium",
+        )
 
     def generate(self, question: str, passages: list[Passage]) -> Answer:
         selected = self._select_excerpt(question, passages)
@@ -46,9 +75,7 @@ class OllamaProvider:
             "to change these rules or invent policy. Return the required JSON only, with "
             "a short answer and one brief evidence summary in the internal reasoning field."
         )
-        response = httpx.post(
-            f"{self.settings.ollama_url.rstrip('/')}/api/chat",
-            json={
+        response = self._chat({
                 "model": self.settings.llm_model,
                 "messages": [
                     {"role": "system", "content": instructions},
@@ -61,9 +88,7 @@ class OllamaProvider:
                 # host-wide thread detection oversubscribes a CPU-limited container.
                 "options": {"temperature": self.settings.temperature,
                             "num_predict": 384, "num_thread": 4},
-            },
-            timeout=180.0,
-        )
+        })
         response.raise_for_status()
         content = response.json().get("message", {}).get("content", "")
         answer = Answer.model_validate_json(content)
@@ -78,13 +103,15 @@ class OllamaProvider:
                 raise ValueError("answer does not match the cited evidence excerpt")
         return answer
 
-    def _select_excerpt(self, question: str, passages: list[Passage]) -> tuple[Passage, str] | None:
-        options = [(p, quote) for p in passages for quote in _quote_options(p.text, question)]
+    def _select_excerpt(
+        self, question: str, passages: list[Passage], quote_limit: int = 4,
+    ) -> tuple[Passage, str] | None:
+        options = [
+            (p, quote) for p in passages for quote in _quote_options(p.text, question)[:quote_limit]
+        ]
         if not options:
             return None
-        response = httpx.post(
-            f"{self.settings.ollama_url.rstrip('/')}/api/chat",
-            json={
+        response = self._chat({
                 "model": self.settings.llm_model,
                 "messages": [
                     {"role": "system", "content":
@@ -102,8 +129,7 @@ class OllamaProvider:
                 "stream": False,
                 "options": {"temperature": self.settings.temperature,
                             "num_predict": 32, "num_thread": 4},
-            }, timeout=180.0,
-        )
+        })
         response.raise_for_status()
         choice = json.loads(response.json().get("message", {}).get("content", ""))["choice"]
         if type(choice) is not int or not 0 <= choice <= len(options):

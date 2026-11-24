@@ -1,0 +1,45 @@
+{
+  "source": "academic-rules-handbook-jun-2026.pdf",
+  "checks": {
+    "rgo-01": {
+      "page": 8,
+      "answer_hint": "2 to 4",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-02": {
+      "page": 10,
+      "answer_hint": "100%",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-03": {
+      "page": 10,
+      "answer_hint": "ineligible",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-04": {
+      "page": 24,
+      "answer_hint": "2.00",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-05": {
+      "page": 24,
+      "answer_hint": "50%",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-06": {
+      "page": 25,
+      "answer_hint": "improve CGPA",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-07": {
+      "page": 28,
+      "answer_hint": "8-week",
+      "check": "hint occurs on the labeled page"
+    },
+    "rgo-08": {
+      "page": 28,
+      "answer_hint": "2",
+      "check": "hint occurs on the labeled page"
+    }
+  }
+}

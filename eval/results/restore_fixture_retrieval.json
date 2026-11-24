@@ -1,0 +1,16 @@
+{
+  "question": "For how long does the campus media desk lend audio recorders?",
+  "match": "This fictional campus supplement was written for the RAHBAR evaluation corpus. The media desk lends audio recorders for three working days. Collect a recorder from the library service counter after showing a student card. The borrowing period starts at pickup. Return the recorder and its memory card together.",
+  "metadata": {
+    "doc_id": "equipment-loan",
+    "doc_version": "2026-01",
+    "section": "Campus media desk equipment loan",
+    "access": "public",
+    "status": "active",
+    "chunk_hash": "905949f86458cecb4dbd71bca15ec4ae7f15023dcac631367f25e0c418686c54",
+    "page": 1,
+    "superseded": false,
+    "source": "equipment-loan.md"
+  },
+  "distance": 0.22313541
+}

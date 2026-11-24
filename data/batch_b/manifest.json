@@ -1,0 +1,100 @@
+[
+  {
+    "file": "copy-a.md",
+    "doc_id": "copy-a",
+    "source": "copy-a.md",
+    "title": "Campus media desk equipment loan",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "copy-b.md",
+    "doc_id": "copy-b",
+    "source": "copy-b.md",
+    "title": "Campus media desk equipment loan",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "similar.md",
+    "doc_id": "similar",
+    "source": "similar.md",
+    "title": "Campus media desk equipment loan",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "equipment-loan.md",
+    "doc_id": "equipment-loan",
+    "source": "equipment-loan.md",
+    "title": "Campus media desk equipment loan",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "truncated.md",
+    "doc_id": "truncated",
+    "source": "truncated.md",
+    "title": "Student events notice",
+    "version": "2026-02",
+    "page_count": 2,
+    "access": "public"
+  },
+  {
+    "file": "missing.md",
+    "doc_id": "missing",
+    "source": "missing.md",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "locker.md",
+    "doc_id": "locker",
+    "source": "locker.md",
+    "title": "Media desk return lockers",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "parking.md",
+    "doc_id": "parking",
+    "source": "parking.md",
+    "title": "Visitor bicycle storage",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "recording.md",
+    "doc_id": "recording",
+    "source": "recording.md",
+    "title": "Recording room bookings",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "transcripts.md",
+    "doc_id": "transcripts",
+    "source": "transcripts.md",
+    "title": "Transcript collection",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  },
+  {
+    "file": "access.md",
+    "doc_id": "access",
+    "source": "access.md",
+    "title": "Accessible exam seating",
+    "version": "2026-02",
+    "page_count": 1,
+    "access": "public"
+  }
+]

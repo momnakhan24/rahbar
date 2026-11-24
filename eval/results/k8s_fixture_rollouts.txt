@@ -1,0 +1,23 @@
+deployment.apps/api annotated
+deployment.apps/api env updated
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
+deployment.apps/api annotated
+deployment.apps/api env updated
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
+deployment.apps/api rolled back
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "api" rollout to finish: 1 old replicas are pending termination...
+deployment "api" successfully rolled out
+deployment.apps/api 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+3         <none>
+4         fixture candidate passed the gated Kubernetes Job
+6         controlled top-k regression rollback drill
+7         controlled top-k regression rollback drill
+

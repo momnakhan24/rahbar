@@ -1,0 +1,36 @@
+{
+  "source": "eval/results/eval_20261123T200917344381Z_batch_a_details.jsonl",
+  "question_count": 29,
+  "differences": [
+    {
+      "id": "rgo-03",
+      "answer_changed": true,
+      "ranking_changed": false,
+      "prompt_changed": false,
+      "trace_ids": [
+        "f7fa169d772343d5a0141917baa79eaf",
+        "39692fd8efa649a78a67609a246a494c"
+      ]
+    },
+    {
+      "id": "rgo-17",
+      "answer_changed": true,
+      "ranking_changed": false,
+      "prompt_changed": false,
+      "trace_ids": [
+        "e2da99734d414b9aa53d10330380e7bb",
+        "0365bd68ec644b919bc956d16aba83f2"
+      ]
+    },
+    {
+      "id": "human-03",
+      "answer_changed": true,
+      "ranking_changed": false,
+      "prompt_changed": false,
+      "trace_ids": [
+        "a01d14b78eed4fd19b523a3b537b886b",
+        "e279617b82a44a6896882c79f05c78fd"
+      ]
+    }
+  ]
+}

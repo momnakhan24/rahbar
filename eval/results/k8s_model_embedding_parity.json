@@ -1,0 +1,13 @@
+{
+  "source_model_ids": {
+    "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "nomic-embed-text:latest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+  },
+  "cluster_model_ids": {
+    "qwen2.5:3b": "cd232a7a8d590449a99eb8fe29b614ef9bf3624d2d17faa496e1135ba4188be0",
+    "nomic-embed-text:latest": "8688dbc0926c1dfdc1b8b7489034e1fedb06f6ac66472dd2d7f0ed6d7d23ba29"
+  },
+  "dimensions": 768,
+  "max_absolute_difference": 0.0,
+  "cosine": 1.0
+}

@@ -1,0 +1,13 @@
+| File | Outcome | Quality | Completeness | Recency | Uniqueness | Suspicious |
+| --- | --- | --- | --- | --- | --- | --- |
+| copy-a.md | quarantined | pass | pass | pass | fail | False |
+| copy-b.md | quarantined | pass | pass | pass | fail | False |
+| similar.md | quarantined | pass | pass | pass | fail | False |
+| equipment-loan.md | changed | pass | pass | pass | pass | False |
+| truncated.md | quarantined | pass | fail | pass | pass | False |
+| missing.md | quarantined | pass | fail | pass | pass | False |
+| locker.md | new | pass | pass | pass | pass | True |
+| parking.md | new | pass | pass | pass | pass | False |
+| recording.md | new | pass | pass | pass | pass | False |
+| transcripts.md | new | pass | pass | pass | pass | False |
+| access.md | new | pass | pass | pass | pass | False |

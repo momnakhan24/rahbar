@@ -1,0 +1,8 @@
+NAME                           CPU(cores)   MEMORY(bytes)   
+api-bb9cdf45d-bnnbn            286m         77Mi            
+candidate-56fffd75d6-295kg     274m         77Mi            
+candidate-dc6b65f68-lgpkz      83m          87Mi            
+chroma-0                       178m         87Mi            
+inbox-loader-f999bdffd-2mdtp   59m          7Mi             
+NAME         CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+ragops-dev   1840m        15%      1298Mi          11%         

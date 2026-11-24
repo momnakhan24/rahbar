@@ -1,0 +1,7 @@
+NAME                           CPU(cores)   MEMORY(bytes)   
+api-68cd984596-wd5r6           20m          500Mi           
+ollama-67cbcbccd7-mplqz        2973m        436Mi           
+candidate-58556d9886-ztrrg     21m          108Mi           
+chroma-0                       15m          96Mi            
+full-corpus-resume-8k9q8       35m          59Mi            
+inbox-loader-f999bdffd-2mdtp   0m           17Mi            
